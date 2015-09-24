@@ -54,7 +54,7 @@ $brand = "UniMeet";
           </div>
           <div class="row">
             <div class="col-md-4 col-md-offset-7 text-center" id="welcome-title">
-              <img class="animated bounceInDown" id="welcome-title-img" src="img/logo6.png">
+              <img class="animated bounceInDown" id="welcome-title-img" src="img/logo6.png" alt="UniMeet Logo">
               <p class="animated fadeInUpDelay">Looking for someone to blow classes with? We think we can help!</p>
             </div>            
           </div>
