@@ -1,0 +1,111 @@
+/*Class Elements*/
+
+.hero h1{
+	font-size: 5em;
+}
+.hero p{
+	font-size: 2em;
+}
+@media screen and (max-width:760px) {
+  .hero p { display: none; }
+  .hero img { margin-bottom: 50px; }
+}
+
+.brand{
+  color: #fff;
+}
+.brand-logo{
+  width:150px;
+  height: 50px;
+}
+.content { padding-top: 56px; background-color: #fff; position: relative; }
+
+.login-btn { 
+  color: #fff;
+  background: rgba(66, 139, 202, 0.5);
+  border: solid 3px #fff;
+  border-radius: 3px; 
+  -webkit-border-radius: 3px; 
+  -moz-border-radius: 3px; 
+  font-size: 2em; 
+  letter-spacing: 2px; 
+  transition: all 0.5s ease; 
+  padding: 15px 50px; 
+  display: inline;    
+  margin-bottom: 10px;
+  margin-right: 8px; 
+}
+.login-btn:hover, .login-btn:focus {
+  text-decoration: none;
+  border-color: #5c6869;
+  color: #5c6869; 
+}
+@media (max-width: 450px){
+  .login-btn{
+    display: block;
+  }
+}
+.nav-sidebar li a:hover{
+  background: black;
+}
+.nav-sidebar li a{
+  color: white;
+  text-decoration: none;
+}
+
+/*Form Inputs*/
+input[type="text"], [type="email"], [type="password"]{
+  width:300px;
+  height:100%;
+  border-radius:5px;  
+  margin-bottom:10px;
+}
+
+.gender-dropdown{
+  width:100px;
+  border-radius:5px;
+  margin-bottom:10px;
+}
+/*.row-no-padding{
+  margin-bottom: -35px;
+  padding: 0px;
+  border:1px solid black;
+}*/
+
+.status-dropdown{
+  width:300px;
+  border-radius:5px;
+  margin-bottom:10px;
+}
+
+/*ID Elements*/
+
+#dashboard-nav{
+  /*margin:0px, 0px, 0px, 0px;*/
+  /*padding: 0px, 0px, 0px, 0px;*/
+  height: 900px;
+  background-color: #BD0026;  
+  color: #fff;
+}
+#dashboard-nav-pic{
+  padding-top: 35px;
+}
+#profile-display-pic{
+  width: 250px;
+  height: 250px;
+}
+#quick-results{
+  padding-top: 50px;
+}
+#selects{
+  color: black;
+}
+/*#welcome-title{
+  border: 1px solid black;
+  margin-top: 100px;
+}*/
+#welcome-title-img{
+  width: 330px;
+  height: 132px;
+  /*padding-bottom: -55px;*/
+}
