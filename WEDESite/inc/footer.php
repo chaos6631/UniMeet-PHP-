@@ -1,5 +1,5 @@
-      <footer>
-        <div class="container">
+      <footer id="contact" >
+        <div class="container" >
           <!-- <div class="row">
             <div class="col-md-4">
               <p>Nam mi enim, auctor non ultricies a, fringilla eu risus. Praesent vitae lorem et elit tincidunt accumsan suscipit eu libero. Maecenas diam est, venenatis vitae dui in, vestibulum mollis arcu. Donec eu nibh tincidunt, dapibus sem eu, aliquam dolor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum consectetur commodo eros, vitae laoreet lectus aliq</p>
@@ -19,7 +19,7 @@
           <div class="row">
             <div class="col-md-12 text-center">
               <a href="#" class="badge-btn">Badge Button</a>
-              <p class="footer-credit">Design by <a href="http://www.blazrobar.com">Blaz Robar</a> | Developed by <a href="http://www.peterfinlan.com">Peter Finlan</a></p>
+              <p class="footer-credit">Template Design by <a href="http://www.blazrobar.com">Blaz Robar</a> & <a href="http://www.peterfinlan.com">Peter Finlan</a></p>
             </div>
           </div>
         </div>

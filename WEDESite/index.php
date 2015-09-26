@@ -37,7 +37,7 @@ $brand = "UniMeet";
                   <li><a href="index.php">Home<span class="indicator"><i class="fa fa-angle-right"></i></span></a></li>
                   <li><a href="user-register.php">Get Started/Sign Up <span class="indicator"><i class="fa fa-angle-right"></i></span></a></li>
                   <li><a href="#media">Testimonials <span class="indicator"><i class="fa fa-angle-right"></i></span></a></li>
-                  <li><a href="#features">Features <span class="indicator"><i class="fa fa-angle-right"></i></span></a></li>
+                  <li><a href="#contact">Contact/Support <span class="indicator"><i class="fa fa-angle-right"></i></span></a></li>
                   <li class="nav-last"><a href="user-login.php">Log In<span class="indicator"><i class="fa fa-angle-right"></i></span></a></li>
                 </ul>
               </nav>

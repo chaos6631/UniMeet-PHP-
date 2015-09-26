@@ -53,6 +53,7 @@ $brand = "UniMeet";
                     <li><a href="user-dashboard.php">Dashboard</a></li>
                     <li><a href="profile-display.php">Profile</a></li>
                     <li><a href="profile-search.php">Search</a></li>
+                    <li><a href="#">Contact/Support</a></li>                    
                     <li class="nav-last"><a href="user-login.php">Log In</a></li>
                   </ul>
                 </div><!-- /.navbar-collapse -->
