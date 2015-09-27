@@ -1,24 +1,8 @@
       <footer id="contact" >
-        <div class="container" >
-          <!-- <div class="row">
-            <div class="col-md-4">
-              <p>Nam mi enim, auctor non ultricies a, fringilla eu risus. Praesent vitae lorem et elit tincidunt accumsan suscipit eu libero. Maecenas diam est, venenatis vitae dui in, vestibulum mollis arcu. Donec eu nibh tincidunt, dapibus sem eu, aliquam dolor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum consectetur commodo eros, vitae laoreet lectus aliq</p>
-            </div>
-            <div class="col-md-3">
-              <p>aliquam dolor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum consectetur commodo eros, vitae laoreet lectus aliq</p>
-            </div>
-            <div class="col-md-2 col-md-offset-3">
-              <ul class="footer-nav">
-                <li><a href="#">Get Started</a></li>
-                <li><a href="#">Testimonials</a></li>
-                <li><a href="#">See the Features</a></li>
-                <li><a href="#">Get in Touch!</a></li>
-              </ul>
-            </div>
-          </div> -->
+        <div class="container" >        
           <div class="row">
             <div class="col-md-12 text-center">
-              <a href="#" class="badge-btn">Badge Button</a>
+              <a href="#" class=""><img src="<?php echo BASE_URL . BRAND_LOGO; ?>"></a>
               <p class="footer-credit">Template Design by <a href="http://www.blazrobar.com">Blaz Robar</a> & <a href="http://www.peterfinlan.com">Peter Finlan</a></p>
             </div>
           </div>

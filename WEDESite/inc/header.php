@@ -1,6 +1,7 @@
 <?php
 
-$brand = "UniMeet";
+require_once('inc/config.php');
+
 
 ?>
 
@@ -10,7 +11,7 @@ $brand = "UniMeet";
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?php echo $brand; ?></title>
+    <title><?php echo BRAND_NAME; ?></title>
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
@@ -42,7 +43,7 @@ $brand = "UniMeet";
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                   </button>
-                  <div class="navbar-brand"><a class="brand" href="index.php">UniMeet</a></div>
+                  <div class="navbar-brand"><a class="brand" href="index.php"><?php echo BRAND_NAME; ?></a></div>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
