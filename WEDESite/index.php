@@ -1,6 +1,7 @@
 <?php 
 
-$brand = "UniMeet";
+require_once('inc/config.php');
+
 
 ?>
 <!DOCTYPE html>
@@ -9,7 +10,7 @@ $brand = "UniMeet";
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?php echo $brand; ?></title>
+    <title><?php echo BRAND_NAME; ?></title>
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
@@ -37,7 +38,7 @@ $brand = "UniMeet";
                   <li><a href="index.php">Home<span class="indicator"><i class="fa fa-angle-right"></i></span></a></li>
                   <li><a href="user-register.php">Get Started/Sign Up <span class="indicator"><i class="fa fa-angle-right"></i></span></a></li>
                   <li><a href="#media">Testimonials <span class="indicator"><i class="fa fa-angle-right"></i></span></a></li>
-                  <li><a href="#features">Features <span class="indicator"><i class="fa fa-angle-right"></i></span></a></li>
+                  <li><a href="#contact">Contact/Support <span class="indicator"><i class="fa fa-angle-right"></i></span></a></li>
                   <li class="nav-last"><a href="user-login.php">Log In<span class="indicator"><i class="fa fa-angle-right"></i></span></a></li>
                 </ul>
               </nav>
@@ -54,7 +55,7 @@ $brand = "UniMeet";
           </div>
           <div class="row">
             <div class="col-md-4 col-md-offset-7 text-center" id="welcome-title">
-              <img class="animated bounceInDown" id="welcome-title-img" src="img/logo6.png">
+              <img class="animated bounceInDown" id="welcome-title-img" src="<?php echo BASE_URL . BRAND_LOGO ?>" alt="UniMeet Logo">
               <p class="animated fadeInUpDelay">Looking for someone to blow classes with? We think we can help!</p>
             </div>            
           </div>

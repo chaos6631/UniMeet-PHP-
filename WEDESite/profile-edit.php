@@ -10,7 +10,7 @@ require_once('inc/header.php');
               <!-- User Profile -->
               <div class="col-sm-12 text-center" id="dashboard-nav-pic">
                 <a href="user-dashboard.php">
-                  <img class="img-responsive center-block" src="img/av-pete.png">                  
+                  <img class="img-responsive img-circle center-block" src="img/pic2.jpg">                  
                 </a>
                 <p class="text-center"><span class="hidden-xs">UserName</span></p>
               </div>
@@ -37,7 +37,17 @@ require_once('inc/header.php');
                     <option class='selectOptions' id='selects' value='male'>Male</option>                  
                     <option class='selectOptions' id='selects' value='female'>Female</option>                                      
                   </select>
+                  <select class="status-dropdown form-control " id="ethnicity" name="ethnicity" required>
+                    <option class="selectOptions" value="" selected disabled>Ethnicity:</option>
+                    <option>Caucasian</option>
+                    <option>Latin American</option>
+                    <option>Asian</option>
+                    <option>East Indian</option>
+                    <option>Native American</option>
+                    <option>African American</option>                                    
+                  </select>
                   <select class="status-dropdown form-control " id="language" name="language" required>
+                    <option class="selectOptions" value="" selected disabled>Spoken Language:</option>
                     <option>English</option>
                     <option>French</option>
                     <option>Spanish</option>
@@ -134,17 +144,7 @@ require_once('inc/header.php');
                       <option class='selectOptions' id='selects' value=''>Post-Secondary Master's</option>                  
                       <option class='selectOptions' id='selects' value=''>I'd rather not say</option>                  
                       <option class='selectOptions' id='selects' value=''>Not sure</option>                  
-                    </select>
-                    <select class="status-dropdown form-control " id="interests" name="interests" required>
-                      <option class="selectOptions" value="" selected disabled>Please check all that apply:</option>
-                      <option class='selectOptions' id='selects' value=''>High School</option>                  
-                      <option class='selectOptions' id='selects' value=''>Some Post-Secondary</option>                  
-                      <option class='selectOptions' id='selects' value=''>Post-Secondary Certificate</option>                  
-                      <option class='selectOptions' id='selects' value=''>Post-Secondary Bachelor's</option>                  
-                      <option class='selectOptions' id='selects' value=''>Post-Secondary Master's</option>                  
-                      <option class='selectOptions' id='selects' value=''>I'd rather not say</option>                  
-                      <option class='selectOptions' id='selects' value=''>Not sure</option>                  
-                    </select>
+                    </select>                    
                 </div>  
                 <div class="col-xs-12 col-sm-12 form-group">
                   <input class="login-btn" type="submit" value="Update">

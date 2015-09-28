@@ -1,6 +1,7 @@
 <?php
 
-include_once 'config.php';
+require_once('inc/config.php');
+
 
 ?>
 
@@ -10,7 +11,7 @@ include_once 'config.php';
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?php echo $brand; ?></title>
+    <title><?php echo BRAND_NAME; ?></title>
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
@@ -42,7 +43,7 @@ include_once 'config.php';
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                   </button>
-                  <div class="navbar-brand"><a class="brand" href="index.php">UniMeet</a></div>
+                  <div class="navbar-brand"><a class="brand" href="index.php"><?php echo BRAND_NAME; ?></a></div>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -53,6 +54,7 @@ include_once 'config.php';
                     <li><a href="user-dashboard.php">Dashboard</a></li>
                     <li><a href="profile-display.php">Profile</a></li>
                     <li><a href="profile-search.php">Search</a></li>
+                    <li><a href="#">Contact/Support</a></li>                    
                     <li class="nav-last"><a href="user-login.php">Log In</a></li>
                   </ul>
                 </div><!-- /.navbar-collapse -->
