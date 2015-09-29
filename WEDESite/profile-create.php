@@ -1,6 +1,6 @@
 <?php include 'inc/header.php'; ?>
 
-      <section class="download-now" id="getstarted">
+      <section class="download-now" id="profile-create">
         <div class="container">
           <div class="row">
             <div class="col-md-8 wp1">

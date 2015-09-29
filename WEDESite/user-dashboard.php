@@ -20,6 +20,7 @@ require_once('inc/header.php');
                   <li class=""><a href="profile-edit.php">Edit Profile</a></li>
                   <li><a href="">Friends</a></li>
                   <li><a href="">Messages</a></li>
+                  <li><a href="">Sign Out</a></li>
                 </ul>
               </div>
             </aside>

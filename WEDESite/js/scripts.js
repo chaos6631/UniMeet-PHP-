@@ -82,3 +82,34 @@ $(document).ready(function() {
     closeEffect: 'none'
   });
 });
+
+function checkPassword(str){
+  var re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+  return re.test(str);
+}
+
+function checkForm(form){
+  if(form.userName.value == "") {
+    alert("Error: Username cannot be blank!");
+    form.userName.focus();
+    return false;
+  }
+  re = /^\w+$/;
+  if(!re.test(form.userName.value)) {
+    alert("Error: Username must contain only letters, numbers and underscores!");
+    form.userName.focus();
+    return false;
+  }
+  if(form.userPass.value != "" && form.userPass.value == form.userPass2.value) {
+    if(!checkPassword(form.userPass.value)) {
+      alert("The password you have entered is not valid!");
+      form.userPass.focus();
+      return false;
+    }
+  } else {
+    alert("Error: Please check that you've entered and confirmed your password!");
+    form.userPass.focus();
+    return false;
+  }
+  return true;
+}

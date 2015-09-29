@@ -124,6 +124,9 @@ input[type="text"], [type="email"], [type="password"]{
   width: 250px;
   height: 250px;
 }
+#profile-create{
+  background-image: none;
+}
 #quick-results{
   padding-top: 50px;
 }
