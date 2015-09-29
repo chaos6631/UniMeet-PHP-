@@ -6,22 +6,7 @@ require_once('inc/header.php');
 			<section class="content">
 				<div class="container-fluid">
           <div class="row">
-          	<aside class="col-sm-2 col-md-2 sidebar" id="dashboard-nav">              
-              <!-- User Profile -->
-              <div class="col-sm-12 text-center" id="dashboard-nav-pic">
-                <a href="user-dashboard.php">
-                  <img class="img-responsive img-circle center-block" src="img/pic2.jpg">                  
-                </a>
-                <p class="text-center"><span class="hidden-xs">UserName</span></p>
-              </div>
-              <div class="col-sm-12">
-                <ul class="nav nav-sidebar">
-                  <li class=""><a href="profile-edit.php">Edit Profile</a></li>
-                  <li><a href="">Friends</a></li>
-                  <li><a href="">Messages</a></li>
-                </ul>
-              </div>
-            </aside>
+          	<?php include_once ('inc/side-nav.php'); ?>
             <div class="col-md-8 content wp1">
               <h1>
               Edit Your Profile

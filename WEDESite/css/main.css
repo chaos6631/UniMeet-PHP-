@@ -56,6 +56,9 @@ a:hover{
   color: white;
   text-decoration: none;
 }
+.search-box{
+  border: 1px solid blue;
+}
 
 
 /*Form Inputs*/
@@ -110,12 +113,20 @@ input[type="text"], [type="email"], [type="password"]{
 
 /*ID Elements*/
 
+/*#footer{
+  height:300px;
+}*/
 #dashboard-nav{
   /*margin:0px, 0px, 0px, 0px;*/
   /*padding: 0px, 0px, 0px, 0px;*/
-  height: 900px;
+  height: 800px;  
   background-color: #BD0026;  
   color: #fff;
+}
+@media (max-width: 450px){
+  aside .sidebar{
+    height:100px;
+  }
 }
 #dashboard-nav-pic{
   padding-top: 35px;

@@ -7,17 +7,17 @@ define("BRAND_LOGO", "img/logo6.png");
 
 // /*---------------------------------Functions-----------------------------------*/
 //     //Function that takes a user input as an argument and uses various built in php functions to sanitize it.
-function singleSanitize($var){
+function sanitize($var){
     $var = trim($var);
     $var = strip_tags($var);
     $var = stripslashes($var);
     $var = htmlspecialchars($var);
     return $var;
 }
-function sanitize($var){
+function arraySanitize($var){
 	if(!is_array($var)){
     	
-    	$var = singleSantize($var);
+    	$var = santize($var);
     }else{
     	foreach($var as $key => $value)
     	{

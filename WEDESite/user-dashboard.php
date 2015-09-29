@@ -7,30 +7,13 @@ require_once('inc/header.php');
       <section class="design" id="design">
         <div class="container-fluid">
           <div class="row">
-            <aside class="col-sm-2 col-md-2 sidebar" id="dashboard-nav">              
-              <!-- User Profile -->
-              <div class="col-sm-12 text-center" id="dashboard-nav-pic">
-                <a href="user-dashboard.php">
-                  <img class="img-responsive center-block" src="img/av-pete.png">                  
-                </a>
-                <p class="text-center"><span class="hidden-xs">UserName</span></p>
-              </div>
-              <div class="col-sm-12">
-                <ul class="nav nav-sidebar">
-                  <li class=""><a href="profile-edit.php">Edit Profile</a></li>
-                  <li><a href="">Friends</a></li>
-                  <li><a href="">Messages</a></li>
-                  <li><a href="">Sign Out</a></li>
-                </ul>
-              </div>
-            </aside>
+            <?php include_once ('inc/side-nav.php'); ?>
             <div class="col-md-9" id="quick-results">
               <div id="secondSlider">
                 <ul class="slides">
                   <li>
                     <div class="col-sm-3 col-md-3 design-content">
                       <h1>We thought you might be interested....</h1>
-                      <p>Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
                     </div> 
                     <div class="col-sm-9 col-md-9">
                       <div class="col-sm-4">
@@ -66,7 +49,6 @@ require_once('inc/header.php');
                   <li>
                     <div class="col-sm-3 col-md-3 design-content">
                       <h1>You never know right....</h1>
-                      <p>Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
                     </div>
                     <div class="col-sm-9 col-md-9">
                       <div class="col-sm-4">
@@ -117,7 +99,7 @@ require_once('inc/header.php');
                   </li>
                 </ul>
               </div>
-              <div class="col-md-1 col-md-offset-11 text-right controls">
+              <div class="col-md-1 col-md-offset-6 text-right controls">
                 <a href="prev" class="prev"><i class="fa fa-angle-left fa-3x"></i></a>
                 <a href="next" class="next"><i class="fa fa-angle-right fa-3x"></i></a>
               </div>

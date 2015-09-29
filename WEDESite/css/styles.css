@@ -196,7 +196,7 @@ nav ul li a { color: rgba(255, 255, 255, 0.6); padding: 20px; display: block; bo
 nav ul li a:hover, nav ul li a:focus { color: rgba(255, 255, 255, 1); text-decoration: none; }
 .indicator { position: absolute; right: 0 !important; }
 .pull { display: none; }
-.hero { background: url('../img/header-background.jpg') no-repeat 50%; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; padding: 65px 0; height: auto; }
+.hero { background: url('../img/header-background-copy.jpg') no-repeat 50%; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; padding: 65px 0; height: auto; }
 .hero p { margin-top: 15px; color: #d0e7e9; font-style: italic; font-size: 17px; }
 .hero a { color: #fff; }
 .hero img{ margin-top: 95px; }
