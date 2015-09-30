@@ -8,10 +8,10 @@
               </div>
               <div class="col-sm-12">
                 <ul class="nav nav-sidebar text-center">
-                  <li class=""><a href="profile-edit.php">Edit Profile</a></li>
-                  <li><a href="">Friends</a></li>
-                  <li><a href="">Messages</a></li>
-                  <li><a href="">Sign Out</a></li>
+                  <div class="col-xs-6 col-sm-12 col-md-12"><li class=""><a href="profile-edit.php">Edit Profile</a></li></div>
+                  <div class="col-xs-6 col-sm-12 col-md-12"><li><a href="">Friends</a></li></div>
+                  <div class="col-xs-6 col-sm-12 col-md-12"><li><a href="">Messages</a></li></div>
+                  <div class="col-xs-6 col-sm-12 col-md-12"><li><a href="">Sign Out</a></li></div>
                 </ul>
               </div>
             </aside>

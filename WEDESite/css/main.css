@@ -23,6 +23,11 @@ a:hover{
   height: 50px;
 }
 .content { padding-top: 56px; background-color: #fff; position: relative; }
+.footer{
+  height: 300px;
+  padding-top:30px;
+  padding-bottom: 15px;
+}
 
 .login-btn { 
   color: #fff;
@@ -58,6 +63,9 @@ a:hover{
 }
 .search-box{
   border: 1px solid blue;
+}
+.row-top{
+  padding-top: 0px;
 }
 
 
@@ -138,8 +146,8 @@ input[type="text"], [type="email"], [type="password"]{
 #profile-create{
   background-image: none;
 }
-#quick-results{
-  padding-top: 50px;
+#content-section{
+  padding-top: 45px;
 }
 #selects{
   color: black;

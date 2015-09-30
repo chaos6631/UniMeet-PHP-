@@ -6,9 +6,9 @@ require_once('inc/header.php');
 ?>
       <section class="design" id="design">
         <div class="container-fluid">
-          <div class="row">
+          <div class="row row-top">
             <?php include_once ('inc/side-nav.php'); ?>
-            <div class="col-md-9" id="quick-results">
+            <div class="col-md-9" id="content-section">
               <div id="secondSlider">
                 <ul class="slides">
                   <li>

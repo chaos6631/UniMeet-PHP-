@@ -5,7 +5,7 @@ require_once('inc/header.php');
 ?>
 			<section class="content">
 				<div class="container-fluid">
-          <div class="row">
+          <div class="row row-top">
           	<?php include_once ('inc/side-nav.php'); ?>
             <div class="col-md-8 content wp1">
               <h1>

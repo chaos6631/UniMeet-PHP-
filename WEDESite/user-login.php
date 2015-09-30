@@ -25,8 +25,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 				
 			<section class="download-now" id="getstarted">
-				<div class="container">
-				  <div class="row">
+				<div class="container-fluid">
+				  <div class="row row-top">
 				    <div class="col-md-8 wp1">
 				      <h1>
 				      Log In
