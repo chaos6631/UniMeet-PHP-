@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	if ($rows == 1) {
 		header("Location: user-dashboard.php");
 	}else{
-		header("Location: index.php");
+		$output = "Account login failed, please try again.";
 	}
 }
 ?>
@@ -31,6 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				      <h1>
 				      Log In
 				      </h1>
+					  <h3><?php echo $output; ?></h3>
 				      <form class="form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" role="form">
 				        <div class="form-group">
 				          <input class="userName form-control" type="text" name="userName" placeholder="Username" autofocus required>
