@@ -1,7 +1,7 @@
 <?php
 
 //Constants
-define("BASE_URL", '/WEDESite/');
+define("BASE_URL", './');
 define("BRAND_NAME", "UniMeet");
 define("BRAND_LOGO", "img/logo6.png");
 
@@ -12,6 +12,18 @@ function sanitize($var){
     $var = strip_tags($var);
     $var = stripslashes($var);
     $var = htmlspecialchars($var);
+    return $var;
+}
+function arraySanitize($var){
+	if(!is_array($var)){
+    	
+    	$var = santize($var);
+    }else{
+    	foreach($var as $key => $value)
+    	{
+    		$var[$key] = singleSanitize($value);
+    	}
+    }
     return $var;
 }
 function dump($arg){

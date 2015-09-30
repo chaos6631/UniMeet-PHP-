@@ -23,6 +23,11 @@ a:hover{
   height: 50px;
 }
 .content { padding-top: 56px; background-color: #fff; position: relative; }
+.footer{
+  height: 300px;
+  padding-top:30px;
+  padding-bottom: 15px;
+}
 
 .login-btn { 
   color: #fff;
@@ -55,6 +60,12 @@ a:hover{
 .nav-sidebar li a{
   color: white;
   text-decoration: none;
+}
+.search-box{
+  border: 1px solid blue;
+}
+.row-top{
+  padding-top: 0px;
 }
 
 
@@ -110,12 +121,20 @@ input[type="text"], [type="email"], [type="password"]{
 
 /*ID Elements*/
 
+/*#footer{
+  height:300px;
+}*/
 #dashboard-nav{
   /*margin:0px, 0px, 0px, 0px;*/
   /*padding: 0px, 0px, 0px, 0px;*/
-  height: 900px;
+  height: 800px;  
   background-color: #BD0026;  
   color: #fff;
+}
+@media (max-width: 450px){
+  aside .sidebar{
+    height:100px;
+  }
 }
 #dashboard-nav-pic{
   padding-top: 35px;
@@ -124,8 +143,11 @@ input[type="text"], [type="email"], [type="password"]{
   width: 250px;
   height: 250px;
 }
-#quick-results{
-  padding-top: 50px;
+#profile-create{
+  background-image: none;
+}
+#content-section{
+  padding-top: 45px;
 }
 #selects{
   color: black;
