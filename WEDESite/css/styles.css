@@ -196,7 +196,7 @@ nav ul li a { color: rgba(255, 255, 255, 0.6); padding: 20px; display: block; bo
 nav ul li a:hover, nav ul li a:focus { color: rgba(255, 255, 255, 1); text-decoration: none; }
 .indicator { position: absolute; right: 0 !important; }
 .pull { display: none; }
-.hero { background: url('../img/header-background.jpg') no-repeat 50%; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; padding: 65px 0; height: auto; }
+.hero { background: url('../img/header-background-copy.jpg') no-repeat 50%; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; padding: 65px 0; height: auto; }
 .hero p { margin-top: 15px; color: #d0e7e9; font-style: italic; font-size: 17px; }
 .hero a { color: #fff; }
 .hero img{ margin-top: 95px; }
@@ -228,7 +228,7 @@ nav ul li a:hover, nav ul li a:focus { color: rgba(255, 255, 255, 1); text-decor
 .controls a { color: #959595; transition: all 0.5s ease; -moz-transition: all 0.5s ease; -webkit-transition: all 0.5s ease; -o-transition: all 0.5s ease; }
 .controls a:hover, .controls a:focus { color: #555555; }
 .controls .prev { margin-right: 5px; }
-footer { background-color: #7accc8; padding: 75px 0 220px; }
+footer { background-color: #000; padding: 75px 0 220px; }
 footer p { color: #fff; line-height: 30px; }
 .footer-nav { list-style: none; padding: 0; }
 .footer-nav li a { display: block; color: #fff; padding: 5px; transition: all 0.5s ease; -moz-transition: all 0.5s ease; -webkit-transition: all 0.5s ease; -o-transition: all 0.5s ease; }

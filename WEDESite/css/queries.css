@@ -1,6 +1,7 @@
 /* For mobile:like samsung grand(480 * 800): */
 @media screen and (max-width:480px) {
 	.get-started-btn { padding: 20px 50px; }
+	
 }
 /* For iphone: */
 @media screen and (max-width:320px) {

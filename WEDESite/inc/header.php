@@ -50,10 +50,12 @@ require_once('inc/config.php');
                 <div class="collapse navbar-collapse" id="navbar-brand">
                   <ul class="nav nav-tabs navbar-right">
                     <li><a href="index.php">Home</a></li>
-                    <li><a href="user-register.php">Get Started/Sign Up</a></li>
+                    <li><a href="user-register.php">Sign Up</a></li>
                     <li><a href="user-dashboard.php">Dashboard</a></li>
                     <li><a href="profile-display.php">Profile</a></li>
+                    <li><a href="profile-edit.php">Profile Edit</a></li>
                     <li><a href="profile-search.php">Search</a></li>
+                    <li><a href="profile-results.php">Results</a></li>
                     <li><a href="#">Contact/Support</a></li>                    
                     <li class="nav-last"><a href="user-login.php">Log In</a></li>
                   </ul>
