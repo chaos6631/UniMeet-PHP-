@@ -2,7 +2,6 @@
 
 require_once('inc/config.php');
 
-
 ?>
 
 <!DOCTYPE html>
@@ -19,6 +18,8 @@ require_once('inc/config.php');
     <link href="css/styles.css?v=1.6" rel="stylesheet">
     <link href="css/queries.css?v=1.6" rel="stylesheet">
     <link href="css/jquery.fancybox.css" rel="stylesheet">
+    <link href="css/toastr.css" rel="stylesheet">  
+    <link href="css/toastr.min.css" rel="stylesheet">        
     <link href="css/main.css" rel="stylesheet">
     <!-- Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
@@ -28,42 +29,46 @@ require_once('inc/config.php');
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
       <![endif]-->
-    </head>
-    <body>
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2">            
-            <nav class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
-              <div class="container">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-brand">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                  </button>
-                  <div class="navbar-brand"><a class="brand" href="index.php"><?php echo BRAND_NAME; ?></a></div>
-                </div>
+    <script type="text/javascript" src="js/jquery-2.1.4.js"></script>  
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/toastr.min.js"></script>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">            
+        <!-- <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2"> -->            
+          <nav class="navbar navbar-collapse navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+              <!-- Brand and toggle get grouped for better mobile display -->
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-brand">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <div class="navbar-brand"><a class="brand" href="index.php"><?php echo BRAND_NAME; ?></a></div>
+              </div>
 
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="navbar-brand">
-                  <ul class="nav nav-tabs navbar-right">
-                    <li><a href="index.php">Home</a></li>
-                    <li><a href="user-register.php">Sign Up</a></li>
-                    <li><a href="user-dashboard.php">Dashboard</a></li>
-                    <li><a href="profile-display.php">Profile</a></li>
-                    <li><a href="profile-edit.php">Profile Edit</a></li>
-                    <li><a href="profile-search.php">Search</a></li>
-                    <li><a href="profile-results.php">Results</a></li>
-                    <li><a href="#">Contact/Support</a></li>                    
-                    <li class="nav-last"><a href="user-login.php">Log In</a></li>
-                  </ul>
-                </div><!-- /.navbar-collapse -->
-              </div><!-- /.container-fluid -->
-            </nav>
-          </div>
+              <!-- Collect the nav links, forms, and other content for toggling -->
+              <div class="collapse navbar-collapse" id="navbar-brand">
+                <ul class="nav nav-tabs navbar-right">
+                  <li><a href="index.php">Home</a></li>
+                  <li><a href="user-register.php">Sign Up</a></li>
+                  <li><a href="user-dashboard.php">Dashboard</a></li>
+                  <li><a href="profile-display.php">Profile</a></li>
+                  <li><a href="profile-edit.php">Profile Edit</a></li>
+                  <li><a href="profile-search.php">Search</a></li>
+                  <li><a href="profile-results.php">Results</a></li>
+                  <!-- <li class="disabled"><a href="#">Contact/Support</a></li>                     -->
+                  <li class="nav-last"><a href="user-login.php">Log In</a></li>
+                </ul>
+              </div><!-- /.navbar-collapse -->
+            </div>
+          </nav>
         </div>
       </div>
+      
 
       

@@ -4,8 +4,7 @@ require_once('inc/header.php');
 
 
 ?>
-      <section class="design" id="design">
-        <div class="container-fluid">
+      <section class="design" id="design">        
           <div class="row row-top">
             <?php include_once ('inc/side-nav.php'); ?>
             <div class="col-sm-9 col-md-9" id="quick-results">
@@ -133,7 +132,6 @@ require_once('inc/header.php');
                 <a href="next" class="next"><i class="fa fa-angle-right fa-3x"></i></a>
               </div>
             </div>
-          </div>
-        </div>
+          </div>        
       </section>
 <?php include_once('inc/footer.php'); ?>

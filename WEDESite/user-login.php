@@ -19,29 +19,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	if ($rows == 1) {
 		header("Location: user-dashboard.php");
 	}else{
-		$output = "Account login failed, please try again.";
+		header("Location: index.php");
 	}
 }
-?>
-				
-			<section class="download-now" id="getstarted">
-				<div class="container-fluid">
-				  <div class="row row-top">
-				    <div class="col-md-8 wp1">
-				      <h1>
-				      Log In
-				      </h1>
-					  <h3><?php echo $output; ?></h3>
-				      <form class="form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" role="form">
-				        <div class="form-group">
-				          <input class="userName form-control" type="text" name="userName" placeholder="Username" autofocus required>
-				          <input class="password form-control" type="password" name="userPass" placeholder="Password" required>                  
-				          <input class="login-btn" type="submit" value="Log In">
-				        </div>
-				      </form>              
-				    </div>
-				  </div>
-				</div>
+?>				
+			<section class="download-now">				
+			  <div class="row">
+			    <div class="col-md-8 wp1">
+			      <h1>
+			      Log In
+			      </h1>
+			      <form class="form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" role="form">
+			        <div class="form-group">
+			          <input class="userName form-control" type="text" name="userName" placeholder="Username" autofocus required>
+			          <input class="password form-control" type="password" name="userPass" placeholder="Password" required>                  
+			          <input class="login-btn" type="submit" value="Log In">
+			        </div>
+			      </form>              
+			    </div>
+			  </div>				
 			</section>
 <?php
 require_once('inc/footer.php'); 

@@ -10,19 +10,18 @@ a:hover{
 .hero p{
 	font-size: 2em;
 }
-@media screen and (max-width:760px) {
-  .hero p { display: none; }
-  .hero img { margin-bottom: 50px; }
-}
 
 .brand{
-  color: #fff;  
+  color: #fff;   
 }
 .brand-logo{
   width:150px;
   height: 50px;
 }
-.content { padding-top: 56px; background-color: #fff; position: relative; }
+.container-fluid{
+  width: 100%;
+}
+.content { padding-top: 50px; background-color: #fff; position: relative; }
 .footer{
   height: 300px;
   padding-top:30px;
@@ -49,24 +48,28 @@ a:hover{
   border-color: #5c6869;
   color: #5c6869; 
 }
-@media (max-width: 450px){
-  .login-btn{
-    display: block;
-  }
+.nav>li>a{
+  padding left: 5px;
+  padding-right: 5px;
+}
+.navbar-header{
+  padding-left: 0px;
 }
 .nav-sidebar li a:hover{
-  background: black;
+  background: #a40026;
 }
 .nav-sidebar li a{
   color: white;
   text-decoration: none;
 }
+.nav-stacked {}
 .search-box{
   border: 1px solid blue;
 }
-.row-top{
-  padding-top: 0px;
+.row{
+  width: 100%;
 }
+
 
 
 /*Form Inputs*/
@@ -76,9 +79,18 @@ input[type="text"], [type="email"], [type="password"]{
   border-radius:5px;  
   margin-bottom:10px;
 }
-
-.gender-dropdown{
-  width:100px;
+.dropdown-large{
+  width:300px;
+  border-radius:5px;
+  margin-bottom:10px;
+}
+.dropdown-medium{
+  width:200px;
+  border-radius:5px;
+  margin-bottom:10px;
+}
+.dropdown-small{
+  width:110px;
   border-radius:5px;
   margin-bottom:10px;
 }
@@ -113,11 +125,7 @@ input[type="text"], [type="email"], [type="password"]{
   margin: 0px;
   padding: 0px;
 }
-.status-dropdown{
-  width:300px;
-  border-radius:5px;
-  margin-bottom:10px;
-}
+
 
 /*ID Elements*/
 
@@ -127,14 +135,9 @@ input[type="text"], [type="email"], [type="password"]{
 #dashboard-nav{
   /*margin:0px, 0px, 0px, 0px;*/
   /*padding: 0px, 0px, 0px, 0px;*/
-  height: 800px;  
+  /*height: 800px;  */
   background-color: #BD0026;  
   color: #fff;
-}
-@media (max-width: 450px){
-  aside .sidebar{
-    height:100px;
-  }
 }
 #dashboard-nav-pic{
   padding-top: 35px;

@@ -204,7 +204,7 @@ nav ul li a:hover, nav ul li a:focus { color: rgba(255, 255, 255, 1); text-decor
 .hero-play-btn:hover, .hero-play-btn:focus { transform: translate(0, -15px); -webkit-transform: translate(0, -15px); -o-transform: translate(0, -15px); -moz-transform: translate(0, -15px); }
 .get-started-btn { background-color: #7accc8; padding: 20px 80px; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; font-size: 22px; letter-spacing: 2px; box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.4); transition: all 0.5s ease; -moz-transition: all 0.5s ease; -webkit-transition: all 0.5s ease; -o-transition: all 0.5s ease; display: inline-block; }
 .get-started-btn:hover, .get-started-btn:focus { text-decoration: none; background-color: #e8b968; }
-.download-now { background: #BD0026 url('../img/couple2-movies.gif') no-repeat right; background-size: 65%; min-height: 600px;}
+.download-now { background: #BD0026 url('../img/couple2-movies.png') no-repeat; background-position: 125% 55px; background-size: 80%; min-height: 600px; padding-left: 20px;}
 .download-now p { color: #fff; font-size: 16px; margin: 40px 30px 40px 0; line-height: 30px; }
 .testimonials { background: #5b6869 url('../img/tBG01.jpg') no-repeat left center; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; padding: 130px 0; }
 .features { background: #fff url('../img/arrowBG.png') no-repeat center -1px; padding: 70px 0; }
@@ -214,7 +214,7 @@ nav ul li a:hover, nav ul li a:focus { color: rgba(255, 255, 255, 1); text-decor
 .margin-bottom { margin-bottom: 70px; }
 .try-btn { background-color: #f69679; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; font-size: 17px; color: #fff; transition: all 0.5s ease; -moz-transition: all 0.5s ease; -webkit-transition: all 0.5s ease; -o-transition: all 0.5s ease; display: inline-block; padding: 15px 50px; margin: 70px 0 70px; }
 .try-btn:hover, .try-btn:focus { background-color: #e37857; color: #fff; text-decoration: none; }
-.design { padding-top: 56px; background-color: #f6f6f4; position: relative; }
+.design { padding-top: 50px; background-color: #f6f6f4; position: relative; }
 .flat-box { background-color: #fff; -webkit-box-shadow: 0px 3px 0px 0px rgba(234, 234, 234, 1); -moz-box-shadow: 0px 3px 0px 0px rgba(234, 234, 234, 1); box-shadow: 0px 3px 0px 0px rgba(234, 234, 234, 1); transition: all 0.5s ease; -moz-transition: all 0.5s ease; -webkit-transition: all 0.5s ease; -o-transition: all 0.5s ease; }
 .flat-box:hover, .flat-box:focus { transform: translate(0, -15px); -webkit-transform: translate(0, -15px); -o-transform: translate(0, -15px); -moz-transform: translate(0, -15px); }
 .colourway { height: 120px; width: 120px }
