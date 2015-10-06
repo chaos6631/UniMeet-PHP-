@@ -1,10 +1,11 @@
 ﻿create table profiles();
 ALTER TABLE profiles 
-ADD user_id VARCHAR(20) REferences users, 
+ADD user_id VARCHAR(20) REFERENCES users, 
 ADD gender_id SMALLINT NOT NULL, 
 ADD gender_sought SMALLINT NOT NULL, 
 ADD city_id INT NOT NULL, 
-ADD prov_id SMALLINT NOT NULL DEFAULT 0,
+ADD school_id INT NOT NULL,
+ADD study_major VARCHAR(150) NOT NULL,
 ADD images SMALLINT NOT NULL DEFAULT 0, 
 ADD head_line VARCHAR(100) NOT NULL, 
 ADD self_description VARCHAR(1000) NOT NULL,
@@ -17,4 +18,4 @@ ADD language_id SMALLINT NOT NULL DEFAULT 0,
 ADD status_id SMALLINT NOT NULL DEFAULT 0,
 ADD seeking_id SMALLINT NOT NULL DEFAULT 0,
 ADD religion_id SMALLINT NOT NULL DEFAULT 0,
-ADD education_id SMALLINT NOT NULL DEFAULT 0,
+ADD education_id SMALLINT NOT NULL DEFAULT 0;
