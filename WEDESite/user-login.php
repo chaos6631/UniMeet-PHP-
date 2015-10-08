@@ -11,8 +11,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
  	//Hash the password
  	$userPass = md5($userPass);
  	// Prepare a query for execution
-	$result = pg_prepare($link, 'login_query', 'SELECT * FROM users WHERE user_name = $1 AND password = $2');
-	$result = pg_execute($link, 'login_query', array($userName, $userPass));
+	$result = pg_prepare($link, "login_query", 'SELECT * FROM users WHERE user_name = $1 AND password = $2');
+	$result = pg_execute($link, "login_query", array($userName, $userPass));
 	// $result = pg_execute($link, "login_query", array(arraySanitize($_POST)));
 	$rows = pg_num_rows($result);
 	if ($rows == 1) {
