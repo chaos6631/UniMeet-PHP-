@@ -1,4 +1,4 @@
-create table languages(language_id smallint not null primary key, language_name varchar(50) not null);
+CREATE TABLE IF NOT EXISTS languages(language_id smallint not null primary key, language_name varchar(50) not null);
 
 --Inserts
 

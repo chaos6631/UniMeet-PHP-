@@ -1,4 +1,4 @@
-create table cities(city_id smallint NOT null primary key, city_name Varchar(50) not null);
+create table IF NOT EXISTS cities(city_id smallint NOT null primary key, city_name Varchar(50) not null);
 
 --Inserts
 

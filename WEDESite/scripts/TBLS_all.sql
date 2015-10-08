@@ -10,4 +10,3 @@ create table status(status_id smallint not null primary key, relationship_status
 create table seeking(seeking_id smallint not null primary key, seeking_type varchar(80) not null);
 create table religions(religion_id smallint not null primary key, religion_type varchar(50) not null);
 create table education(education_id smallint not null primary key, education_type varchar(80) not null);
-

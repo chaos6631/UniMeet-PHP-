@@ -1,4 +1,4 @@
-create table hair(hair_id smallint not null primary key, colour varchar(50) not null);
+create table IF NOT EXISTS hair(hair_id smallint not null primary key, colour varchar(50) not null);
 
 --INSERTS
 insert into hair(hair_id, colour) values(0, 'Black');

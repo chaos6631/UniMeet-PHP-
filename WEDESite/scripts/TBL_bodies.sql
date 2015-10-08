@@ -1,4 +1,4 @@
-create table bodies(body_id smallint not null primary key, body_type varchar(25) not null);
+create table IF NOT EXISTS bodies(body_id smallint not null primary key, body_type varchar(25) not null);
 
 --Inserts
 

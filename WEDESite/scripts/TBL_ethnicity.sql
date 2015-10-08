@@ -1,4 +1,4 @@
-create table ethnicity(ethnic_id smallint not null primary key, ethnic_name varchar(80) not null);
+create table IF NOT EXISTS ethnicity(ethnic_id smallint not null primary key, ethnic_name varchar(80) not null);
  
  --Inserts
 

@@ -1,4 +1,4 @@
-create table seeking(seeking_id smallint not null primary key, seeking_type varchar(80) not null);
+create table IF NOT EXISTS seeking(seeking_id smallint not null primary key, seeking_type varchar(80) not null);
 
 --Inserts
 

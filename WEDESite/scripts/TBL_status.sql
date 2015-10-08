@@ -1,4 +1,4 @@
-create table status(status_id smallint not null primary key, relationship_status varchar(80) not null);
+create table IF NOT EXISTS status(status_id smallint not null primary key, relationship_status varchar(80) not null);
 
 --Inserts
 

@@ -1,4 +1,4 @@
-create table religions(religion_id smallint not null primary key, religion_type varchar(50) not null);
+create table IF NOT EXISTS religions(religion_id smallint not null primary key, religion_type varchar(50) not null);
 
 --Inserts
 

@@ -1,4 +1,4 @@
-create table schools(school_id smallint NOT null primary key, school_name Varchar(100) not null);
+create table IF NOT EXISTS schools(school_id smallint NOT null primary key, school_name Varchar(100) not null);
 
 --Inserts
 

@@ -1,4 +1,4 @@
-﻿create table profiles();
+﻿create table IF NOT EXISTS profiles();
 ALTER TABLE profiles 
 ADD user_id VARCHAR(20) REFERENCES users, 
 ADD gender_id SMALLINT NOT NULL, 
