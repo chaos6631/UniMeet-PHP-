@@ -1,6 +1,6 @@
 <?php 
-require_once('inc/header.php'); 
-require_once ('inc/connect.php');
+include_once('inc/header.php'); 
+include_once('inc/connect.php');
 
 
 //Checks if request method was POST and if TRUE begins input sanitation and validation process
