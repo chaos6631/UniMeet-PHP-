@@ -70,7 +70,14 @@ require_once('inc/db.php');
                   <li><a href="profile-search.php">Search</a></li>
                   <li><a href="profile-results.php">Results</a></li>
                   <!-- <li class="disabled"><a href="#">Contact/Support</a></li>                     -->
-                  <li class="nav-last"><a href="user-login.php">Log In</a></li>
+                  <li class="nav-last">
+                  <?php 
+                  if (!empty($_SESSION['user_id'])) {
+                    echo '<a href="user-logout.php">Logout</a></li>';
+                  }else{
+                    echo '<a href="user-login.php">Login</a></li>';
+                  }
+                  ?>
                 </ul>
               </div><!-- /.navbar-collapse -->
             </div>

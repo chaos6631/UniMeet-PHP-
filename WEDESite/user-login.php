@@ -1,6 +1,6 @@
 <?php 
 include_once('inc/header.php'); 
-
+unset($errorMessage);
 //Checks if request method was POST and if TRUE begins input sanitation and validation process
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   //Sanitize User submissions, removing any possible script injection and assigning each to a variable
@@ -14,8 +14,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$rows = pg_num_rows($result);	
 	
 	if ($rows == 1) {
-		$_SESSION = pg_fetch_assoc($result);		
-		header("Location: user-dashboard.php");
+		$_SESSION = pg_fetch_assoc($result);
+		if ($_SESSION['user_type'] == "d") {
+					$errorMessage = "Sorry your account has been disabled, please contact us to resolve this issue";					
+			}else{
+				header("Location: user-dashboard.php");
+			}				
 	}
 	else{		
 		$errorMessage = "Sorry you have entered an incorrect username and password combination";
