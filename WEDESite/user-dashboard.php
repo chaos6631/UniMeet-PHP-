@@ -2,7 +2,6 @@
 
 require_once('inc/header.php');
 
-
 ?>
       <section class="design" id="design">        
         <div class="row">

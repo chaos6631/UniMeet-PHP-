@@ -1,8 +1,14 @@
 <?php
 
+if (session_id() == "") {
+  session_start();
+}
+  
+
 require_once('inc/constants.php');
 require_once ('inc/functions.php');
 require_once('inc/db.php');
+
 
 ?>
 

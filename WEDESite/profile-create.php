@@ -8,7 +8,8 @@ if($_SERVER['REQUEST_METHOD']=="GET")
    $bodyType = (isset($_POST['bodyType']))?$_POST['bodyType']:"";
 
 }
-echo "Body type: " . $bodyType;
+/*Testing sticky output*/ 
+// echo "Body type: " . $bodyType;
 ?>
       <section class="download-now" id="profile-create">        
         <div class="row row-top">
