@@ -29,13 +29,6 @@ function dump($arg){
 	echo "</pre>";
 }
 
-function buildDropdown($tableName){
-	//query to array
 
-	//Fill dropdown
-	foreach ($array as $key => $value) {
-		# code...
-	}
-}
 
 ?>

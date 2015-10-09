@@ -1,7 +1,14 @@
 <?php 
 
 include 'inc/header.php'; 
+if($_SERVER['REQUEST_METHOD']=="GET")
+{
+  $bodyType = "";
+}else{
+   $bodyType = (isset($_POST['bodyType']))?$_POST['bodyType']:"";
 
+}
+echo "Body type: " . $bodyType;
 ?>
       <section class="download-now" id="profile-create">        
         <div class="row row-top">
@@ -18,7 +25,10 @@ include 'inc/header.php';
                   <option class='selectOptions' id='selects' value='male'>Male</option>                  
                   <option class='selectOptions' id='selects' value='female'>Female</option>                                      
                 </select>
-                <select class="dropdown-large form-control " id="language" name="language" >
+                <select class="dropdown-large form-control" id="bodyType" name="bodyType">
+                  <?php echo buildDropdown("bodies",$bodyType); ?>
+                </select>
+                <select class="dropdown-large form-control" id="language" name="language" >
                   <option>English</option>
                   <option>French</option>
                   <option>Spanish</option>
