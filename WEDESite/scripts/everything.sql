@@ -18,7 +18,7 @@ create table IF NOT EXISTS cities(value_id smallint NOT null primary key, proper
 
 --Inserts
 
-insert into cities values(0, 'City');
+insert into cities values(0, 'City:');
 insert into cities values(16, 'Oshawa');
 insert into cities values(1, 'Whitby');
 insert into cities values(2, 'Ajax');
@@ -141,17 +141,19 @@ create table IF NOT EXISTS smoker(value_id smallint not null primary key, proper
 
 --Inserts
 
-insert into smoker values(0, 'Yes');
-insert into smoker values(1, 'No');
-insert into smoker values(2, 'Casual');
+insert into smoker values(0, 'Do You Smoke:');
+insert into smoker values(1, 'Yes');
+insert into smoker values(2, 'No');
+insert into smoker values(4, 'Casual');
 
 ------ TABLE STATUS ------
 create table IF NOT EXISTS status(value_id smallint not null primary key, property varchar(80) not null);
 
 --Inserts
 
-INSERT INTO status VALUES(0, 'Single');
-INSERT INTO status VALUES(1, 'Seperated');
-INSERT INTO status VALUES(2, 'Recently Divorced');
-INSERT INTO status VALUES(4, 'Recently Widowed');
-INSERT INTO status VALUES(8, 'Unhappily Married');
+INSERT INTO status VALUES(0, 'Relationship Status:');
+INSERT INTO status VALUES(1, 'Single');
+INSERT INTO status VALUES(2, 'Seperated');
+INSERT INTO status VALUES(4, 'Recently Divorced');
+INSERT INTO status VALUES(8, 'Recently Widowed');
+INSERT INTO status VALUES(16, 'Unhappily Married');

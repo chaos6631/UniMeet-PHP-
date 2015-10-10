@@ -18,7 +18,7 @@
 	.features-rightcol { padding: 0 0 0 20px; }
 	.margin-bottom { margin-bottom: 0; }
 	.features p { margin-bottom: 50px; }
-	.hero p { display: none; }
+	/*.hero p { display: none; }*/
   	.hero img { margin-bottom: 50px; }
 	.sidebar { height: 200px; }
 }

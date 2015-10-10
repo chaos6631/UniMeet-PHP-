@@ -2,6 +2,7 @@ create table IF NOT EXISTS smoker(value_id smallint not null primary key, proper
 
 --Inserts
 
-insert into smoker values(0, 'Yes');
-insert into smoker values(1, 'No');
-insert into smoker values(2, 'Casual');
+insert into smoker values(0, 'Do You Smoke:');
+insert into smoker values(1, 'Yes');
+insert into smoker values(2, 'No');
+insert into smoker values(4, 'Casual');

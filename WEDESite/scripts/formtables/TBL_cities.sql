@@ -2,7 +2,7 @@ create table IF NOT EXISTS cities(value smallint NOT null primary key, property 
 
 --Inserts
 
-insert into cities values(0, 'City');
+insert into cities values(0, 'City:');
 insert into cities values(16, 'Oshawa');
 insert into cities values(1, 'Whitby');
 insert into cities values(2, 'Ajax');
