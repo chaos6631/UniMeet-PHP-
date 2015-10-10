@@ -62,10 +62,10 @@ include_once ('inc/functions.php');
             </div>            
           </div>
           <div class="row row-no-padding">
-            <div class="col-xs-12 text-center">
+            <div class="col-xs-12 text-center" id="hide4phone">
               <a href="user-register.php" class="login-btn">Sign Up</a>
               <a href="user-login.php" class="login-btn">Log In</a>
-            </div>
+            </div>            
           </div>          
         </div>
       </section>

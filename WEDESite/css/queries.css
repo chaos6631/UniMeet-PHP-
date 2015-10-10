@@ -4,10 +4,12 @@
 	.get-started-btn { padding: 20px 50px; }
 	.sidebar { height: 100px; }
 	.login-btn { display: block; }
+	#hide4phone{ display: none; }
 }
 /* For iphone: */
 @media screen and (max-width:320px) {
 	.sidebar { height: 100px; }
+	#hide4phone{ display: none; }
 }
 /* For ipad: */
 @media screen and (max-width:760px) {
