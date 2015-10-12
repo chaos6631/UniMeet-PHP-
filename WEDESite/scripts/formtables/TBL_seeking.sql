@@ -1,4 +1,4 @@
-create table IF NOT EXISTS seeking(value smallint not null primary key, property varchar(80) not null);
+create table IF NOT EXISTS seeking(value_id smallint not null primary key, property varchar(80) not null);
 
 --Inserts
 

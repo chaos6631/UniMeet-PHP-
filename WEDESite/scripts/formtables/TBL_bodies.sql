@@ -1,4 +1,4 @@
-create table IF NOT EXISTS bodies(value smallint not null primary key, property varchar(25) not null);
+create table IF NOT EXISTS bodies(value_id smallint not null primary key, property varchar(25) not null);
 
 --Inserts
 

@@ -137,7 +137,7 @@ INSERT INTO seeking VALUES(4, 'Friend');
 INSERT INTO seeking VALUES(16, 'Not Sure');
 
 ------ TABLE SMOKER ------
-create table IF NOT EXISTS smoker(value_id smallint not null primary key, property varchar(20) not null);
+create table IF NOT EXISTS smoker(value_id smallint not null primary key, property varchar(25) not null);
 
 --Inserts
 

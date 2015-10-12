@@ -1,4 +1,4 @@
-create table IF NOT EXISTS religions(value smallint not null primary key, property varchar(50) not null);
+create table IF NOT EXISTS religions(value_id smallint not null primary key, property varchar(50) not null);
 
 --Inserts
 

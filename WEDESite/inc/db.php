@@ -79,4 +79,8 @@ function buildCheckbox($tableName, $pre_selected = ""){
     return $output .= "\n";
   }
 }
+//getProperty function for displaying user information
+function getProperty(){
+  
+}
 ?>

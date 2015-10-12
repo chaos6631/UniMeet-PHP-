@@ -1,4 +1,4 @@
-create table IF NOT EXISTS schools(value smallint NOT null primary key, property Varchar(100) not null);
+create table IF NOT EXISTS schools(value_id smallint NOT null primary key, property Varchar(100) not null);
 
 --Inserts
 
