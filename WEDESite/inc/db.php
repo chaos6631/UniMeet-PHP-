@@ -21,7 +21,7 @@ function buildDropdown($tableName, $pre_selected = "")  {
 	//query to array
 
 	global $conn;
-  // $result = pg_query($conn, 'SELECT * FROM ' . $tableName);
+  
   $result = pg_prepare($conn, "dropdown query", 'SELECT * FROM ' . $tableName);
   $result = pg_execute($conn, "dropdown query", array());
   $array = pg_fetch_all($result);
@@ -57,7 +57,6 @@ function buildRadio($tableName, $pre_selected = ""){
       $selected = ($pre_selected == $entry['value_id'])?" selected=\"selected\"":"";
 
       $output .= "\n\t\t\t<input type='radio' value='" . $entry['value_id'] . "'" . $selected . ">" . $entry['property'] . "</input>";
-
     }    
     return $output .= "\n";
   }
@@ -96,4 +95,5 @@ function getProperty($userID, $propertyName, $boxSize){
  
   return $output;
 }
+
 ?>
