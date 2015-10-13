@@ -1,3 +1,8 @@
+-- File: TBL_languages.sql
+-- Author: Chris Calder
+-- Date: 05/10/2015
+-- Desc: SQL file to create spoken language property/value table
+
 CREATE TABLE IF NOT EXISTS languages(value_id smallint not null primary key, property varchar(50) not null);
 
 --Inserts

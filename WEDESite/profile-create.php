@@ -27,7 +27,7 @@ if($_SERVER['REQUEST_METHOD']=="GET")
                   <option class='selectOptions' id='selects' value='female'>Female</option>                                      
                 </select>
                 <select class="dropdown-large form-control" id="bodyType" name="bodyType">
-                  <?php echo buildDropdown("bodies",$bodyType); ?>
+                  <?php echo buildDropDown("bodies",$bodyType); ?>
                 </select>
                 <select class="dropdown-large form-control" id="language" name="language" >
                   <option>English</option>

@@ -1,3 +1,8 @@
+-- File: TBL_education.sql
+-- Author: Chris Calder
+-- Date: 05/10/2015
+-- Desc: SQL file to create an education level property/value table
+
 create table IF NOT EXISTS education(value_id smallint not null primary key, property varchar(80) not null);
 
 --Inserts

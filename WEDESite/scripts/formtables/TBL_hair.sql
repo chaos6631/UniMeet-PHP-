@@ -1,3 +1,8 @@
+-- File: TBL_hair.sql
+-- Author: Chris Calder
+-- Date: 05/10/2015
+-- Desc: SQL file to create hair colour property/value table
+
 create table IF NOT EXISTS hair(value_id smallint not null primary key, property varchar(50) not null);
 
 --INSERTS

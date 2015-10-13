@@ -17,7 +17,7 @@ function db_connect()
 $conn = db_connect();
 
 // buildDropdown function with $pre_selected as argument for stickiness
-function buildDropdown($tableName, $pre_selected = "")  {
+function buildDropDown($tableName, $pre_selected = "")  {
 	//query to array
 
 	global $conn;

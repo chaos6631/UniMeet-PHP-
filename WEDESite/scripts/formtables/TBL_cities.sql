@@ -1,3 +1,8 @@
+-- File: TBL_cities.sql
+-- Author: Chris Calder
+-- Date: 05/10/2015
+-- Desc: SQL file to create Cities property/value table
+
 create table IF NOT EXISTS cities(value_id smallint NOT null primary key, property Varchar(50) not null);
 
 --Inserts

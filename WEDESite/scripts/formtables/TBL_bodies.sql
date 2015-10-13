@@ -1,3 +1,8 @@
+-- File: bodies.sql
+-- Author: Chris Calder
+-- Date: 05/10/2015
+-- Desc: SQL file to create bodytype property/value table
+
 create table IF NOT EXISTS bodies(value_id smallint not null primary key, property varchar(25) not null);
 
 --Inserts

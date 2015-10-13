@@ -21,7 +21,7 @@ $stickyReligion = "";
             <div class="col-sm-12 col-md-4 search-box">
               <h3>DROP DOWN SEARCH ITEMS HERE</h3>
               <select class="dropdown-large form-control" id="bodyType" name="bodyType">
-                <?php echo buildDropdown("religions", $stickyReligion); ?>
+                <?php echo buildDropDown("religions", $stickyReligion); ?>
               </select>
             </div>
             <div class="col-sm-12 col-md-8 search-box">            
