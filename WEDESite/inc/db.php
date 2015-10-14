@@ -95,6 +95,16 @@ function getProperty($userID, $propertyID, $tableName, $boxSize){
  
   return $output;
 }
+function getRandomValue($tableName){
+  global $conn;
+  $result = pg_prepare($conn, "random query", 'SELECT * FROM ' . $tableName);
+  $result = pg_execute($conn, "random query", array());
+  $array = pg_fetch_all($result);
+  // Removing the first value of the array witch is the label or placeholder for each table  
+  shuffle($array);
+  $value = array_shift($array);
+  return $value['value_id'];
+}
 
 //lastAccess function that updates the users last_access field
 function lastAccess(){

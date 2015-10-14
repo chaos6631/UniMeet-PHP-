@@ -1,7 +1,9 @@
 <?php
 include_once '../inc/constants.php';
+include_once '../inc/db.php';
 include_once 'names.txt';
 include_once '../inc/functions.php';
+
 
 //Insert Users table information
 
@@ -72,4 +74,9 @@ echo $birth_date . "<br>";
 // $enroll_date = ""; //Random date between today and 1 month ago
 // echo $enroll_date . "<br>";
 
+//city_id 
+$city_id = getRandomValue("cities");
+echo "The City is: ";
+echo($city_id) . "<br>";
+	
 ?>
