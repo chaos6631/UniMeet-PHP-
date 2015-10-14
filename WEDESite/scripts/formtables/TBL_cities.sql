@@ -19,3 +19,4 @@ insert into cities values(256, 'Markham');
 insert into cities values(8, 'Mississauga');
 insert into cities values(512, 'Brampton');
 insert into cities values(1024, 'Peterborough');
+insert into cities values(2048, 'Brooklin');

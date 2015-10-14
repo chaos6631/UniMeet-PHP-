@@ -64,19 +64,52 @@ $email_address = $user_id . $email_domains[$random]; //user_id@......com
 echo $email_address . "<br>";
 
 //Birth Date
-//convert to timestamp
-// $min = time() - 60*60*24*365*18;
-// $max = time() - 60*60*24*365*40;
-//generate random date
 $birth_date = rand(MIN_AGE, MAX_AGE); //Random date between 18 yrs ago and 40 yrs ago
 $birth_date = date('Y-m-d', $birth_date);
 echo $birth_date . "<br>";
-// $enroll_date = ""; //Random date between today and 1 month ago
-// echo $enroll_date . "<br>";
 
-//city_id 
+//Enroll Date
+$enroll_date = rand(time(), time() - 60*60*24*30); //Random date between today and 1 month ago
+$enroll_date = date('Y-m-d', $enroll_date);
+echo $enroll_date . "<br>";
+
+							/*----------Profile------------*/ 
+								/*Numerical values*/
+
+ /*gender_sought , city_id , school_id ,study_major ,images , head_line , self_description ,
+ match_description ,hair_id , body_id , smoker_id , ethnic_id , language_id , status_id , seeking_id ,
+ religion_id , education_id */
+$body_id = getRandomValue("bodies");
 $city_id = getRandomValue("cities");
+$education_id = getRandomValue("education");// This is probably going to be removed
+$ethnic_id = getRandomValue("ethnicity");
+$gender_sought = getRandomValue("genders");
+$hair_id = getRandomValue("hair");
+$language_id = getRandomValue("languages");//needs to be adjusted for secondary language
+$religion_id = getRandomValue("religions");
+$school_id = getRandomValue("schools");
+$seeking_id = getRandomValue("seeking");
+$status_id = getRandomValue("status");
+$smoker_id = getRandomValue("smoker");
 echo "The City is: ";
 echo($city_id) . "<br>";
+
+									/*Text values*/
+
+$study_major = "";
+$images = "";
+$head_line = "";
+$self_description = "";
+$match_description = "";
+
+
+
+
+
+
+
+
+
+
 	
 ?>

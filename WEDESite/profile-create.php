@@ -4,8 +4,12 @@ include 'inc/header.php';
 if($_SERVER['REQUEST_METHOD']=="GET")
 {
   $bodyType = "";
+  $school = "";
+  $gender = "";
 }else{
    $bodyType = (isset($_POST['bodyType']))?$_POST['bodyType']:"";
+   $gender = (isset($_POST['gender']))?$_POST['gender']:"";
+   $school = (isset($_POST['school']))?$_POST['school']:"";
 
 }
 /*Testing sticky output*/ 
@@ -22,13 +26,17 @@ if($_SERVER['REQUEST_METHOD']=="GET")
                 <input class="name form-control" type="text" name="firstName" placeholder="First Name" autofocus >
                 <input class="name form-control" type="text" name="lastName" placeholder="Last Name" >
                 <select class="dropdown-small form-control " id="gender" name="gender" >
-                  <option class="selectOptions" value="" selected disabled>Gender:</option>
-                  <option class='selectOptions' id='selects' value='male'>Male</option>                  
-                  <option class='selectOptions' id='selects' value='female'>Female</option>                                      
+                  <?php echo buildDropDown("genders", $gender) ?>                                      
                 </select>
                 <select class="dropdown-large form-control" id="bodyType" name="bodyType">
-                  <?php echo buildDropDown("bodies",$bodyType); ?>
-                </select>
+                  <?php echo buildDropDown("bodies", $bodyType); ?>
+                </select>                
+                <input class="address form-control" type="text" name="city" placeholder="City" >
+                <select class="dropdown-large form-control" id="school" name="school">
+                  <?php echo buildDropDown("schools", $school); ?>
+                </select>                               
+              </div>
+              <div class="col-md-6 form-group">
                 <select class="dropdown-large form-control" id="language" name="language" >
                   <option>English</option>
                   <option>French</option>
@@ -82,12 +90,6 @@ if($_SERVER['REQUEST_METHOD']=="GET")
                   <option>Cajun</option>
                   <option>Amharic</option>
                 </select>
-                <input class="address form-control" type="text" name="address" placeholder="Address" >
-                <input class="address form-control" type="text" name="city" placeholder="City" >
-                <input class="address form-control" type="text" name="province" placeholder="Province" >
-                <input class="address form-control" type="text" name="postalCode" placeholder="Postal Code" >                  
-              </div>
-              <div class="col-md-6 form-group">
                 <select class="dropdown-large form-control " id="status" name="status" >
                     <option class="selectOptions" value="" selected disabled>Please Select a Realationship Status:</option>
                     <option class='selectOptions' id='selects' value=''>Single</option>                  

@@ -50,7 +50,9 @@ require_once('inc/header.php');
                   <option class='selectOptions' id='selects' value='no'>No</option>                                      
                 </select>                
                 <input class="address form-control" type="text" name="city" placeholder="City" required>
-                <input class="address form-control" type="text" name="school_id" placeholder="Phone Number       XXX-XXX-XXXX" required>                  
+                <select class="dropdown-large form-control" id="school" name="school">
+                  <?php echo buildDropDown("schools", $school); ?>
+                </select>                  
                 <input class="address form-control" type="text" name="study_major" placeholder="Field of Study" required>                  
               </div>
               <div class="col-md-6 form-group">
