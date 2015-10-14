@@ -6,6 +6,7 @@
                 </a>
                 <p class="text-center"><span class="hidden-xs"><?php echo $_SESSION['user_id']; ?></span></p>
                 <p class="text-center"><span class="hidden-xs"><?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name']; ?></span></p>
+                <p class="text-center"><span class="hidden-xs"><?php echo $_SESSION['city_id'] . " " . $_SESSION['smoker_id']; ?></span></p>
               </div>
               <div class="col-xs-6 col-sm-12">
                 <ul class="nav nav-pills nav-sidebar nav-stacked text-center">

@@ -21,7 +21,7 @@ require_once('inc/header.php');
                 <label>Gender:</label><div class="output-box-small"><p>Test Info</p></div>
                 <label>Ethnicity:</label><div class="output-box-normal"><p>Test Info</p></div>
                 <label>Spoken Language:</label><div class="output-box-normal"><p>Test Info</p></div>
-                <label>City:</label><?php echo getProperty($_SESSION['user_id'], "city_id", "normal");?>
+                <label>City:</label><?php echo getProperty($_SESSION['user_id'], $_SESSION['city_id'], "cities", "normal");?>
                 <label>Province:</label><div class="output-box-small"><p>Test Info</p></div>
               </div>
               <div class="col-sm-6 col-md-6 form-group">

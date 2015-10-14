@@ -84,16 +84,25 @@ function buildCheckbox($tableName, $pre_selected = ""){
   }
 }
 //getProperty function for displaying user information, boxsizes are small, normal, large.
-function getProperty($userID, $propertyName, $boxSize){
+function getProperty($userID, $propertyID, $tableName, $boxSize){
   //query to array
   global $conn;   
-	$result = pg_prepare($conn, "property query", "SELECT " . $propertyName . " FROM profiles WHERE user_id = '" . $userID . "'");
+	$result = pg_prepare($conn, "property query", "SELECT property FROM " . $tableName . " WHERE value_id = '" . $propertyID . "'");
   $result = pg_execute($conn, "property query", array());
-  $value = pg_fetch_result($result, 0, $propertyName);
+  $value = pg_fetch_result($result, 0, 'property');
 
   $output = '<div class="output-box-' . $boxSize .'"><p>' . $value . '</p></div>';
  
   return $output;
 }
 
+//lastAccess function that updates the users last_access field
+function lastAccess(){
+  date_default_timezone_set('America/Toronto');
+  $time = date('Y-m-d');  
+  // $statement = "UPDATE users SET last_access = " . $time . " WHERE user_id = '" . $_SESSION['user_id'] . "'";
+  global $conn;
+  $update = pg_prepare($conn, "user_update", "UPDATE users SET last_access = $1 WHERE user_id = $2");
+  $update = pg_execute($conn, "user_update", array($time, $_SESSION['user_id']));
+}
 ?>
