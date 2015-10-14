@@ -2,6 +2,17 @@
 //CENSUS DATA GENERATED male, female and surnames
 //from http://www.markrichman.com/2007/09/26/generating-random-names-as-test-data/
 
+$email_domains = 
+array(
+	"@gmail.com",
+	"@hotmail.com",
+	"@rogers.com",
+	"@yahoo.com",
+	"@yandex.mail",
+	"@outlook.com",
+	"@inbox.com"
+	);
+
 $last_names = 
 Array(
 "AABERG",
