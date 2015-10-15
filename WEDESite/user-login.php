@@ -1,48 +1,107 @@
 <?php 
-require_once('inc/header.php'); 
-require_once ('inc/connect.php');
-
-
+include_once('inc/header.php'); 
+unset($errorMessage);
 //Checks if request method was POST and if TRUE begins input sanitation and validation process
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   //Sanitize User submissions, removing any possible script injection and assigning each to a variable
- 	$userName = pg_escape_string($link, sanitize($_POST["userName"]));
- 	$userPass = pg_escape_string($link, sanitize($_POST["userPass"]));
+ 	$userName = pg_escape_string($conn, sanitize($_POST["userName"]));
+ 	$userPass = pg_escape_string($conn, sanitize($_POST["userPass"]));
  	//Hash the password
  	$userPass = md5($userPass);
-	// $_POST['userPass'] = md5($_POST['userPass']);
- 	// Prepare a query for execution
-	$result = pg_prepare($link, "login_query", 'SELECT * FROM users WHERE user_name = $1 AND user_pass = $2');
-	$result = pg_execute($link, "login_query", array($userName, $userPass));
-	// $result = pg_execute($link, "login_query", array(arraySanitize($_POST)));
-	$rows = pg_num_rows($result);
+ 	// Prepare query for execution
+	$result = pg_prepare($conn, "login_query", 'SELECT * FROM users WHERE user_id = $1 AND password = $2');
+	$result = pg_execute($conn, "login_query", array($userName, $userPass));	
+	$rows = pg_num_rows($result);	
+	
 	if ($rows == 1) {
-		header("Location: user-dashboard.php");
-	}else{
-		$output = "Account login failed, please try again.";
+		//collect user data from users table
+		$_SESSION = pg_fetch_assoc($result);
+		//Set cookie for user id expires after 30 days
+		setcookie("user_id", $_SESSION['user_id'], time()+ 60*60*24*30);
+
+		if ($_SESSION['user_type'] == "d") {
+				$errorMessage = "Sorry your account has been disabled, please contact us to resolve this issue";
+				// exit();
+		}elseif($_SESSION['user_type'] == "c"){
+			$result = pg_prepare($conn, "profile_query", "SELECT * FROM profiles WHERE user_id = $1");
+			$result = pg_execute($conn, "profile_query", array($userName));
+			$profile = pg_fetch_assoc($result);
+			//Removing duplicate user_id key from Array
+			$a = array_shift($profile);
+			unset($a);								
+			$_SESSION = array_merge($_SESSION, $profile);	
+			//updating last access time
+			lastAccess();
+			header("Location: user-dashboard.php");				
+		}elseif($_SESSION['user_type'] == "a"){
+			$result = pg_prepare($conn, "profile_query", "SELECT * FROM profiles WHERE user_id = $1");
+			$result = pg_execute($conn, "profile_query", array($userName));
+			$profile = pg_fetch_assoc($result);
+			//Removing duplicate user_id key from Array
+			$a = array_shift($profile);
+			unset($a);								
+			$_SESSION = array_merge($_SESSION, $profile);	
+			//updating last access time
+			lastAccess();
+			header("Location: admin-dashboard.php");		 
+		}else{
+			header("Location: user-dashboard.php");
+		}				
 	}
+	else{		
+		$errorMessage = "Sorry you have entered an incorrect username and password combination";
+	}
+
+ 	/*Notification for type of error*/
+	// Prepare username query for execution
+	// $result = pg_query($conn,'SELECT * FROM users WHERE user_id = $userName');
+	
+	// if ($result == TRUE) {
+	// 	$_SESSION['user_id'] = $userName;		
+	// 	$auth = TRUE;
+	// }
+	// else{		
+	// 	$errorMessage = "Sorry you have entered an incorrect Username";
+	// 	$auth = FALSE;
+	// }
+	
+	// if ($auth == TRUE) {
+	// 	// Prepare password query for execution
+	// 	$result = pg_query($conn,'SELECT * FROM users WHERE user_id = $userName AND password = $userPass');
+	
+	// 	if ($result == TRUE) {			
+	// 		unset($errorMessage);
+	// 		header("Location: user-dashboard.php");
+	// 	}
+	// 	else{
+	// 		$errorMessage = "Sorry you have entered an incorrect Password";
+	// 	}
+	// }
+	
 }
-?>
-				
-			<section class="download-now" id="getstarted">
-				<div class="container-fluid">
-				  <div class="row row-top">
-				    <div class="col-md-8 wp1">
-				      <h1>
-				      Log In
-				      </h1>
-					  <h3><?php echo $output; ?></h3>
-				      <form class="form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" role="form">
-				        <div class="form-group">
-				          <input class="userName form-control" type="text" name="userName" placeholder="Username" autofocus required>
-				          <input class="password form-control" type="password" name="userPass" placeholder="Password" required>                  
-				          <input class="login-btn" type="submit" value="Log In">
-				        </div>
-				      </form>              
-				    </div>
-				  </div>
-				</div>
-			</section>
+?>				
+		<section class="download-now">				
+		  <div class="row">
+		    <div class="col-md-8 wp1">
+		      <h1>
+		      Log In
+		      </h1>
+		      <form class="form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" role="form">
+		        <div class="form-group">	
+		        	<?php echo userLogin(); ?>		        		        	
+		          <!-- Error Message Display -->
+		        	<?php 
+		        		if (isset($errorMessage)) {
+		        			echo '<div class="output-box-normal text-center"><p>' . $errorMessage .'</p></div>';
+		        		}
+		        	?>		
+		          <input class="login-btn" type="submit" value="Log In">
+		        </div>
+		      </form>              
+		    </div>
+		  </div>				
+		</section>
+			
 <?php
 require_once('inc/footer.php'); 
 ?>

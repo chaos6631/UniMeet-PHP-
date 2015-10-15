@@ -1,7 +1,7 @@
 <?php 
 
-require_once('inc/config.php');
-
+require_once('inc/constants.php');
+include_once ('inc/functions.php');
 
 ?>
 <!DOCTYPE html>
@@ -18,6 +18,7 @@ require_once('inc/config.php');
     <link href="css/styles.css?v=1.6" rel="stylesheet">
     <link href="css/queries.css?v=1.6" rel="stylesheet">
     <link href="css/jquery.fancybox.css" rel="stylesheet">
+    <link href="css/toastr.min.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
     <!-- Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
@@ -27,10 +28,12 @@ require_once('inc/config.php');
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
       <![endif]-->
-    </head>
-    <body>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/toastr.min.js"></script>   
+  </head>
+  <body>
+    <div class="container-fluid"></div>
       <section class="navigation">
-        <div class="container-fluid">
           <div class="row">
             <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2">
               <nav class="pull">
@@ -43,8 +46,7 @@ require_once('inc/config.php');
                 </ul>
               </nav>
             </div>
-          </div>
-        </div>
+          </div>        
       </section>
       <section class="hero" id="hero">
         <div class="container">
@@ -54,16 +56,16 @@ require_once('inc/config.php');
             </div>
           </div>
           <div class="row">
-            <div class="col-md-4 col-md-offset-7 text-center" id="welcome-title">
+            <div class="col-md-5 col-md-offset-7 text-center" id="welcome-title">
               <img class="animated bounceInDown" id="welcome-title-img" src="<?php echo BASE_URL . BRAND_LOGO ?>" alt="UniMeet Logo">
               <p class="animated fadeInUpDelay">Looking for someone to blow classes with? We think we can help!</p>
             </div>            
           </div>
           <div class="row row-no-padding">
-            <div class="col-xs-12 text-center">
+            <div class="col-xs-12 text-center" id="hide4phone">
               <a href="user-register.php" class="login-btn">Sign Up</a>
               <a href="user-login.php" class="login-btn">Log In</a>
-            </div>
+            </div>            
           </div>          
         </div>
       </section>
@@ -104,4 +106,4 @@ require_once('inc/config.php');
           </div>
         </div>
       </section>
-      <?php include 'inc/footer.php'; ?>
+    <?php include 'inc/footer.php'; ?>
