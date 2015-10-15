@@ -196,20 +196,20 @@ nav ul li a { color: rgba(255, 255, 255, 0.6); padding: 20px; display: block; bo
 nav ul li a:hover, nav ul li a:focus { color: rgba(255, 255, 255, 1); text-decoration: none; }
 .indicator { position: absolute; right: 0 !important; }
 .pull { display: none; }
-.hero { background: url('../img/header-background-copy.jpg') no-repeat 50%; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; padding: 65px 0; height: auto; }
-.hero p { margin-top: 15px; color: #d0e7e9; font-style: italic; font-size: 17px; }
+.hero { background: url('../img/header-background-copy.jpg') no-repeat 50%; -webkit-background-size: 45px; -moz-background-size: cover; -o-background-size: cover; background-size: cover; padding: 65px 0; height: auto; }
+.hero p { margin-top: 15px; color: #d0e7e9; font-family: segoe UI light; font-size: 17px; }
 .hero a { color: #fff; }
 .hero img{ margin-top: 95px; }
 .hero-play-btn { height: 99px; width: 99px; background: url('../img/play-btn.png') no-repeat center center; display: block; text-indent: -99999px; margin: 80px auto 260px; transition: all 1s ease; -moz-transition: all 1s ease; -webkit-transition: all 1s ease; -o-transition: all 1s ease; }
 .hero-play-btn:hover, .hero-play-btn:focus { transform: translate(0, -15px); -webkit-transform: translate(0, -15px); -o-transform: translate(0, -15px); -moz-transform: translate(0, -15px); }
 .get-started-btn { background-color: #7accc8; padding: 20px 80px; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; font-size: 22px; letter-spacing: 2px; box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.4); transition: all 0.5s ease; -moz-transition: all 0.5s ease; -webkit-transition: all 0.5s ease; -o-transition: all 0.5s ease; display: inline-block; }
 .get-started-btn:hover, .get-started-btn:focus { text-decoration: none; background-color: #e8b968; }
-.download-now { background: #BD0026 url('../img/couple2-movies.png') no-repeat; background-position: 125% 55px; background-size: 80%; min-height: 600px; padding-left: 20px;}
-.download-now p { color: #fff; font-size: 16px; margin: 40px 30px 40px 0; line-height: 30px; }
+.download-now { background: #BD0026 url('../img/couple2-movies.png') no-repeat; background-position: 100%; background-size: 45%; padding-left: 20px; position: relative;}
+.download-now p { font-family: segoe UI light; color: #fff; font-size: 16px; margin: 40px 0px 100px 0px; line-height: 30px; padding-right:; }
 .testimonials { background: #5b6869 url('../img/tBG01.jpg') no-repeat left center; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; padding: 130px 0; }
 .features { background: #fff url('../img/arrowBG.png') no-repeat center -1px; padding: 70px 0; }
 .features p { color: #7a8387; font-size: 16px; word-spacing: 2px; line-height: 30px; }
-.features-leftcol { border-right: 1px solid rgba(208, 217, 226, 0.4); padding-right: 60px; }
+.features-leftcol { border-right: 1px solid rgba(208, 217, 226, 0.4); padding-right: 60px;}
 .features-rightcol { padding-left: 60px; }
 .margin-bottom { margin-bottom: 70px; }
 .try-btn { background-color: #f69679; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; font-size: 17px; color: #fff; transition: all 0.5s ease; -moz-transition: all 0.5s ease; -webkit-transition: all 0.5s ease; -o-transition: all 0.5s ease; display: inline-block; padding: 15px 50px; margin: 70px 0 70px; }
@@ -228,16 +228,16 @@ nav ul li a:hover, nav ul li a:focus { color: rgba(255, 255, 255, 1); text-decor
 .controls a { color: #959595; transition: all 0.5s ease; -moz-transition: all 0.5s ease; -webkit-transition: all 0.5s ease; -o-transition: all 0.5s ease; }
 .controls a:hover, .controls a:focus { color: #555555; }
 .controls .prev { margin-right: 5px; }
-footer { background-color: #000; padding: 75px 0 220px; }
+footer { background-color: #252627; padding: 75px 0 220px; }
 footer p { color: #fff; line-height: 30px; }
 .footer-nav { list-style: none; padding: 0; }
 .footer-nav li a { display: block; color: #fff; padding: 5px; transition: all 0.5s ease; -moz-transition: all 0.5s ease; -webkit-transition: all 0.5s ease; -o-transition: all 0.5s ease; }
 .footer-nav li a:hover, .footer-nav li a:focus { text-decoration: none; color: #5db3af; }
-.badge-btn { width: 60px; height: 62px; /*background: url('../img/footer-logo.png') no-repeat center center*/; /*text-indent: -99999px*/; display: block; margin: 65px auto 65px; -webkit-transition-duration: 3s; -moz-transition-duration: 3s; -o-transition-duration: 3s; transition-duration: 3s; -webkit-transition-property: -webkit-transform; -moz-transition-property: -moz-transform; -o-transition-property: -o-transform; transition-property: transform; }
+.badge-btn { width: 60px; height: 62px; /*background: url('../img/footer-5.png') no-repeat center center*/; /*text-indent: -99999px*/; display: block; margin: 65px auto 65px; -webkit-transition-duration: 3s; -moz-transition-duration: 3s; -o-transition-duration: 3s; transition-duration: 3s; -webkit-transition-property: -webkit-transform; -moz-transition-property: -moz-transform; -o-transition-property: -o-transform; transition-property: transform; }
 .badge-btn:hover, .badge-btn:focus { -webkit-transform: rotate(360deg); -moz-transform: rotate(360deg); -o-transform: rotate(360deg); }
 .footer-credit { font-size: 12px; text-transform: uppercase; letter-spacing: 5px; }
-footer a { color: #42817e; transition: all 0.5s ease; -moz-transition: all 0.5s ease; -webkit-transition: all 0.5s ease; -o-transition: all 0.5s ease; }
-footer a:hover, footer a:focus { color: #2f5c5a; text-decoration: none; }
+footer a { font-weight: bold; color: #4B88A2; transition: all 0.5s ease; -moz-transition: all 0.5s ease; -webkit-transition: all 0.5s ease; -o-transition: all 0.5s ease; }
+footer a:hover, footer a:focus { color: #2f5c5a; text-decoration: none; font-weight: bolder; }
 /* ==========================================================================
 Animations
 ========================================================================== */
