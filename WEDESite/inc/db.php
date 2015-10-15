@@ -100,6 +100,7 @@ function getRandomValue($tableName){
   $result = pg_prepare($conn, "", 'SELECT * FROM ' . $tableName);
   $result = pg_execute($conn, "", array());
   $array = pg_fetch_all($result);
+  $removePlaceholder = array_shift($array);
   // Removing the first value of the array witch is the label or placeholder for each table  
   shuffle($array);
   $value = array_shift($array);
