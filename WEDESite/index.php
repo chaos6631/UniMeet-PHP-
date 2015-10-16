@@ -4,8 +4,9 @@ require_once('inc/constants.php');
 include_once ('inc/functions.php');
 
 ?>
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -32,8 +33,8 @@ include_once ('inc/functions.php');
     <script type="text/javascript" src="js/toastr.min.js"></script>   
   </head>
   <body>
-    <div class="container-fluid"></div>
-      <section class="navigation">
+    <div class="container-fluid">
+      <section class="navigation"><h2 class="hidden">Main Navigation</h2>
           <div class="row">
             <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2">
               <nav class="pull">
@@ -48,7 +49,7 @@ include_once ('inc/functions.php');
             </div>
           </div>        
       </section>
-      <section class="hero" id="hero">
+      <section class="hero" id="hero"><h2 class="hidden">Home Page</h2>
         <div class="container">
           <div class="row">
             <div class="col-md-12 text-right">
