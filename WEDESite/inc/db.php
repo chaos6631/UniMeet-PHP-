@@ -4,7 +4,7 @@
 
 function db_connect()
 {
-	$connString = "host=localhost port=5432 dbname=group19_db user=group19_admin password=wede19";
+	$connString = "host=" . DB_HOST . " port=5432 dbname=" . DB_NAME . " user=" . DB_USER . " password=" . DB_PASSWORD;
 
 	$conn = pg_connect($connString);
 
@@ -84,22 +84,23 @@ function buildCheckbox($tableName, $pre_selected = ""){
   }
 }
 //getProperty function for displaying user information, boxsizes are small, normal, large.
-function getProperty($userID, $propertyID, $tableName, $boxSize){
+function getProperty($userID, $propertyID, $tableName){
   //query to array
   global $conn;   
 	$result = pg_prepare($conn, "", "SELECT property FROM " . $tableName . " WHERE value_id = '" . $propertyID . "'");
   $result = pg_execute($conn, "", array());
   $value = pg_fetch_result($result, 0, 'property');
 
-  $output = '<div class="output-box-' . $boxSize .'"><p>' . $value . '</p></div>';
+  //$output = '<div class="output-box-' . $boxSize .'"><p>' . $value . '</p></div>';
  
-  return $output;
+  return $value;
 }
 function getRandomValue($tableName){
   global $conn;
   $result = pg_prepare($conn, "", 'SELECT * FROM ' . $tableName);
   $result = pg_execute($conn, "", array());
   $array = pg_fetch_all($result);
+  $removePlaceholder = array_shift($array);
   // Removing the first value of the array witch is the label or placeholder for each table  
   shuffle($array);
   $value = array_shift($array);

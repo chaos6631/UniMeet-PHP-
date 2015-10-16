@@ -10,8 +10,8 @@ array(
 	"@yahoo.com",
 	"@yandex.mail",
 	"@outlook.com",
-	"@inbox.com"
-	);
+	"@inbox.com",
+	"@icloud.com");
 
 $last_names = 
 Array(

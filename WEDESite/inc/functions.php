@@ -73,4 +73,12 @@ function userLogin(){
   return $output;
 }
 
+//calculates age of a users
+function ageCalculate($var){
+	$age = "";
+	$now = date('Ymd', time());
+	$date = date('Ymd', strtotime($var));
+	$age = intval(($now - $date)/10000);
+	return $age;
+}
 ?>

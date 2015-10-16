@@ -13,7 +13,7 @@ ADD last_access date;
 INSERT INTO users VALUES(
 	'homer12', 
 	'5f4dcc3b5aa765d61d8327deb882cf99', 
-	'c',
+	'a',
 	'homer12@gmail.com', 
 	'Homer', 
 	'Simpson', 
@@ -22,7 +22,7 @@ INSERT INTO users VALUES(
 INSERT INTO users VALUES(
 	'flanders99', 
 	'5f4dcc3b5aa765d61d8327deb882cf99', 
-	'c', 
+	'a', 
 	'flanders99@gmail.com', 
 	'Ned', 
 	'Flanders', 
