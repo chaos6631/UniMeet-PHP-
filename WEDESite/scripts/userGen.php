@@ -114,19 +114,7 @@ for ($i=0; $i <= ADD_USERS; $i++) {
 	$smoker_id = getRandomValue("smoker");
 	$images = 0; // default for no images
 
-	/*$testArray =array(
-		$body_id, 
-		$city_id, 
-		$education_id, 
-		$ethnic_id, 
-		$gender_sought, 
-		$hair_id, 
-		$language_id,
-		$religion_id,
-		$school_id,
-		$seeking_id,
-		$status_id,
-		$smoker_id);*/
+	
 
 										/*Text values*/
 	//Fields of Study
@@ -148,9 +136,36 @@ for ($i=0; $i <= ADD_USERS; $i++) {
 		$result = pg_execute($conn, "", array($user_id, $gender_id, $gender_sought, $city_id, $school_id, $study_major, $images, $head_line, $self_description, $match_description, $hair_id, $body_id, $smoker_id, $ethnic_id, $language_id, $status_id, $seeking_id, $religion_id, $education_id));
 
 	}
-	$userCount = 1;
-	echo $userCount . " users created<br>";
-	$userCount = $userCount + 1;
+	
+	/*Uncomment this for testing and comment out the inserts above*/
+	// $personArray =array(
+	// 	$user_id,
+	// 	$user_type, 
+	// 	$email_address, 
+	// 	$first_name, 
+	// 	$last_name, 
+	// 	$birth_date, 
+	// 	$enroll_date,
+	// 	$gender_id, 
+	// 	$gender_sought, 
+	// 	$city_id, 
+	// 	$school_id, 
+	// 	$study_major, 
+	// 	$images, 
+	// 	$head_line, 
+	// 	$self_description, 
+	// 	$match_description, 
+	// 	$hair_id, 
+	// 	$body_id, 
+	// 	$smoker_id, 
+	// 	$ethnic_id, 
+	// 	$language_id, 
+	// 	$status_id, 
+	// 	$seeking_id, 
+	// 	$religion_id, 
+	// 	$education_id);
+	// $testArray[] = $personArray;
+	
 }
-
+//dump($testArray);
 ?>
