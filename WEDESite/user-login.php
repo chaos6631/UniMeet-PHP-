@@ -1,5 +1,5 @@
 <?php 
-include_once('inc/header.php'); 
+require_once('inc/header.php'); 
 unset($errorMessage);
 //Checks if request method was POST and if TRUE begins input sanitation and validation process
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -17,12 +17,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		//collect user data from users table
 		$_SESSION = pg_fetch_assoc($result);
 		//Set cookie for user id expires after 30 days
-		setcookie("user_id", $_SESSION['user_id'], time()+ 60*60*24*30);
+		setcookie("user_id", $_SESSION['user_id'], COOKIE_EXPIRE);
 
 		if ($_SESSION['user_type'] == "d") {
 				$errorMessage = "Sorry your account has been disabled, please contact us to resolve this issue";
 				// exit();
 		}elseif($_SESSION['user_type'] == "c"){
+			//collecting user data for SESSION
 			$result = pg_prepare($conn, "profile_query", "SELECT * FROM profiles WHERE user_id = $1");
 			$result = pg_execute($conn, "profile_query", array($userName));
 			$profile = pg_fetch_assoc($result);
