@@ -2,7 +2,10 @@
 
 require_once('inc/header.php');
 
+
 ?>
+	<p>Welcome back <?php echo $_SESSION['first_name'] echo $_SESSION['last_name'] ?></p>
+	<p><br/> Last Access: <php echo $_SESSION['last_access'] ?></p>
 			<section class="content">				
         <div class="row">
         	<?php include_once ('inc/side-nav.php'); ?>
@@ -14,15 +17,15 @@ require_once('inc/header.php');
             <form class="form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" role="form">
             <div class="row">
               <div class="col-md-6 form-group">
-                <input class="name form-control" type="text" name="firstName" placeholder="First Name" autofocus required>
-                <input class="name form-control" type="text" name="lastName" placeholder="Last Name" required>
-                <select class="dropdown-small form-control " id="gender" name="gender" required>
+                <input class="name form-control" type="text" name="firstName" placeholder="First Name" value="<?=$_POST['firstName'] ?> autofocus required>
+                <input class="name form-control" type="text" name="lastName" placeholder="Last Name" value="<?=$_POST['lastName'] ?> required>
+                <select class="dropdown-small form-control " id="gender" name="gender" value="<?=$_POST['gender'] ?> required>
                   <option class="selectOptions" value="" selected disabled>Gender:</option>
                   <option class='selectOptions' id='selects' value='male'>Male</option>                  
                   <option class='selectOptions' id='selects' value='female'>Female</option>                                      
                   <option class='selectOptions' id='selects' value='trans'>Trans</option>                                      
                 </select>
-                <select class="dropdown-medium form-control " id="hairColour" name="hairColour" required>
+                <select class="dropdown-medium form-control " id="hairColour" name="hairColour" value="<?=$_POST['hairColour'] ?>required>
                   <option class="selectOptions" value="" selected disabled>Hair Colour:</option>
                   <option class='selectOptions' id='selects' value='blonde'>Blonde</option>                  
                   <option class='selectOptions' id='selects' value='black'>Black</option>                  
@@ -32,7 +35,7 @@ require_once('inc/header.php');
                   <option class='selectOptions' id='selects' value='red'>Red</option>                                      
                   <option class='selectOptions' id='selects' value='grayWhite'>Gray/White</option>                                      
                 </select>
-                <select class="dropdown-medium form-control " id="bodyType" name="bodyType" required>
+                <select class="dropdown-medium form-control " id="bodyType" name="bodyType" value="<?=$_POST['bodyType'] ?>required>
                   <option class="selectOptions" value="" selected disabled>Body Type:</option>
                   <option class='selectOptions' id='selects' value='chunky'>Rather Not Say</option>                                      
                   <option class='selectOptions' id='selects' value='thin'>Thin</option>                  
@@ -43,20 +46,20 @@ require_once('inc/header.php');
                   <option class='selectOptions' id='selects' value='curvy'>Curvy</option>                                      
                   <option class='selectOptions' id='selects' value='overWeight'>Full Figured</option>                                      
                 </select>
-                <select class="dropdown-small form-control " id="smoker" name="smoker" required>
+                <select class="dropdown-small form-control " id="smoker" name="smoker" value="<?=$_POST['smoker'] ?>required>
                   <option class="selectOptions" value="" selected disabled>Smoker?</option>
                   <option class='selectOptions' id='selects' value='yes'>Yes</option>                  
                   <option class='selectOptions' id='selects' value='casual'>Casual</option>                  
                   <option class='selectOptions' id='selects' value='no'>No</option>                                      
                 </select>                
-                <input class="address form-control" type="text" name="city" placeholder="City" required>
+                <input class="address form-control" type="text" name="city" placeholder="City" value="<?=$_POST['city'] ?> required>
                 <select class="dropdown-large form-control" id="school" name="school">
                   <?php echo buildDropDown("schools", $school); ?>
                 </select>                  
-                <input class="address form-control" type="text" name="study_major" placeholder="Field of Study" required>                  
+                <input class="address form-control" type="text" name="study_major" placeholder="Field of Study" value="<?=$_POST['study_major'] ?>required>                  
               </div>
               <div class="col-md-6 form-group">
-                <select class="dropdown-large form-control " id="ethnicity" name="ethnicity" required>
+                <select class="dropdown-large form-control " id="ethnicity" name="ethnicity" value="<?=$_POST['ethnicity'] ?> required>
                   <option class="selectOptions" value="" selected disabled>Ethnicity:</option>
                   <option>Caucasian</option>
                   <option>Latin American</option>
@@ -65,7 +68,7 @@ require_once('inc/header.php');
                   <option>Native American</option>
                   <option>African American</option>                                    
                 </select>
-                <select class="dropdown-large form-control " id="language" name="language" required>
+                <select class="dropdown-large form-control " id="language" name="language" value="<?=$_POST['language'] ?>required>
                   <option class="selectOptions" value="" selected disabled>Spoken Language:</option>
                   <option>English</option>
                   <option>French</option>
@@ -119,26 +122,26 @@ require_once('inc/header.php');
                   <option>Cajun</option>
                   <option>Amharic</option>
                 </select>
-                <select class="dropdown-large form-control " id="status" name="status" required>
+                <select class="dropdown-large form-control " id="status" name="status" value="<?=$_POST['status'] ?>required>
                     <option class="selectOptions" value="" selected disabled>Please Select a Realationship Status:</option>
                     <option class='selectOptions' id='selects' value=''>Single</option>                  
                     <option class='selectOptions' id='selects' value=''>Seperated</option>                  
                     <option class='selectOptions' id='selects' value=''>Recently Divorced</option>                  
                     <option class='selectOptions' id='selects' value=''>Recently Widowed</option>                  
                   </select>
-                  <select class="dropdown-large form-control " id="genderInterest" name="genderInterest" required>
+                  <select class="dropdown-large form-control " id="genderInterest" name="genderInterest" value="<?=$_POST['genderInterest'] ?> required>
                     <option class="selectOptions" value="" selected disabled>I'm seeking a....</option>
                     <option class='selectOptions' id='selects' value=''>Man</option>                  
                     <option class='selectOptions' id='selects' value=''>Woman</option>                  
                   </select>
-                  <select class="dropdown-large form-control " id="relationshipType" name="relationshipType" required>
+                  <select class="dropdown-large form-control " id="relationshipType" name="relationshipType" value="<?=$_POST['relationshipType'] ?> required>
                     <option class="selectOptions" value="" selected disabled>I'm looking for :</option>
                     <option class='selectOptions' id='selects' value=''>Long-Term Relationship</option>                  
                     <option class='selectOptions' id='selects' value=''>Casual Dates</option>                  
                     <option class='selectOptions' id='selects' value=''>Hook-Up</option>                  
                     <option class='selectOptions' id='selects' value=''>Friend</option>                  
                   </select>
-                  <select class="dropdown-large form-control " id="religion" name="religion" required>
+                  <select class="dropdown-large form-control " id="religion" name="religion" value="<?=$_POST['religion'] ?> required>
                     <option class="selectOptions" value="" selected disabled>Religion...</option>
                     <option class='selectOptions' id='selects' value=''>Atheist</option>                  
                     <option class='selectOptions' id='selects' value=''>Catholic</option>                  
@@ -148,7 +151,7 @@ require_once('inc/header.php');
                     <option class='selectOptions' id='selects' value=''>I'd rather not say</option>                  
                     <option class='selectOptions' id='selects' value=''>Not sure</option>                  
                   </select>
-                  <select class="dropdown-large form-control " id="education" name="education" required>
+                  <select class="dropdown-large form-control " id="education" name="education" value="<?=$_POST['education'] ?> required>
                     <option class="selectOptions" value="" selected disabled>Highest level of education reached:</option>
                     <option class='selectOptions' id='selects' value=''>High School</option>                  
                     <option class='selectOptions' id='selects' value=''>Some Post-Secondary</option>                  
@@ -158,7 +161,7 @@ require_once('inc/header.php');
                     <option class='selectOptions' id='selects' value=''>I'd rather not say</option>                  
                     <option class='selectOptions' id='selects' value=''>Not sure</option>                  
                   </select>  
-                  <textarea class="form-control dropdown-large" name="aboutUser" rows="6" cols="30" placeholder="Tell us a little about yourself..."></textarea>
+                  <textarea class="form-control dropdown-large" name="aboutUser" value="<?=$_POST['aboutUser'] ?> rows="6" cols="30" placeholder="Tell us a little about yourself..."></textarea>
               </div>  
               <div class="col-xs-12 col-sm-12 form-group">
                 <input class="login-btn" type="submit" value="Update">
