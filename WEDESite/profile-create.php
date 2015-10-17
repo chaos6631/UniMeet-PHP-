@@ -3,13 +3,39 @@
 include 'inc/header.php'; 
 if($_SERVER['REQUEST_METHOD']=="GET")
 {
-  $bodyType = "";
-  $school = "";
+  $bodyType = "";  
+  $city = "";
+  $ethnicity = "";
+  $education = "";
   $gender = "";
+  $genderSought = "";
+  $fieldOfStudy = "Field of Study";
+  $firstName = "First Name";
+  $hairColour = "";
+  $lastName = "Last Name";
+  $language = "";
+  $religion = "";
+  $school = "";
+  $seeking = "";
+  $smoker = "";
+  $status = "";
 }else{
    $bodyType = (isset($_POST['bodyType']))?$_POST['bodyType']:"";
-   $gender = (isset($_POST['gender']))?$_POST['gender']:"";
+   $city = (isset($_POST['city']))?$_POST['city']:"";
+   $ethnicity = (isset($_POST['ethnicity']))?$_POST['ethnicity']:"";
+   $education = (isset($_POST['education']))?$_POST['education']:"";
+   $gender = (isset($_POST['genders']))?$_POST['genders']:"";
+   $genderSought = (isset($_POST['genderSought']))?$_POST['genderSought']:"";
+   $fieldOfStudy = (isset($_POST['fieldOfStudy']) AND !empty($_POST['fieldOfStudy']))?$_POST['fieldOfStudy']:"Field of Study";
+   $firstName = (isset($_POST['firstName']) AND !empty($_POST['firstName']))?$_POST['firstName']:"First Name";
+   $lastName = (isset($_POST['lastName']) AND !empty($_POST['lastName']))?$_POST['lastName']:"Last Name";
+   $hairColour = (isset($_POST['hairColour']))?$_POST['hairColour']:"";
+   $language = (isset($_POST['language']))?$_POST['language']:"";
+   $religion = (isset($_POST['religion']))?$_POST['religion']:"";
    $school = (isset($_POST['school']))?$_POST['school']:"";
+   $seeking = (isset($_POST['seeking']))?$_POST['seeking']:"";
+   $smoker = (isset($_POST['smoker']))?$_POST['smoker']:"";
+   $status = (isset($_POST['status']))?$_POST['status']:"";
 
 }
 /*Testing sticky output*/ 
@@ -23,92 +49,49 @@ if($_SERVER['REQUEST_METHOD']=="GET")
             <form class="form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" role="form">
             <div class="row">
               <div class="col-md-6 form-group">
-                <input class="name form-control" type="text" name="firstName" placeholder="First Name" autofocus >
-                <input class="name form-control" type="text" name="lastName" placeholder="Last Name" >
-                <select class="dropdown-small form-control " id="gender" name="gender" >
-                  <?php echo buildDropDown("genders", $gender) ?>                                      
+                <input class="name form-control" type="text" name="firstName" placeholder="<?php echo $firstName; ?>" autofocus >
+                <input class="name form-control" type="text" name="lastName" placeholder="<?php echo $lastName; ?>" >
+                <div class="output-box-normal"><?php echo buildRadio("genders", $gender); ?></div>
+                <select class="dropdown-medium form-control " id="genderSought" name="genderSought" >
+                  <?php echo buildDropDown("gender_sought", $genderSought) ?>                                      
+                </select>
+                <select class="dropdown-large form-control " id="status" name="status" >
+                  <?php echo buildDropDown("status", $status); ?>                   
+                </select>
+                <select class="dropdown-large form-control " id="seeking" name="seeking" >
+                  <?php echo buildDropDown("seeking", $seeking); ?>                
+                </select>
+                <select class="dropdown-large form-control " id="hairColour" name="hairColour" >
+                  <?php echo buildDropDown("hair", $hairColour); ?>                
                 </select>
                 <select class="dropdown-large form-control" id="bodyType" name="bodyType">
                   <?php echo buildDropDown("bodies", $bodyType); ?>
-                </select>                
-                <input class="address form-control" type="text" name="city" placeholder="City" >
-                <select class="dropdown-large form-control" id="school" name="school">
-                  <?php echo buildDropDown("schools", $school); ?>
-                </select>                               
+                </select>  
+                                              
               </div>
               <div class="col-md-6 form-group">
-                <select class="dropdown-large form-control" id="language" name="language" >
-                  <option>English</option>
-                  <option>French</option>
-                  <option>Spanish</option>
-                  <option>German</option>
-                  <option>Italian</option>
-                  <option>Chinese</option>
-                  <option>Tagalog</option>
-                  <option>Polish</option>
-                  <option>Korean</option>
-                  <option>Vietnamese</option>
-                  <option>Portuguese</option>
-                  <option>Japanese</option>
-                  <option>Greek</option>
-                  <option>Arabic</option>
-                  <option>Hindi (urdu)</option>
-                  <option>Russian</option>
-                  <option>Yiddish</option>
-                  <option>Thai (laotian)</option>
-                  <option>Persian</option>
-                  <option>French Creole</option>
-                  <option>Armenian</option>
-                  <option>Navaho</option>
-                  <option>Hungarian</option>
-                  <option>Hebrew</option>
-                  <option>Dutch</option>
-                  <option>Mon-khmer (cambodian)</option>
-                  <option>Gujarathi</option>
-                  <option>Ukrainian</option>
-                  <option>Czech</option>
-                  <option>Pennsylvania Dutch</option>
-                  <option>Miao (hmong)</option>
-                  <option>Norwegian</option>
-                  <option>Slovak</option>
-                  <option>Swedish</option>
-                  <option>Serbocroatian</option>
-                  <option>Kru</option>
-                  <option>Rumanian</option>
-                  <option>Lithuanian</option>
-                  <option>Finnish</option>
-                  <option>Panjabi</option>
-                  <option>Formosan</option>
-                  <option>Croatian</option>
-                  <option>Turkish</option>
-                  <option>Ilocano</option>
-                  <option>Bengali</option>
-                  <option>Danish</option>
-                  <option>Syriac</option>
-                  <option>Samoan</option>
-                  <option>Malayalam</option>
-                  <option>Cajun</option>
-                  <option>Amharic</option>
+                <select class="dropdown-large form-control" id="city" name="city" >
+                  <?php echo buildDropDown("cities", $city); ?>
                 </select>
-                <select class="dropdown-large form-control " id="status" name="status" >
-                    <option class="selectOptions" value="" selected disabled>Please Select a Realationship Status:</option>
-                    <option class='selectOptions' id='selects' value=''>Single</option>                  
-                    <option class='selectOptions' id='selects' value=''>Seperated</option>                  
-                    <option class='selectOptions' id='selects' value=''>Recently Divorced</option>                  
-                    <option class='selectOptions' id='selects' value=''>Recently Widowed</option>                  
-                  </select>
-                  <select class="dropdown-large form-control " id="genderInterest" name="genderInterest" >
-                    <option class="selectOptions" value="" selected disabled>I'm seeking a....</option>
-                    <option class='selectOptions' id='selects' value=''>Man</option>                  
-                    <option class='selectOptions' id='selects' value=''>Woman</option>                  
-                  </select>
-                  <select class="dropdown-large form-control " id="relationshipType" name="relationshipType" >
-                    <option class="selectOptions" value="" selected disabled>I'm looking for :</option>
-                    <option class='selectOptions' id='selects' value=''>Long-Term Relationship</option>                  
-                    <option class='selectOptions' id='selects' value=''>Casual Dates</option>                  
-                    <option class='selectOptions' id='selects' value=''>Hook-Up</option>                  
-                    <option class='selectOptions' id='selects' value=''>Friend</option>                  
-                  </select>                  
+                <select class="dropdown-large form-control" id="education" name="education" >
+                  <?php echo buildDropDown("education", $education); ?>
+                </select>
+                <select class="dropdown-large form-control" id="school" name="school">
+                  <?php echo buildDropDown("schools", $school); ?>
+                </select>
+                <input class="form-control" type="text" name="fieldOfStudy" placeholder="<?php echo $fieldOfStudy; ?>">               
+                <select class="dropdown-large form-control" id="ethnicity" name="ethnicity">
+                  <?php echo buildDropDown("ethnicity", $ethnicity); ?>
+                </select>
+                <select class="dropdown-large form-control" id="language" name="language">
+                  <?php echo buildDropDown("languages", $language); ?>
+                </select>
+                <select class="dropdown-large form-control" id="religion" name="religion">
+                  <?php echo buildDropDown("religions", $religion); ?>
+                </select>  
+                <select class="dropdown-large form-control" id="smoker" name="smoker">
+                  <?php echo buildDropDown("smoker", $smoker); ?>
+                </select>                
               </div>  
               <div class="col-xs-12 col-sm-12 form-group">
                 <input class="login-btn" type="submit" value="Create/Skip Profile">
@@ -119,11 +102,11 @@ if($_SERVER['REQUEST_METHOD']=="GET")
         </div>        
       </section>    
       <script>
-        toastr.options.closeButton = true;
-        toastr.options.positionClass = 'toast-screen-center';
-        toastr.options.timeOut = 0;
-        toastr.options.extendedTimeOut = 0;
-        toastr.success("Thank You for becoming a member, you may proceed with your profile or skip this step and check out the site.", "Successfull Registration!!")
+        // toastr.options.closeButton = true;
+        // toastr.options.positionClass = 'toast-screen-center';
+        // toastr.options.timeOut = 0;
+        // toastr.options.extendedTimeOut = 0;
+        // toastr.success("Thank You for becoming a member, you may proceed with your profile or skip this step and check out the site.", "Successfull Registration!!")
 
           // "closeButton": true,
           // "debug": false,

@@ -1,12 +1,45 @@
 <?php
 
 require_once('inc/header.php');
-
-
+if($_SERVER['REQUEST_METHOD']=="GET")
+{
+  $bodyType = $_SESSION['body_id'];  
+  $city = $_SESSION['city_id'];
+  $ethnicity = $_SESSION['ethnic_id'];
+  $education = $_SESSION['education_id'];
+  $gender = $_SESSION['gender_id'];
+  $genderSought = $_SESSION['gender_sought'];  
+  $fieldOfStudy = $_SESSION['study_major'];
+  $firstName = $_SESSION['first_name'];
+  $hairColour = $_SESSION['hair_id'];
+  $lastName = $_SESSION['last_name'];
+  $language = $_SESSION['language_id'];
+  $religion = $_SESSION['religion_id'];
+  $school = $_SESSION['school_id'];
+  $seeking = $_SESSION['seeking_id'];
+  $smoker = $_SESSION['smoker_id'];
+  $status = $_SESSION['status_id'];
+}else{
+   $bodyType = (isset($_POST['bodyType']))?$_POST['bodyType']:$_SESSION['body_id'];
+   $city = (isset($_POST['city']))?$_POST['city']:$_SESSION['city_id'];
+   $ethnicity = (isset($_POST['ethnicity']))?$_POST['ethnicity']:$_SESSION['ethnic_id'];
+   $education = (isset($_POST['education']))?$_POST['education']:$_SESSION['education_id'];
+   $gender = (isset($_POST['genders']))?$_POST['genders']:$_SESSION['gender_id'];
+   $genderSought = (isset($_POST['genderSought']))?$_POST['genderSought']:$_SESSION['gender_sought'];
+   $fieldOfStudy = (isset($_POST['fieldOfStudy']) AND !empty($_POST['fieldOfStudy']))?$_POST['fieldOfStudy']:"Field of Study";
+   $firstName = (isset($_POST['firstName']) AND !empty($_POST['firstName']))?$_POST['firstName']:"First Name";
+   $lastName = (isset($_POST['lastName']) AND !empty($_POST['lastName']))?$_POST['lastName']:"Last Name";
+   $hairColour = (isset($_POST['hairColour']))?$_POST['hairColour']:"";
+   $language = (isset($_POST['language']))?$_POST['language']:"";
+   $religion = (isset($_POST['religion']))?$_POST['religion']:"";
+   $school = (isset($_POST['school']))?$_POST['school']:"";
+   $seeking = (isset($_POST['seeking']))?$_POST['seeking']:"";
+   $smoker = (isset($_POST['smoker']))?$_POST['smoker']:"";
+   $status = (isset($_POST['status']))?$_POST['status']:"";
+}
+// if post is set update the profile in the database
 ?>
-	<p>Welcome back <?php echo $_SESSION['first_name'] echo $_SESSION['last_name'] ?></p>
-	<p><br/> Last Access: <php echo $_SESSION['last_access'] ?></p>
-			<section class="content">				
+				<section class="content">				
         <div class="row">
         	<?php include_once ('inc/side-nav.php'); ?>
           <div class="col-xs-12 col-sm-8 col-md-9 content wp1">
@@ -17,151 +50,49 @@ require_once('inc/header.php');
             <form class="form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" role="form">
             <div class="row">
               <div class="col-md-6 form-group">
-                <input class="name form-control" type="text" name="firstName" placeholder="First Name" value="<?=$_POST['firstName'] ?> autofocus required>
-                <input class="name form-control" type="text" name="lastName" placeholder="Last Name" value="<?=$_POST['lastName'] ?> required>
-                <select class="dropdown-small form-control " id="gender" name="gender" value="<?=$_POST['gender'] ?> required>
-                  <option class="selectOptions" value="" selected disabled>Gender:</option>
-                  <option class='selectOptions' id='selects' value='male'>Male</option>                  
-                  <option class='selectOptions' id='selects' value='female'>Female</option>                                      
-                  <option class='selectOptions' id='selects' value='trans'>Trans</option>                                      
+                <input class="name form-control" type="text" name="firstName" placeholder="<?php echo $firstName; ?>" autofocus >
+                <input class="name form-control" type="text" name="lastName" placeholder="<?php echo $lastName; ?>" >
+                <div class="output-box-normal"><?php echo buildRadio("genders", $gender); ?></div>
+                <select class="dropdown-medium form-control " id="genderSought" name="genderSought" >
+                  <?php echo buildDropDown("gender_sought", $genderSought) ?>                                      
                 </select>
-                <select class="dropdown-medium form-control " id="hairColour" name="hairColour" value="<?=$_POST['hairColour'] ?>required>
-                  <option class="selectOptions" value="" selected disabled>Hair Colour:</option>
-                  <option class='selectOptions' id='selects' value='blonde'>Blonde</option>                  
-                  <option class='selectOptions' id='selects' value='black'>Black</option>                  
-                  <option class='selectOptions' id='selects' value='brunette'>Brunette</option>                                      
-                  <option class='selectOptions' id='selects' value='auburn'>Auburn</option>                                      
-                  <option class='selectOptions' id='selects' value='chestnut'>Chestnut</option>                                      
-                  <option class='selectOptions' id='selects' value='red'>Red</option>                                      
-                  <option class='selectOptions' id='selects' value='grayWhite'>Gray/White</option>                                      
+                <select class="dropdown-large form-control " id="status" name="status" >
+                  <?php echo buildDropDown("status", $status); ?>                   
                 </select>
-                <select class="dropdown-medium form-control " id="bodyType" name="bodyType" value="<?=$_POST['bodyType'] ?>required>
-                  <option class="selectOptions" value="" selected disabled>Body Type:</option>
-                  <option class='selectOptions' id='selects' value='chunky'>Rather Not Say</option>                                      
-                  <option class='selectOptions' id='selects' value='thin'>Thin</option>                  
-                  <option class='selectOptions' id='selects' value='toned'>Toned</option>
-                  <option class='selectOptions' id='selects' value='average'>Average</option>                                      
-                  <option class='selectOptions' id='selects' value='athletic'>Athletic</option>
-                  <option class='selectOptions' id='selects' value='muscular'>Muscular</option>                                      
-                  <option class='selectOptions' id='selects' value='curvy'>Curvy</option>                                      
-                  <option class='selectOptions' id='selects' value='overWeight'>Full Figured</option>                                      
+                <select class="dropdown-large form-control " id="seeking" name="seeking" >
+                  <?php echo buildDropDown("seeking", $seeking); ?>                
                 </select>
-                <select class="dropdown-small form-control " id="smoker" name="smoker" value="<?=$_POST['smoker'] ?>required>
-                  <option class="selectOptions" value="" selected disabled>Smoker?</option>
-                  <option class='selectOptions' id='selects' value='yes'>Yes</option>                  
-                  <option class='selectOptions' id='selects' value='casual'>Casual</option>                  
-                  <option class='selectOptions' id='selects' value='no'>No</option>                                      
-                </select>                
-                <input class="address form-control" type="text" name="city" placeholder="City" value="<?=$_POST['city'] ?> required>
-                <select class="dropdown-large form-control" id="school" name="school">
-                  <?php echo buildDropDown("schools", $school); ?>
-                </select>                  
-                <input class="address form-control" type="text" name="study_major" placeholder="Field of Study" value="<?=$_POST['study_major'] ?>required>                  
+                <select class="dropdown-large form-control " id="hairColour" name="hairColour" >
+                  <?php echo buildDropDown("hair", $hairColour); ?>                
+                </select>
+                <select class="dropdown-large form-control" id="bodyType" name="bodyType">
+                  <?php echo buildDropDown("bodies", $bodyType); ?>
+                </select>  
+                                              
               </div>
               <div class="col-md-6 form-group">
-                <select class="dropdown-large form-control " id="ethnicity" name="ethnicity" value="<?=$_POST['ethnicity'] ?> required>
-                  <option class="selectOptions" value="" selected disabled>Ethnicity:</option>
-                  <option>Caucasian</option>
-                  <option>Latin American</option>
-                  <option>Asian</option>
-                  <option>East Indian</option>
-                  <option>Native American</option>
-                  <option>African American</option>                                    
+                <select class="dropdown-large form-control" id="city" name="city" >
+                  <?php echo buildDropDown("cities", $city); ?>
                 </select>
-                <select class="dropdown-large form-control " id="language" name="language" value="<?=$_POST['language'] ?>required>
-                  <option class="selectOptions" value="" selected disabled>Spoken Language:</option>
-                  <option>English</option>
-                  <option>French</option>
-                  <option>Spanish</option>
-                  <option>German</option>
-                  <option>Italian</option>
-                  <option>Chinese</option>
-                  <option>Tagalog</option>
-                  <option>Polish</option>
-                  <option>Korean</option>
-                  <option>Vietnamese</option>
-                  <option>Portuguese</option>
-                  <option>Japanese</option>
-                  <option>Greek</option>
-                  <option>Arabic</option>
-                  <option>Hindi (urdu)</option>
-                  <option>Russian</option>
-                  <option>Yiddish</option>
-                  <option>Thai (laotian)</option>
-                  <option>Persian</option>
-                  <option>French Creole</option>
-                  <option>Armenian</option>
-                  <option>Navaho</option>
-                  <option>Hungarian</option>
-                  <option>Hebrew</option>
-                  <option>Dutch</option>
-                  <option>Mon-khmer (cambodian)</option>
-                  <option>Gujarathi</option>
-                  <option>Ukrainian</option>
-                  <option>Czech</option>
-                  <option>Pennsylvania Dutch</option>
-                  <option>Miao (hmong)</option>
-                  <option>Norwegian</option>
-                  <option>Slovak</option>
-                  <option>Swedish</option>
-                  <option>Serbocroatian</option>
-                  <option>Kru</option>
-                  <option>Rumanian</option>
-                  <option>Lithuanian</option>
-                  <option>Finnish</option>
-                  <option>Panjabi</option>
-                  <option>Formosan</option>
-                  <option>Croatian</option>
-                  <option>Turkish</option>
-                  <option>Ilocano</option>
-                  <option>Bengali</option>
-                  <option>Danish</option>
-                  <option>Syriac</option>
-                  <option>Samoan</option>
-                  <option>Malayalam</option>
-                  <option>Cajun</option>
-                  <option>Amharic</option>
+                <select class="dropdown-large form-control" id="education" name="education" >
+                  <?php echo buildDropDown("education", $education); ?>
                 </select>
-                <select class="dropdown-large form-control " id="status" name="status" value="<?=$_POST['status'] ?>required>
-                    <option class="selectOptions" value="" selected disabled>Please Select a Realationship Status:</option>
-                    <option class='selectOptions' id='selects' value=''>Single</option>                  
-                    <option class='selectOptions' id='selects' value=''>Seperated</option>                  
-                    <option class='selectOptions' id='selects' value=''>Recently Divorced</option>                  
-                    <option class='selectOptions' id='selects' value=''>Recently Widowed</option>                  
-                  </select>
-                  <select class="dropdown-large form-control " id="genderInterest" name="genderInterest" value="<?=$_POST['genderInterest'] ?> required>
-                    <option class="selectOptions" value="" selected disabled>I'm seeking a....</option>
-                    <option class='selectOptions' id='selects' value=''>Man</option>                  
-                    <option class='selectOptions' id='selects' value=''>Woman</option>                  
-                  </select>
-                  <select class="dropdown-large form-control " id="relationshipType" name="relationshipType" value="<?=$_POST['relationshipType'] ?> required>
-                    <option class="selectOptions" value="" selected disabled>I'm looking for :</option>
-                    <option class='selectOptions' id='selects' value=''>Long-Term Relationship</option>                  
-                    <option class='selectOptions' id='selects' value=''>Casual Dates</option>                  
-                    <option class='selectOptions' id='selects' value=''>Hook-Up</option>                  
-                    <option class='selectOptions' id='selects' value=''>Friend</option>                  
-                  </select>
-                  <select class="dropdown-large form-control " id="religion" name="religion" value="<?=$_POST['religion'] ?> required>
-                    <option class="selectOptions" value="" selected disabled>Religion...</option>
-                    <option class='selectOptions' id='selects' value=''>Atheist</option>                  
-                    <option class='selectOptions' id='selects' value=''>Catholic</option>                  
-                    <option class='selectOptions' id='selects' value=''>Buhddist</option>                  
-                    <option class='selectOptions' id='selects' value=''>Islamic</option>                  
-                    <option class='selectOptions' id='selects' value=''>Jewish</option>                  
-                    <option class='selectOptions' id='selects' value=''>I'd rather not say</option>                  
-                    <option class='selectOptions' id='selects' value=''>Not sure</option>                  
-                  </select>
-                  <select class="dropdown-large form-control " id="education" name="education" value="<?=$_POST['education'] ?> required>
-                    <option class="selectOptions" value="" selected disabled>Highest level of education reached:</option>
-                    <option class='selectOptions' id='selects' value=''>High School</option>                  
-                    <option class='selectOptions' id='selects' value=''>Some Post-Secondary</option>                  
-                    <option class='selectOptions' id='selects' value=''>Post-Secondary Certificate</option>                  
-                    <option class='selectOptions' id='selects' value=''>Post-Secondary Bachelor's</option>                  
-                    <option class='selectOptions' id='selects' value=''>Post-Secondary Master's</option>                  
-                    <option class='selectOptions' id='selects' value=''>I'd rather not say</option>                  
-                    <option class='selectOptions' id='selects' value=''>Not sure</option>                  
-                  </select>  
-                  <textarea class="form-control dropdown-large" name="aboutUser" value="<?=$_POST['aboutUser'] ?> rows="6" cols="30" placeholder="Tell us a little about yourself..."></textarea>
+                <select class="dropdown-large form-control" id="school" name="school">
+                  <?php echo buildDropDown("schools", $school); ?>
+                </select>
+                <input class="form-control" type="text" name="fieldOfStudy" placeholder="<?php echo $fieldOfStudy; ?>">               
+                <select class="dropdown-large form-control" id="ethnicity" name="ethnicity">
+                  <?php echo buildDropDown("ethnicity", $ethnicity); ?>
+                </select>
+                <select class="dropdown-large form-control" id="language" name="language">
+                  <?php echo buildDropDown("languages", $language); ?>
+                </select>
+                <select class="dropdown-large form-control" id="religion" name="religion">
+                  <?php echo buildDropDown("religions", $religion); ?>
+                </select>  
+                <select class="dropdown-large form-control" id="smoker" name="smoker">
+                  <?php echo buildDropDown("smoker", $smoker); ?>
+                </select>                
               </div>  
               <div class="col-xs-12 col-sm-12 form-group">
                 <input class="login-btn" type="submit" value="Update">
@@ -172,11 +103,11 @@ require_once('inc/header.php');
         </div>        
 			</section>
       <script>
-        toastr.options.closeButton = true;
-        toastr.options.positionClass = 'toast-screen-center';
-        toastr.options.timeOut = 0;
-        toastr.options.extendedTimeOut = 0;
-        toastr.success("Thank You, your profile has been updated.", "Successfull Update!!")
+        // toastr.options.closeButton = true;
+        // toastr.options.positionClass = 'toast-screen-center';
+        // toastr.options.timeOut = 0;
+        // toastr.options.extendedTimeOut = 0;
+        // toastr.success("Thank You, your profile has been updated.", "Successfull Update!!")
 
           // "closeButton": true,
           // "debug": false,

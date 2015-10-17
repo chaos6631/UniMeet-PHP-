@@ -53,10 +53,14 @@ function buildRadio($tableName, $pre_selected = ""){
   $output = "<label>" . $label ."</label>";
   if (!empty($result)) {
     //Fill dropdown
-    foreach ($array as $entry) {      
-      $selected = ($pre_selected == $entry['value_id'])?" selected=\"selected\"":"";
-
-      $output .= "\n\t\t\t<input type='radio' value='" . $entry['value_id'] . "'" . $selected . ">" . $entry['property'] . "</input>";
+    foreach ($array as $entry) {
+      if (!isset($_POST) and $entry['value_id'] == 1){
+        $selected = "checked";
+      }else{
+        $selected = ($pre_selected == $entry['value_id'])?" checked":"";
+        // $selected = "";
+      }
+      $output .= "\n\t\t\t<input type='radio' name='" . $tableName . "' value='" . $entry['value_id'] . "' " . $selected . ">" . $entry['property'] . "</input>";
     }    
     return $output .= "\n";
   }

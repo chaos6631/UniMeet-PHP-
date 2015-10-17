@@ -65,7 +65,15 @@ CREATE TABLE IF NOT EXISTS genders(value_id SMALLINT NOT NULL PRIMARY KEY, prope
 INSERT INTO genders VALUES(0, 'Gender:');
 INSERT INTO genders VALUES(1, 'Male');
 INSERT INTO genders VALUES(2, 'Female');
-INSERT INTO genders VALUES(4, 'Trans');
+
+------ TABLE GENDER SOUGHT ------
+CREATE TABLE IF NOT EXISTS gender_sought(value_id SMALLINT NOT NULL PRIMARY KEY, property VARCHAR(25) NOT NULL);
+
+-- INSERTS
+
+INSERT INTO gender_sought VALUES(0, 'Gender Seeking:');
+INSERT INTO gender_sought VALUES(1, 'Male');
+INSERT INTO gender_sought VALUES(2, 'Female');
 
 ------ TABLE HAIR ------
 create table IF NOT EXISTS hair(value_id smallint not null primary key, property varchar(50) not null);
