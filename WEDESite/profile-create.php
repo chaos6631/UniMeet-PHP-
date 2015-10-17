@@ -1,6 +1,8 @@
 <?php 
 
 include 'inc/header.php'; 
+
+//Setting placeholders and values for data retention
 if($_SERVER['REQUEST_METHOD']=="GET")
 {
   $bodyType = "";  
@@ -38,8 +40,12 @@ if($_SERVER['REQUEST_METHOD']=="GET")
    $status = (isset($_POST['status']))?$_POST['status']:"";
 
 }
-/*Testing sticky output*/ 
-// echo "Body type: " . $bodyType;
+/*if user decides to fill out profile now, validate data and store in db if not set their 
+  user_type to "i" and return them to the login page*/ 
+// if (!isset($_POST)) {
+
+//   header("Location: user-login.php");
+//  } 
 ?>
       <section class="download-now" id="profile-create">        
         <div class="row row-top">
@@ -94,7 +100,10 @@ if($_SERVER['REQUEST_METHOD']=="GET")
                 </select>                
               </div>  
               <div class="col-xs-12 col-sm-12 form-group">
-                <input class="login-btn" type="submit" value="Create/Skip Profile">
+                <input class="login-btn" type="submit" value="Create Profile">
+                <!-- <form class="form" method="POST" action="user-login.php" role="skip profile and return to login">
+                  <input class="login-btn" type="submit" value="Skip Profile">
+                </form> -->
               </div>
             </div>                
             </form>              

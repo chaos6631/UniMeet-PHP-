@@ -87,6 +87,19 @@ function buildCheckbox($tableName, $pre_selected = ""){
     return $output .= "\n";
   }
 }
+//checkUserName function ensures user_id has not already been taken
+function checkUserName($userName){
+  global $conn;
+  $result = pg_prepare($conn, "", 'SELECT * FROM users WHERE user_id = $1');
+  $result = pg_execute($conn, "", array($userName));  
+  $rows = pg_num_rows($result);
+  if ($rows == 1) {
+    return FALSE;
+  }else{
+    return TRUE;
+  }
+}
+
 //getProperty function for displaying user information, boxsizes are small, normal, large.
 function getProperty($userID, $propertyID, $tableName){
   //query to array
