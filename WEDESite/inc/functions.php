@@ -30,6 +30,9 @@ function dump($arg){
 	echo (is_array($arg))? print_r($arg): $arg;
 	echo "</pre>";
 }
+function displayCopyrightInfo(){ 
+  echo "&copy; UniMeet. All rights reserved.";
+}
 
 //Redirect user to appropriate dashboard
 // function dashboardRedirect(){

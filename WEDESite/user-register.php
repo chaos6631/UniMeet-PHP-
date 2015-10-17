@@ -13,7 +13,8 @@
                 <input class="userName form-control" type="text" name="userName" placeholder="Username" autofocus required>
                 <input class="email form-control" type="email" name="userEmail" placeholder="Email" required>
                 <input class="password form-control" type="password" name="userPass" placeholder="Password" required>                  
-                <input class="password form-control" type="password" name="userPass2" placeholder="Confirm Password" required>                  
+                <input class="password form-control" type="password" name="userPass2" placeholder="Confirm Password" required>
+				        <input class="email form-control" type="date" name="date" placeholder="Enter Birthdate" required>
                 <input class="login-btn" type="submit" value="Sign Up">
               </div>
             </form>              
