@@ -2,7 +2,7 @@
               <!-- User Profile -->
               <div class="col-xs-6 col-sm-12 text-center" id="dashboard-nav-pic">
                 <a href="user-dashboard.php">
-                  <img class="img-responsive center-block" src="img/av-pete.png">                  
+                  <img class="img-responsive img-circle center-block" src="img/pic1.jpg" alt="User Profile Image">                  
                 </a>
                 <p class="text-center"><span class="hidden-xs"><?php echo $_SESSION['user_id']; ?></span></p>
                 <p class="text-center"><span><?php echo "Welcome Back " . $_SESSION['first_name']; ?></span></p>

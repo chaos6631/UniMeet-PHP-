@@ -67,11 +67,11 @@ function displayCopyrightInfo(){
 function userLogin(){
   $output = "";
   if(isset($_COOKIE['user_id'])){
-    $output .= "<input class='userName form-control' type='text' name='userName' value='" . $_COOKIE['user_id'] . "' required>\n"; 
-    $output .= "\t\t\t\t<input class='password form-control' type='password' name='userPass' placeholder='Password' autofocus required>\n";
+    $output .= "<input class='userName form-control' type='text' name='user_id' value='" . $_COOKIE['user_id'] . "' required>\n"; 
+    $output .= "\t\t\t\t<input class='password form-control' type='password' name='password' placeholder='Password' autofocus required>\n";
   }else{ 
-    $output .= "<input class='userName form-control' type='text' name='userName' placeholder='Username' autofocus required>\n";
-    $output .= "\t\t\t\t<input class='password form-control' type='password' name='userPass' placeholder='Password' required>\n";  
+    $output .= "<input class='userName form-control' type='text' name='user_id' placeholder='Username' autofocus required>\n";
+    $output .= "\t\t\t\t<input class='password form-control' type='password' name='password' placeholder='Password' required>\n";  
   }
   return $output;
 }

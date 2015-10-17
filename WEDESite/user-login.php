@@ -4,8 +4,8 @@ unset($errorMessage);
 //Checks if request method was POST and if TRUE begins input sanitation and validation process
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   //Sanitize User submissions, removing any possible script injection and assigning each to a variable
- 	$userName = pg_escape_string($conn, sanitize($_POST["userName"]));
- 	$userPass = pg_escape_string($conn, sanitize($_POST["userPass"]));
+ 	$userName = pg_escape_string($conn, sanitize($_POST["user_id"]));
+ 	$userPass = pg_escape_string($conn, sanitize($_POST["password"]));
  	//Hash the password
  	$userPass = md5($userPass);
  	// Prepare query for execution

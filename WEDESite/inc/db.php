@@ -60,7 +60,7 @@ function buildRadio($tableName, $pre_selected = ""){
         $selected = ($pre_selected == $entry['value_id'])?" checked":"";
         // $selected = "";
       }
-      $output .= "\n\t\t\t<input type='radio' name='" . $tableName . "' value='" . $entry['value_id'] . "' " . $selected . ">" . $entry['property'] . "</input>";
+      $output .= "\n\t\t\t<input type='radio' name='" . rtrim($tableName, "s") . "_id" . "' value='" . $entry['value_id'] . "' " . $selected . ">" . $entry['property'] . "</input>";
     }    
     return $output .= "\n";
   }
@@ -132,5 +132,19 @@ function lastAccess(){
   global $conn;
   $update = pg_prepare($conn, "user_update", "UPDATE users SET last_access = $1 WHERE user_id = $2");
   $update = pg_execute($conn, "user_update", array($time, $_SESSION['user_id']));
+}
+
+//storeNewUserInfo function that takes any user data input and stores it in the appropriate db tables
+function storeNewUserInfo(){
+  // global $conn;
+  // $sqlInsert//in order to use a foreach all form input names must be same as db field names
+
+  // $insert = pg_prepare($conn, "new_user_insert", "");
+  // $insert = pg_execute($conn, "new_user_insert", array());
+}
+
+//storeUserInfo function that takes any user data input and stores it in the appropriate db tables
+function storeUserInfo(){
+
 }
 ?>
