@@ -54,9 +54,7 @@ if($_SERVER['REQUEST_METHOD']=="GET")
             <p>Enter your information below to create a profile or you may skip this step and update it later.</p>              
             <form class="form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" role="form">
             <div class="row">
-              <div class="col-md-6 form-group">
-                <input class="name form-control" type="text" name="first_name" placeholder="<?php echo $firstName; ?>" autofocus >
-                <input class="name form-control" type="text" name="last_name" placeholder="<?php echo $lastName; ?>" >
+              <div class="col-md-6 form-group">                
                 <div class="output-box-normal">
                   <?php echo buildRadio("genders", $gender); ?>
                 </div>

@@ -137,10 +137,10 @@ function lastAccess(){
 //storeNewUserInfo function that takes any user data input and stores it in the appropriate db tables
 function storeNewUserInfo(){
   // global $conn;
-  // $sqlInsert//in order to use a foreach all form input names must be same as db field names
+  $sqlInsert = 'INSERT INTO users() VALUES($1, $2, $3, $4, $5, $6, )';
 
-  // $insert = pg_prepare($conn, "new_user_insert", "");
-  // $insert = pg_execute($conn, "new_user_insert", array());
+  $insert = pg_prepare($conn, "new_user_insert", "");
+  $insert = pg_execute($conn, "new_user_insert", array());
 }
 
 //storeUserInfo function that takes any user data input and stores it in the appropriate db tables

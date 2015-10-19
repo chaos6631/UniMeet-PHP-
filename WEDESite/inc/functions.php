@@ -18,7 +18,7 @@ function arraySanitize($var){
     }else{
     	foreach($var as $key => $value)
     	{
-    		$var[$key] = singleSanitize($value);
+    		$var[$key] = sanitize($value);
     	}
     }
     return $var;
