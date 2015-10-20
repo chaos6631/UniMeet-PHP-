@@ -14,27 +14,27 @@ require_once('inc/header.php');
           	</div>              
             <div class="row">
               <div class="col-sm-6 col-md-6">  
-                <label>Gender:</label><div class="output-box-small"><p><?php echo getProperty($_SESSION['user_id'], $_SESSION['gender_id'], "genders");?></p></div>              
-                <label>First Name:</label><div class="output-box-normal"><p><?php echo $_SESSION['first_name']; ?></p></div>
-                <label>Last Name:</label><div class="output-box-normal"><p><?php echo $_SESSION['last_name']; ?></p></div>                
-                <label>Interested in a _______ companion:</label><div class="output-box-normal"><p><p><?php echo getProperty($_SESSION['user_id'], $_SESSION['gender_sought'], "genders");?></p></div>
-                <label>Relationship Status:</label><div class="output-box-normal"><p><?php echo getProperty($_SESSION['user_id'], $_SESSION['status_id'], "status");?></p></div>
-                <label>Looking for a:</label><div class="output-box-normal"><p><?php echo getProperty($_SESSION['user_id'], $_SESSION['seeking_id'], "seeking");?></p></div>                
-                <label>Birth Date:</label><div class="output-box-normal"><p><?php echo $_SESSION['birth_date']; ?></p></div>                
-                <label>Hair Colour:</label><div class="output-box-normal"><p><?php echo getProperty($_SESSION['user_id'], $_SESSION['hair_id'], "hair");?></p></div>
-                <label>Body Type:</label><div class="output-box-normal"><p><?php echo getProperty($_SESSION['user_id'], $_SESSION['body_id'], "bodies");?></p></div>
-                <label>Smoker:</label><div class="output-box-normal"><p><?php echo getProperty($_SESSION['user_id'], $_SESSION['smoker_id'], "smoker");?></p></div>                                
-                <label>Ethnicity:</label><div class="output-box-normal"><p><?php echo getProperty($_SESSION['user_id'], $_SESSION['ethnic_id'], "ethnicity");?></p></div>
-                <label>Spoken Language:</label><div class="output-box-normal"><p><?php echo getProperty($_SESSION['user_id'], $_SESSION['language_id'], "languages");?></p></div>
+                <?php echo buildOutputBox("small", getProperty(PLACEHOLDER, "genders"),getProperty($_SESSION['gender_id'], "genders")); ?>             
+                <?php echo buildOutputBox("normal",  "First Name:", $_SESSION['first_name']); ?>
+                <?php echo buildOutputBox("normal", "Last Name:", $_SESSION['last_name']); ?>                
+                <?php echo buildOutputBox("small", getProperty(PLACEHOLDER, "gender_sought"), getProperty($_SESSION['gender_sought'], "gender_sought")); ?>
+                <?php echo buildOutputBox("normal", getProperty(PLACEHOLDER, "status"), getProperty($_SESSION['status_id'], "status"));?>
+                <?php echo buildOutputBox("normal", getProperty(PLACEHOLDER, "seeking"), getProperty($_SESSION['seeking_id'], "seeking"));?>                
+                <?php echo buildOutputBox("small", "Birth Date:", $_SESSION['birth_date']); ?>                
+                <?php echo buildOutputBox("normal", getProperty(PLACEHOLDER, "hair"), getProperty($_SESSION['hair_id'], "hair"));?>
+                <?php echo buildOutputBox("normal", getProperty(PLACEHOLDER, "bodies"), getProperty($_SESSION['body_id'], "bodies"));?>
+                <?php echo buildOutputBox("normal", getProperty(PLACEHOLDER, "smoker"), getProperty($_SESSION['smoker_id'], "smoker"));?>                                                                
               </div>
               <div class="col-sm-6 col-md-6">
-                <label>City:</label><div class="output-box-normal"><p><?php echo getProperty($_SESSION['user_id'], $_SESSION['city_id'], "cities");?></p></div>
-                <label>Highest Level of Education:</label><div class="output-box-normal"><p><p><?php echo getProperty($_SESSION['user_id'], $_SESSION['education_id'], "education");?></p></div>
-                <label>School:</label><div class="output-box-normal"><p><?php echo getProperty($_SESSION['user_id'], $_SESSION['school_id'], "schools");?></p></div>
-                <label>Field of Study:</label><div class="output-box-normal"><p><?php echo $_SESSION['study_major']; ?></p></div>
-                <label>Religion:</label><div class="output-box-normal"><p><p><?php echo getProperty($_SESSION['user_id'], $_SESSION['religion_id'], "religions");?></p></div>                
-                <label>Email Address:</label><div class="output-box-normal"><p><p><?php echo $_SESSION['email_address']; ?></p></div>
-                <label>About Me:</label><div class="output-box-large"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate.</p></div>
+                <?php echo buildOutputBox("normal", getProperty(PLACEHOLDER, "cities"), getProperty($_SESSION['city_id'], "cities"));?>
+                <?php echo buildOutputBox("normal", getProperty(PLACEHOLDER, "education"), getProperty($_SESSION['education_id'], "education"));?>
+                <?php echo buildOutputBox("normal", getProperty(PLACEHOLDER, "schools"), getProperty($_SESSION['school_id'], "schools"));?>
+                <?php echo buildOutputBox("normal", "Field of Study:", $_SESSION['study_major']); ?>
+                <?php echo buildOutputBox("normal", getProperty(PLACEHOLDER, "ethnicity"), getProperty($_SESSION['ethnic_id'], "ethnicity"));?>
+                <?php echo buildOutputBox("normal", getProperty(PLACEHOLDER, "languages"), getProperty($_SESSION['language_id'], "languages"));?>
+                <?php echo buildOutputBox("normal", getProperty(PLACEHOLDER, "religions"), getProperty($_SESSION['religion_id'], "religions"));?>                
+                <?php echo buildOutputBox("normal", "Email:", $_SESSION['email_address']); ?>
+                <?php echo buildOutputBox("large", "About Me:", "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate."); ?>
               </div>                  
             </div>    
           </div>

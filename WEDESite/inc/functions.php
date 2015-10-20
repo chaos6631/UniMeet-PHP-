@@ -23,6 +23,12 @@ function arraySanitize($var){
     }
     return $var;
 }
+function buildOutputBox($boxSize, $label, $property){
+/*builds box for displaying user data, size is small, normal, large. $property is information you want to display, 
+  most likely using the getProperty function*/
+  $output = '<label>' . $label . '</label><div class="output-box-' . $boxSize .'"><p>' . $property . '</p></div>';
+  return $output;
+}
 
 function dump($arg){
 	echo "<pre>";

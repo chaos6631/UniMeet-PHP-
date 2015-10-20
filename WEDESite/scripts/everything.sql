@@ -93,7 +93,7 @@ CREATE TABLE IF NOT EXISTS languages(value_id smallint not null primary key, pro
 
 --Inserts
 
-INSERT INTO languages VALUES(0, 'Languages Spoken:');
+INSERT INTO languages VALUES(0, ' Second Language:');
 INSERT INTO languages VALUES(1, 'English');
 INSERT INTO languages VALUES(2, 'French');
 INSERT INTO languages VALUES(4, 'Spanish');

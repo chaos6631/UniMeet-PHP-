@@ -80,13 +80,15 @@ function buildCheckbox($tableName, $pre_selected = ""){
     //Fill dropdown
     foreach ($array as $entry) {      
       $selected = ($pre_selected == $entry['value_id'])?" selected=\"selected\"":"";
-
+      //ad <td> <tr> to clean up output, store value as an array
       $output .= "\n\t\t\t<input type='checkbox' value='" . $entry['value_id'] . "'" . $selected . ">" . $entry['property'] . "</input>";
 
     }    
     return $output .= "\n";
   }
 }
+
+
 //checkUserName function ensures user_id has not already been taken
 function checkUserName($userName){
   global $conn;
@@ -101,15 +103,13 @@ function checkUserName($userName){
 }
 
 //getProperty function for displaying user information, boxsizes are small, normal, large.
-function getProperty($userID, $propertyID, $tableName){
+function getProperty($propertyID, $tableName){
   //query to array
   global $conn;   
 	$result = pg_prepare($conn, "", "SELECT property FROM " . $tableName . " WHERE value_id = '" . $propertyID . "'");
   $result = pg_execute($conn, "", array());
   $value = pg_fetch_result($result, 0, 'property');
-
-  //$output = '<div class="output-box-' . $boxSize .'"><p>' . $value . '</p></div>';
- 
+  
   return $value;
 }
 function getRandomValue($tableName){
@@ -135,12 +135,11 @@ function lastAccess(){
 }
 
 //storeNewUserInfo function that takes any user data input and stores it in the appropriate db tables
-function storeNewUserInfo(){
-  // global $conn;
-  $sqlInsert = 'INSERT INTO users() VALUES($1, $2, $3, $4, $5, $6, )';
-
-  $insert = pg_prepare($conn, "new_user_insert", "");
-  $insert = pg_execute($conn, "new_user_insert", array());
+function storeNewUserInfo($array){
+  global $conn;
+  
+  $insert = pg_prepare($conn, "new_user_insert", "INSERT INTO users VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)");
+  $insert = pg_execute($conn, "new_user_insert", array($array['user_id'], $array['password'], "i", $array['email_address'], $array['first_name'], $array['last_name'], $array['birth_date'], date('Y-m-d'), date('Y-m-d')));
 }
 
 //storeUserInfo function that takes any user data input and stores it in the appropriate db tables
