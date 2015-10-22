@@ -5,22 +5,11 @@ include 'inc/header.php';
 //Setting placeholders and values for data retention
 if($_SERVER['REQUEST_METHOD']=="GET")
 {
-  $bodyType = "";  
-  $city = "";
-  $ethnicity = "";
-  $education = "";
-  $gender = "";
-  $genderSought = "";
+  $bodyType = $city = $ethnicity = $education = $gender = $genderSought = $hairColour = $language = $religion = $school = $seeking = $smoker = $status = "";
   $fieldOfStudy = "Field of Study";
-  $firstName = "First Name";
-  $hairColour = "";
+  $firstName = "First Name";  
   $lastName = "Last Name";
-  $language = "";
-  $religion = "";
-  $school = "";
-  $seeking = "";
-  $smoker = "";
-  $status = "";
+  
 }else{
    $bodyType = (isset($_POST['body_id']))?$_POST['body_id']:"";
    $city = (isset($_POST['city_id']))?$_POST['city_id']:"";
@@ -29,8 +18,6 @@ if($_SERVER['REQUEST_METHOD']=="GET")
    $gender = (isset($_POST['gender_id']))?$_POST['gender_id']:"";
    $genderSought = (isset($_POST['gender_sought']))?$_POST['gender_sought']:"";
    $fieldOfStudy = (isset($_POST['study_major']) AND !empty($_POST['study_major']))?$_POST['study_major']:"Field of Study";
-   $firstName = (isset($_POST['first_name']) AND !empty($_POST['first_name']))?$_POST['first_name']:"First Name";
-   $lastName = (isset($_POST['last_name']) AND !empty($_POST['last_name']))?$_POST['last_name']:"Last Name";
    $hairColour = (isset($_POST['hair_id']))?$_POST['hair_id']:"";
    $language = (isset($_POST['language_id']))?$_POST['language_id']:"";
    $religion = (isset($_POST['religion_id']))?$_POST['religion_id']:"";
@@ -58,9 +45,9 @@ if($_SERVER['REQUEST_METHOD']=="GET")
                 <div class="output-box-normal">
                   <?php echo buildRadio("genders", $gender); ?>
                 </div>
-                <select class="dropdown-medium form-control " id="gender_sought" name="gender_sought" >
-                  <?php echo buildDropDown("gender_sought", $genderSought) ?>                                      
-                </select>
+                <div class="output-box-normal">
+                  <?php echo buildRadio("gender_sought", $genderSought) ?>
+                </div>
                 <select class="dropdown-large form-control " id="status_id" name="status_id" >
                   <?php echo buildDropDown("status", $status); ?>                   
                 </select>
@@ -73,16 +60,18 @@ if($_SERVER['REQUEST_METHOD']=="GET")
                 <select class="dropdown-large form-control" id="body_id" name="body_id">
                   <?php echo buildDropDown("bodies", $bodyType); ?>
                 </select>  
-                                              
+                <select class="dropdown-large form-control" id="smoker_id" name="smoker_id">
+                  <?php echo buildDropDown("smoker", $smoker); ?>
+                </select>                                               
               </div>
               <div class="col-md-6 form-group">
-                <select class="dropdown-large form-control" id="city_id" name="city_id" >
+                <select class="dropdown-large form-control" id="city_id" name="city_id" required>
                   <?php echo buildDropDown("cities", $city); ?>
                 </select>
                 <select class="dropdown-large form-control" id="education_id" name="education_id" >
                   <?php echo buildDropDown("education", $education); ?>
                 </select>
-                <select class="dropdown-large form-control" id="school_id" name="school_id">
+                <select class="dropdown-large form-control" id="school_id" name="school_id" required>
                   <?php echo buildDropDown("schools", $school); ?>
                 </select>
                 <input class="form-control" type="text" name="study_major" placeholder="<?php echo $fieldOfStudy; ?>">               
@@ -95,15 +84,14 @@ if($_SERVER['REQUEST_METHOD']=="GET")
                 <select class="dropdown-large form-control" id="religion_id" name="religion_id">
                   <?php echo buildDropDown("religions", $religion); ?>
                 </select>  
-                <select class="dropdown-large form-control" id="smoker_id" name="smoker_id">
-                  <?php echo buildDropDown("smoker", $smoker); ?>
-                </select>                
+                               
               </div>  
               <div class="col-xs-12 col-sm-12 form-group">
                 <input class="login-btn" type="submit" value="Create Profile">
-                <!-- <form class="form" method="POST" action="user-login.php" role="skip profile and return to login">
+               <!--  <form class="form" method="POST" action="user-login.php" role="skip profile and return to login">
                   <input class="login-btn" type="submit" value="Skip Profile">
                 </form> -->
+                <div class="login-btn"><a>Skip Profile</a></div>
               </div>
             </div>                
             </form>              

@@ -28,6 +28,7 @@ function buildDropDown($tableName, $pre_selected)  {
   // Removing the first value of the array witch is the label or placeholder for each table  
   $label = array_shift($array);  
   $label = $label['property'];
+
   $output = "<option class='selectOptions' value='' selected disabled>" . $label . "</option>";
   if (!empty($result)) {
     //Fill dropdown
@@ -43,6 +44,7 @@ function buildDropDown($tableName, $pre_selected)  {
 //buildRadio function with $pre_selected as argument for stickiness
 function buildRadio($tableName, $pre_selected = ""){
   //query to array
+
   global $conn;  
   $result = pg_prepare($conn, "", 'SELECT * FROM ' . $tableName);
   $result = pg_execute($conn, "", array());
@@ -51,6 +53,14 @@ function buildRadio($tableName, $pre_selected = ""){
   $label = array_shift($array);
   $label = $label['property'];
   $output = "<label>" . $label ."</label>";
+  $name = rtrim($tableName, "s") . "_id";
+  if ($tableName == "gender_sought") {
+    $name = "gender_sought";
+  }
+  $required = "";
+  if ($name == "gender_id" || $name == "gender_sought") {
+    $required = "required";
+  }
   if (!empty($result)) {
     //Fill dropdown
     foreach ($array as $entry) {
@@ -60,7 +70,7 @@ function buildRadio($tableName, $pre_selected = ""){
         $selected = ($pre_selected == $entry['value_id'])?" checked":"";
         // $selected = "";
       }
-      $output .= "\n\t\t\t<input type='radio' name='" . rtrim($tableName, "s") . "_id" . "' value='" . $entry['value_id'] . "' " . $selected . ">" . $entry['property'] . "</input>";
+      $output .= "\n\t\t\t<input type='radio' name='" . $name . "' value='" . $entry['value_id'] . "' " . $selected . $required . ">" . $entry['property'] . "</input>";
     }    
     return $output .= "\n";
   }
@@ -142,8 +152,24 @@ function storeNewUserInfo($array){
   $insert = pg_execute($conn, "new_user_insert", array($array['user_id'], $array['password'], "i", $array['email_address'], $array['first_name'], $array['last_name'], $array['birth_date'], date('Y-m-d'), date('Y-m-d')));
 }
 
-//storeUserInfo function that takes any user data input and stores it in the appropriate db tables
-function storeUserInfo(){
+// //storeUserInfo function that takes any user data input and stores it in the appropriate db tables
+// function storeUserInfo($array){
+//   global $conn;
 
-}
+//   $sqlUpdate = "";
+//   $i = 1;
+//   foreach($_POST as $field=>$data)
+//   {
+//     $sql_update .= $field . "=$" . $i . ", ";
+//     $sql_insert1 .= $field . ", ";
+//     $sql_insert2 .= "$" . $i . ", ";
+//     $i++; //iterate the number
+//   }
+
+//   $sql_update = substr($sql_update, 0, (strlen($sql_update) - 2)); //remove trailing comma,
+//   $sql_update = "UPDATE users SET ". $sql_update ." WHERE user_id = $".$i++;
+
+//   $update = pg_prepare($conn, "existing_user_insert");
+//   $update = pg_execute($conn, "existing_user_insert");
+// }
 ?>

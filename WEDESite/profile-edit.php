@@ -3,39 +3,43 @@
 require_once('inc/header.php');
 if($_SERVER['REQUEST_METHOD']=="GET")
 {
-  $bodyType = $_SESSION['body_id'];  
-  $city = $_SESSION['city_id'];
-  $ethnicity = $_SESSION['ethnic_id'];
-  $education = $_SESSION['education_id'];
-  $gender = $_SESSION['gender_id'];
-  $genderSought = $_SESSION['gender_sought'];  
-  $fieldOfStudy = $_SESSION['study_major'];
-  $firstName = $_SESSION['first_name'];
-  $hairColour = $_SESSION['hair_id'];
-  $lastName = $_SESSION['last_name'];
-  $language = $_SESSION['language_id'];
-  $religion = $_SESSION['religion_id'];
-  $school = $_SESSION['school_id'];
-  $seeking = $_SESSION['seeking_id'];
-  $smoker = $_SESSION['smoker_id'];
-  $status = $_SESSION['status_id'];
+  $bodyType = (isset($_SESSION['body_id'])?$_SESSION['body_id']:""); 
+  $birthDate = (isset($_SESSION['birth_date'])?$_SESSION['birth_date']:"");  
+  $city = (isset($_SESSION['city_id'])?$_SESSION['city_id']:"");
+  $ethnicity = (isset($_SESSION['ethnic_id'])?$_SESSION['ethnic_id']:"");
+  $education = (isset($_SESSION['education_id'])?$_SESSION['education_id']:"");
+  $gender = (isset($_SESSION['gender_id'])?$_SESSION['gender_id']:"");
+  $genderSought = (isset($_SESSION['gender_sought'])?$_SESSION['gender_sought']:"");  
+  $email = (isset($_SESSION['email_address'])?$_SESSION['email_address']:"");  
+  $fieldOfStudy = (isset($_SESSION['study_major'])?$_SESSION['study_major']:"Field Of Study");
+  $firstName = (isset($_SESSION['first_name'])?$_SESSION['first_name']:"");
+  $hairColour = (isset($_SESSION['hair_id'])?$_SESSION['hair_id']:"");
+  $lastName = (isset($_SESSION['last_name'])?$_SESSION['last_name']:"");
+  $language = (isset($_SESSION['language_id'])?$_SESSION['language_id']:"");
+  $religion = (isset($_SESSION['religion_id'])?$_SESSION['religion_id']:"");
+  $school = (isset($_SESSION['school_id'])?$_SESSION['school_id']:"");
+  $seeking = (isset($_SESSION['seeking_id'])?$_SESSION['seeking_id']:"");
+  $smoker = (isset($_SESSION['smoker_id'])?$_SESSION['smoker_id']:"");
+  $status = (isset($_SESSION['status_id'])?$_SESSION['status_id']:"");
 }else{
-   $bodyType = (isset($_POST['bodyType']))?$_POST['bodyType']:$_SESSION['body_id'];
-   $city = (isset($_POST['city']))?$_POST['city']:$_SESSION['city_id'];
-   $ethnicity = (isset($_POST['ethnicity']))?$_POST['ethnicity']:$_SESSION['ethnic_id'];
-   $education = (isset($_POST['education']))?$_POST['education']:$_SESSION['education_id'];
-   $gender = (isset($_POST['genders']))?$_POST['genders']:$_SESSION['gender_id'];
-   $genderSought = (isset($_POST['genderSought']))?$_POST['genderSought']:$_SESSION['gender_sought'];
-   $fieldOfStudy = (isset($_POST['fieldOfStudy']) AND !empty($_POST['fieldOfStudy']))?$_POST['fieldOfStudy']:"Field of Study";
-   $firstName = (isset($_POST['firstName']) AND !empty($_POST['firstName']))?$_POST['firstName']:"First Name";
-   $lastName = (isset($_POST['lastName']) AND !empty($_POST['lastName']))?$_POST['lastName']:"Last Name";
-   $hairColour = (isset($_POST['hairColour']))?$_POST['hairColour']:"";
-   $language = (isset($_POST['language']))?$_POST['language']:"";
-   $religion = (isset($_POST['religion']))?$_POST['religion']:"";
-   $school = (isset($_POST['school']))?$_POST['school']:"";
-   $seeking = (isset($_POST['seeking']))?$_POST['seeking']:"";
-   $smoker = (isset($_POST['smoker']))?$_POST['smoker']:"";
-   $status = (isset($_POST['status']))?$_POST['status']:"";
+   $bodyType = (isset($_POST['body_id']))?$_POST['body_id']:$_SESSION['body_id'];
+   $birthDate = (isset($_POST['birth_date']))?$_POST['birth_date']:$_SESSION['birth_date'];
+   $city = (isset($_POST['city_id']))?$_POST['city_id']:$_SESSION['city_id'];
+   $ethnicity = (isset($_POST['ethnic_id']))?$_POST['ethnic_id']:$_SESSION['ethnic_id'];
+   $education = (isset($_POST['education_id']))?$_POST['education_id']:$_SESSION['education_id'];
+   $gender = (isset($_POST['gender_id']))?$_POST['gender_id']:$_SESSION['gender_id'];
+   $genderSought = (isset($_POST['gender_sought']))?$_POST['gender_sought']:$_SESSION['gender_sought'];
+   $email = (isset($_POST['email_address']) AND !empty($_POST['email_address']))?$_POST['email_address']:"Email";
+   $fieldOfStudy = (isset($_POST['study_major']) AND !empty($_POST['study_major']))?$_POST['study_major']:"Field of Study";
+   $firstName = (isset($_POST['first_name']) AND !empty($_POST['first_name']))?$_POST['first_name']:"First Name";
+   $lastName = (isset($_POST['last_name']) AND !empty($_POST['last_name']))?$_POST['last_name']:"Last Name";
+   $hairColour = (isset($_POST['hair_id']))?$_POST['hair_id']:$_SESSION['hair_id'];
+   $language = (isset($_POST['language_id']))?$_POST['language_id']:$_SESSION['language_id'];
+   $religion = (isset($_POST['religion_id']))?$_POST['religion_id']:$_SESSION['religion_id'];
+   $school = (isset($_POST['school_id']))?$_POST['school_id']:$_SESSION['school_id'];
+   $seeking = (isset($_POST['seeking_id']))?$_POST['seeking_id']:$_SESSION['seeking_id'];
+   $smoker = (isset($_POST['smoker_id']))?$_POST['smoker_id']:$_SESSION['smoker_id'];
+   $status = (isset($_POST['status_id']))?$_POST['status_id']:$_SESSION['status_id'];
 }
 // if post is set update the profile in the database
 ?>
@@ -50,47 +54,51 @@ if($_SERVER['REQUEST_METHOD']=="GET")
             <form class="form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" role="form">
             <div class="row">
               <div class="col-md-6 form-group">
-                <input class="name form-control" type="text" name="firstName" placeholder="<?php echo $firstName; ?>" autofocus >
-                <input class="name form-control" type="text" name="lastName" placeholder="<?php echo $lastName; ?>" >
-                <div class="output-box-normal"><?php echo buildRadio("genders", $gender); ?></div>
-                <select class="dropdown-medium form-control " id="genderSought" name="genderSought" >
-                  <?php echo buildDropDown("gender_sought", $genderSought) ?>                                      
-                </select>
-                <select class="dropdown-large form-control " id="status" name="status" >
+                <input class="name form-control" type="text" name="first_name" placeholder="<?php echo $firstName; ?>" >
+                <input class="name form-control" type="text" name="last_name" placeholder="<?php echo $lastName; ?>" >
+                <input class="name form-control" type="email" name="email_address" placeholder="<?php echo $email; ?>" >
+                <input class="name form-control" type="date" name="birth_date" value="<?php echo $birthDate; ?>">
+                <div class="output-box-normal">
+                  <?php echo buildRadio("genders", $gender); ?>
+                </div>
+                <div class="output-box-normal">
+                  <?php echo buildRadio("gender_sought", $genderSought) ?>
+                </div>
+                <select class="dropdown-large form-control " id="status_id" name="status_id" >
                   <?php echo buildDropDown("status", $status); ?>                   
                 </select>
-                <select class="dropdown-large form-control " id="seeking" name="seeking" >
+                <select class="dropdown-large form-control " id="seeking_id" name="seeking_id" >
                   <?php echo buildDropDown("seeking", $seeking); ?>                
                 </select>
-                <select class="dropdown-large form-control " id="hairColour" name="hairColour" >
+                <select class="dropdown-large form-control " id="hair_id" name="hair_id" >
                   <?php echo buildDropDown("hair", $hairColour); ?>                
                 </select>
-                <select class="dropdown-large form-control" id="bodyType" name="bodyType">
+                <select class="dropdown-large form-control" id="body_id" name="body_id">
                   <?php echo buildDropDown("bodies", $bodyType); ?>
                 </select>  
                                               
               </div>
               <div class="col-md-6 form-group">
-                <select class="dropdown-large form-control" id="city" name="city" >
+                <select class="dropdown-large form-control" id="city_id" name="city_id" required>
                   <?php echo buildDropDown("cities", $city); ?>
                 </select>
-                <select class="dropdown-large form-control" id="education" name="education" >
+                <select class="dropdown-large form-control" id="education_id" name="education_id" >
                   <?php echo buildDropDown("education", $education); ?>
                 </select>
-                <select class="dropdown-large form-control" id="school" name="school">
+                <select class="dropdown-large form-control" id="school_id" name="school_id" required>
                   <?php echo buildDropDown("schools", $school); ?>
                 </select>
-                <input class="form-control" type="text" name="fieldOfStudy" placeholder="<?php echo $fieldOfStudy; ?>">               
-                <select class="dropdown-large form-control" id="ethnicity" name="ethnicity">
+                <input class="form-control" type="text" name="study_major" placeholder="<?php echo $fieldOfStudy; ?>">               
+                <select class="dropdown-large form-control" id="ethnic_id" name="ethnic_id">
                   <?php echo buildDropDown("ethnicity", $ethnicity); ?>
                 </select>
-                <select class="dropdown-large form-control" id="language" name="language">
+                <select class="dropdown-large form-control" id="language_id" name="language_id">
                   <?php echo buildDropDown("languages", $language); ?>
                 </select>
-                <select class="dropdown-large form-control" id="religion" name="religion">
+                <select class="dropdown-large form-control" id="religion_id" name="religion_id">
                   <?php echo buildDropDown("religions", $religion); ?>
                 </select>  
-                <select class="dropdown-large form-control" id="smoker" name="smoker">
+                <select class="dropdown-large form-control" id="smoker_id" name="smoker_id">
                   <?php echo buildDropDown("smoker", $smoker); ?>
                 </select>                
               </div>  

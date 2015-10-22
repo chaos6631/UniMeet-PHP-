@@ -40,16 +40,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 
   //check that the user is @ least 18yrs old
-  if (isset($_POST['birth_date']) AND (ageCalculate($_POST['birth_date']) <= 18)) {
+  if (isset($_POST['birth_date']) AND (ageCalculate($_POST['birth_date']) < 18)) {
     $auth = FALSE;
     $errorMessage = "Sorry you are not old enough, to become a member of UniMeet. We would like to see you when you become of age though!!";    
   }
 
   //If everything passes store in $_SESSION and redirect to profile-create.php
   if ($auth == TRUE) {
-    storeNewUserInfo($_POST);    
-    $errorMessage = "Success!!";
-    //redirect to create-profile
+    storeNewUserInfo($_POST); 
+    $_SESSION = $_POST;
+    unset($_SESSION['password']);   
+    // $errorMessage = "Success!!";
+    header("Location: user-login.php");
   }else{
     $errorMessage = "FAILED!!";
   }
