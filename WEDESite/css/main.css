@@ -81,8 +81,6 @@ a:hover{
   width: 100%;
 }
 
-
-
 /*Form Inputs*/
 input[type="text"], [type="email"], [type="password"], [type="date"]{
   width:300px;
@@ -117,7 +115,7 @@ input[type="text"], [type="email"], [type="password"], [type="date"]{
   border: 1px solid #ccc;
   border-radius: 5px;
   box-shadow: inset 0 2px 1px rgba(0, 0, 0, .12);
-  -webkit-box-shadow: inset 0 2px 1px rgba(0, 0, 0, .12);          
+  /*-webkit-box-shadow: inset 0 2px 1px rgba(0, 0, 0, .12);*/          
   margin-bottom:10px;
 }
 .output-box-small{
@@ -136,7 +134,10 @@ input[type="text"], [type="email"], [type="password"], [type="date"]{
   margin: 0px;
   padding: 0px;
 }
-
+.required{
+  border: 1px solid red;
+  /*border: 1px solid #BD0026;*/
+}
 
 /*ID Elements*/
 

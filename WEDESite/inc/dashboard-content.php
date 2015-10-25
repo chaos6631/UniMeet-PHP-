@@ -1,16 +1,3 @@
-<?php
-
-require_once('inc/header.php');
-
-if ($_SESSION['user_type'] == "i") {
-  header("Location: profile-edit.php");
-}
-
-?>
-<section class="design" id="design">        
-        <div class="row">
-          <?php include_once ('inc/side-nav.php'); ?>
-          <div class="col-xs-12 col-sm-8 col-md-9" id="content-section">
             <div id="secondSlider">
               <ul class="slides">
                 <li>
@@ -104,8 +91,4 @@ if ($_SESSION['user_type'] == "i") {
             <div class="col-md-1 col-md-offset-6 text-right controls">
               <a href="prev" class="prev"><i class="fa fa-angle-left fa-3x"></i></a>
               <a href="next" class="next"><i class="fa fa-angle-right fa-3x"></i></a>
-            </div>          
-          </div>
-        </div>        
-      </section>
-<?php include_once('inc/footer.php'); ?>
+            </div>

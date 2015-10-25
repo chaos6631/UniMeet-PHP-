@@ -1,7 +1,6 @@
 <?php
 
 //Establish connection
-
 function db_connect()
 {
 	$connString = "host=" . DB_HOST . " port=5432 dbname=" . DB_NAME . " user=" . DB_USER . " password=" . DB_PASSWORD;
@@ -16,7 +15,7 @@ function db_connect()
 }
 $conn = db_connect();
 
-// buildDropdown function with $pre_selected as argument for stickiness
+//function for form dropdown with $pre_selected as argument for stickiness
 function buildDropDown($tableName, $pre_selected)  {
 	//query to array
 
@@ -41,7 +40,8 @@ function buildDropDown($tableName, $pre_selected)  {
     $result = "";
   }
 }
-//buildRadio function with $pre_selected as argument for stickiness
+
+//function for form radio input with $pre_selected as argument for stickiness
 function buildRadio($tableName, $pre_selected = ""){
   //query to array
 
@@ -75,7 +75,8 @@ function buildRadio($tableName, $pre_selected = ""){
     return $output .= "\n";
   }
 }
-//buildCheckbox function with $pre_selected as argument for stickiness
+
+//function for form checkbox with $pre_selected as argument for stickiness
 function buildCheckbox($tableName, $pre_selected = ""){
   //query to array
   global $conn;  
@@ -98,8 +99,7 @@ function buildCheckbox($tableName, $pre_selected = ""){
   }
 }
 
-
-//checkUserName function ensures user_id has not already been taken
+//function that ensures user_id has not already been taken
 function checkUserName($userName){
   global $conn;
   $result = pg_prepare($conn, "", 'SELECT * FROM users WHERE user_id = $1');
@@ -112,7 +112,7 @@ function checkUserName($userName){
   }
 }
 
-//getProperty function for displaying user information, boxsizes are small, normal, large.
+//function for displaying user information, boxsizes are small, normal, large.
 function getProperty($propertyID, $tableName){
   //query to array
   global $conn;   
@@ -122,6 +122,8 @@ function getProperty($propertyID, $tableName){
   
   return $value;
 }
+
+//function that returns a random value....used in userGenerator
 function getRandomValue($tableName){
   global $conn;
   $result = pg_prepare($conn, "", 'SELECT * FROM ' . $tableName);
@@ -152,24 +154,83 @@ function storeNewUserInfo($array){
   $insert = pg_execute($conn, "new_user_insert", array($array['user_id'], $array['password'], "i", $array['email_address'], $array['first_name'], $array['last_name'], $array['birth_date'], date('Y-m-d'), date('Y-m-d')));
 }
 
-// //storeUserInfo function that takes any user data input and stores it in the appropriate db tables
-// function storeUserInfo($array){
-//   global $conn;
+//function that takes NEW user data input and stores it in the appropriate db tables
+function storeNewProfileInfo($array){
+  global $conn;
 
-//   $sqlUpdate = "";
-//   $i = 1;
-//   foreach($_POST as $field=>$data)
-//   {
-//     $sql_update .= $field . "=$" . $i . ", ";
-//     $sql_insert1 .= $field . ", ";
-//     $sql_insert2 .= "$" . $i . ", ";
-//     $i++; //iterate the number
-//   }
+  $sqlUserUpdate = "";
+  $sqlProfileInsert1 = "";
+  $sqlProfileInsert2 = "";
+  /*Possibly change to an array function that looks for the profiles table fields, and
+    pulls them into array2*/
+  $array2 = array_splice($array, 5);
+  // $i = 1;
+ 
+  foreach($array as $field=>$data){    
+    $sqlUserUpdate .= $field . "='" . $data . "', ";
+    // $sqlUserUpdate .= $field . "=$" . $i . ", ";
+    // $i++; //iterate the number
+  }
+  foreach($array2 as $field=>$data){   
+    $sqlProfileInsert1 .= $field . ", ";
+    $sqlProfileInsert2 .= "'" . $data . "', ";  
+  }  
 
-//   $sql_update = substr($sql_update, 0, (strlen($sql_update) - 2)); //remove trailing comma,
-//   $sql_update = "UPDATE users SET ". $sql_update ." WHERE user_id = $".$i++;
+  $sqlUserUpdate = substr($sqlUserUpdate, 0, (strlen($sqlUserUpdate) - 2)); //remove trailing comma,
+  $sqlProfileInsert1 = substr($sqlProfileInsert1, 0, (strlen($sqlProfileInsert1) - 2)); //remove trailing comma,
+  $sqlProfileInsert2 = substr($sqlProfileInsert2, 0, (strlen($sqlProfileInsert2) - 2)); //remove trailing comma,
+  $sqlUserUpdate = "UPDATE users SET " . $sqlUserUpdate . " WHERE user_id = '" . $_SESSION['user_id'] . "';";
+  $sqlProfileInsert = "INSERT INTO profiles(user_id, " . $sqlProfileInsert1 . ") VALUES('" . $_SESSION['user_id'] . "', " . $sqlProfileInsert2 . ");";
+  $update = $sqlUserUpdate . $sqlProfileInsert;
+//Testing the statement ouptut
+  // return $sqlUserUpdate;
+  // return $sqlProfileInsert;  
 
-//   $update = pg_prepare($conn, "existing_user_insert");
-//   $update = pg_execute($conn, "existing_user_insert");
-// }
+//Store profile data
+  pg_query($conn, $update);
+  //update SESSION with new user info
+  $_SESSION = array_merge($_SESSION, $array);
+  $_SESSION = array_merge($_SESSION, $array2);
+
+  // $update1 = pg_prepare($conn, "update", $sqlUserUpdate);  
+  // $update1 = pg_execute($conn, "update", $array);
+  // $update2 = pg_prepare($conn, "", "INSERT INTO profiles(user_id, " . $sqlProfileInsert1 . ") VALUES('" . $_SESSION['user_id'] . "', " . $sqlProfileInsert2 . ")");
+  // $update2 = pg_execute($conn, "", $array2);
+}
+
+//function that takes user data input and updates it in the appropriate db tables
+function updateProfileInfo($array){
+  global $conn;
+
+  $sqlUserUpdate = "";
+  $sqlProfileUpdate = "";  
+  /*Possibly change to an array function that looks for the profiles table fields, and
+    pulls them into array2*/
+  $array2 = array_splice($array, 5);
+  
+ 
+  foreach($array as $field=>$data){    
+    $sqlUserUpdate .= $field . "='" . $data . "', ";    
+  }
+
+  foreach($array2 as $field=>$data){   
+    $sqlProfileUpdate .= $field . "='" . $data . "', ";     
+  }  
+
+  $sqlUserUpdate = substr($sqlUserUpdate, 0, (strlen($sqlUserUpdate) - 2)); //remove trailing comma,
+  $sqlProfileUpdate = substr($sqlProfileUpdate, 0, (strlen($sqlProfileUpdate) - 2)); //remove trailing comma,
+  $sqlUserUpdate = "UPDATE users SET " . $sqlUserUpdate . " WHERE user_id = '" . $_SESSION['user_id'] . "';";
+  $sqlProfileUpdate = "UPDATE profiles SET " . $sqlProfileUpdate . " WHERE user_id = '" . $_SESSION['user_id'] . "';";
+  $update = $sqlUserUpdate . $sqlProfileUpdate;
+//Testing the statement ouptut
+  // return $sqlUserUpdate;
+  // return $sqlProfileUpdate;  
+  // return $update;  
+
+//Store profile data
+  pg_query($conn, $update);
+  //update SESSION with new user info
+  $_SESSION = array_merge($_SESSION, $array);
+  $_SESSION = array_merge($_SESSION, $array2);
+}
 ?>

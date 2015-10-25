@@ -2,13 +2,16 @@
 
 if (session_id() == "") {
   session_start();
-}
-  
+}  
 
 require_once('inc/constants.php');
 require_once ('inc/functions.php');
 require_once('inc/db.php');
-
+$disabled = "";
+if ((isset($_SESSION['user_type'])) && $_SESSION['user_type'] == "i") {
+  $disabled = "disabled";
+}
+// $disabled = (isset($_SESSION['user_type']) == "i"?"disabled":" ");
 
 ?>
 
@@ -59,24 +62,23 @@ require_once('inc/db.php');
                 </button>
                 <div class="navbar-brand"><a class="brand" href="index.php"><?php echo BRAND_NAME; ?></a></div>
               </div>
-
               <!-- Collect the nav links, forms, and other content for toggling -->
               <div class="collapse navbar-collapse" id="navbar-brand">
                 <ul class="nav nav-tabs navbar-right">
-                  <li><a href="index.php">Home</a></li>
-                  <li><a href="user-register.php">Sign Up</a></li>
-                  <li><a href="user-dashboard.php">Dashboard</a></li>
-                  <li><a href="profile-display.php">Profile</a></li>
-                  <li><a href="profile-edit.php">Profile Edit</a></li>
-                  <li><a href="profile-search.php">Search</a></li>
-                  <li><a href="profile-results.php">Results</a></li>
+                  <li class=""><a href="index.php">Home</a></li>
+                  <li class=""><a href="user-register.php">Sign Up</a></li>
+                  <li class=""><a href="user-dashboard.php">Dashboard</a></li>
+                  <li class=""><a href="profile-display.php">Profile</a></li>
+                  <li class=""><a href="profile-edit.php">Profile Edit</a></li>
+                  <li class="<?php echo $disabled; ?>"><a href="profile-search.php">Search</a></li>
+                  <li class="<?php echo $disabled; ?>"><a href="profile-results.php">Results</a></li>
                   <!-- <li class="disabled"><a href="#">Contact/Support</a></li>                     -->
                   <li class="nav-last">
                   <?php 
                   if (!empty($_SESSION['user_id'])) {
-                    echo '<a href="user-logout.php">Logout</a></li>';
+                    echo "<a href='user-logout.php'>Logout</a></li>\n";
                   }else{
-                    echo '<a href="user-login.php">Login</a></li>';
+                    echo "<a href='user-login.php'>Login</a></li>\n";
                   }
                   ?>
                 </ul>
@@ -85,6 +87,4 @@ require_once('inc/db.php');
           </nav>
         </div>
       </div>
-      
-
-      
+         
