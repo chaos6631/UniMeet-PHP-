@@ -1,5 +1,29 @@
 <?php
 
+/*---------------------------Things that Must be done---------------------------
+-0.5 page does not check to ensure there are matches on the $_SESSION and redirect user to the profile-search.php page 
+
+-0.5 page does not use an appropriately named constant (declared in constants.php)) to limit number of matches per page 
+
+-3 pagination not attempted 
+
+-2 pagination does not work (not close) 
+
+-1 pagination does not work (close) 
+
+-0.5 search results with more than 10 matches should have a navigation bar (at the top and bottom of
+ the profile previews, which implies it should be set up as a function) to 
+ navigate through all of the search result matches
+*/
+
+
+
+
+
+
+
+
+
 require_once('inc/header.php');
 
 
