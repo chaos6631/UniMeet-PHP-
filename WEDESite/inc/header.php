@@ -1,5 +1,15 @@
 <?php
 
+$now = time();
+if (isset($_SESSION['discard_after']) && $now > $_SESSION['discard_after']) {
+    // kill session and start a brand new one
+    session_unset();
+    session_destroy();    
+}
+
+// Session is destroyed after 30 mins 
+$_SESSION['discard_after'] = $now + 1800;
+
 if (session_id() == "") {
   session_start();
 }  
@@ -87,4 +97,4 @@ if ((isset($_SESSION['user_type'])) && $_SESSION['user_type'] == "i") {
           </nav>
         </div>
       </div>
-         
+      

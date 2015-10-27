@@ -8,7 +8,7 @@ require_once('inc/header.php');
 			<section class="content">				
         <div class="row row-top">
         	<?php include_once ('inc/side-nav.php'); ?>
-          <div class="col-xs-12 col-sm-9 col-md-9 content">
+          <div class="col-xs-12 col-sm-9 col-md-9" id="content-section">
           	<div class="col-sm-12">
           		<h1>Profile<?php echo '  "' . $_SESSION['user_id'] . '"'; ?></h1>
           	</div>              

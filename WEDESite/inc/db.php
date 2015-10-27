@@ -86,16 +86,21 @@ function buildCheckbox($tableName, $pre_selected = ""){
   //Removing the first value of the array witch is the label or placeholder for each table
   $label = array_shift($array);
   $label = $label['property'];
-  $output = "<label>" . $label ."</label>";
+  $output = "  <div class='col-md-12 text-center'><label>" . $label . "</label></div>";
+  $output .= "\n\t\t  <ul>";
+  // $output .= "\t\t\t\t\t<li><input type='checkbox' id='ID'><label for='ID' name='NAME' value='VALUE'>Label</label></li>\n";
   if (!empty($result)) {
+    $i = 1;
     //Fill dropdown
-    foreach ($array as $entry) {      
+    foreach ($array as $entry){      
       $selected = ($pre_selected == $entry['value_id'])?" selected=\"selected\"":"";
       //ad <td> <tr> to clean up output, store value as an array
-      $output .= "\n\t\t\t<input type='checkbox' value='" . $entry['value_id'] . "'" . $selected . ">" . $entry['property'] . "</input>";
-
+      $output .= "\n\t\t    <li style='list-style:none;'>";
+      $output .= "\n\t\t      <input type='checkbox' id='" . $tableName . "' name='" . $tableName . "[]' value='" . $entry['value_id'] . "' " . $selected . ">" . $entry['property'] . "";
+      $output .= "\n\t\t    </li>";
+      $i++;
     }    
-    return $output .= "\n";
+    return $output .= "\n\t\t  </ul>\n";
   }
 }
 
@@ -233,4 +238,38 @@ function updateProfileInfo($array){
   $_SESSION = array_merge($_SESSION, $array);
   $_SESSION = array_merge($_SESSION, $array2);
 }
+
+
+
+// //function for form checkbox with $pre_selected as argument for stickiness
+// function buildCheckbox($tableName, $pre_selected = ""){
+//   //query to array
+//   global $conn;  
+//   $result = pg_prepare($conn, "", 'SELECT * FROM ' . $tableName);
+//   $result = pg_execute($conn, "", array());  
+//   $array = pg_fetch_all($result);
+//   //Removing the first value of the array witch is the label or placeholder for each table
+//   $label = array_shift($array);
+//   $label = $label['property'];
+//   $output = "<div class='btn-group-lg'>";
+//   $output .= "\n\t\t  <label>" . $label . "</label>";
+//   // $output .= "\n\t\t  <button type='button' class'btn btn-primary'>" . $label . "</button>";
+//   $output .= "\n\t\t  <button type='button' data-toggle='dropdown' class='btn dropdown-toggle' data-placeholder='Please Select'>Please Select<span class='caret'></span></button>"; 
+//   $output .= "\n\t\t  <ul class='dropdown-menu'>";
+//   // $output .= "\t\t\t\t\t<li><input type='checkbox' id='ID'><label for='ID' name='NAME' value='VALUE'>Label</label></li>\n";
+//   if (!empty($result)) {
+//     $i = 1;
+//     //Fill dropdown
+//     foreach ($array as $entry){      
+//       $selected = ($pre_selected == $entry['value_id'])?" selected=\"selected\"":"";
+//       //ad <td> <tr> to clean up output, store value as an array
+//       $output .= "\n\t\t    <li>";
+//       $output .= "\n\t\t      <input type='checkbox' id='" . $tableName . "' name='" . $tableName . "[]' value='" . $entry['value_id'] . "'" . $selected . ">";
+//       $output .= "\n\t\t      <label name='" . $tableName . "'>" . $entry['property'] . "</label>";
+//       $output .= "\n\t\t    </li>";
+//       $i++;
+//     }    
+//     return $output .= "\n\t\t  </ul>\n\t\t</div>";
+//   }
+// }
 ?>
