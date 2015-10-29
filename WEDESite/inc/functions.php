@@ -39,6 +39,14 @@ function buildOutputBox($boxSize, $label, $property){
   return $output;
 }
 
+function checkLoginStatus(){
+  //Check if user is logged in
+  if ($_SESSION['user_id'] == NULL) {
+    header("Location: user-login.php");   
+    exit;
+  }
+}
+
 function dump($arg){
 	echo "<pre>";
 	echo "<br>";echo "<br>";echo "<br>";echo "<br>";echo "<br>";echo "<br>";

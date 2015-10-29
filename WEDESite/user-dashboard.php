@@ -1,6 +1,7 @@
 <?php
 
 require_once('inc/header.php');
+checkLoginStatus();
 
 if ($_SESSION['user_type'] == "i") {
   header("Location: profile-edit.php");

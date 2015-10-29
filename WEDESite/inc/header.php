@@ -81,7 +81,7 @@ if ((isset($_SESSION['user_type'])) && $_SESSION['user_type'] == "i") {
                   <li class=""><a href="profile-display.php">Profile</a></li>
                   <li class=""><a href="profile-edit.php">Profile Edit</a></li>
                   <li class="<?php echo $disabled; ?>"><a href="profile-search.php">Search</a></li>
-                  <li class="<?php echo $disabled; ?>"><a href="profile-results.php">Results</a></li>
+                  <li class="<?php echo $disabled; ?>"><a href="profile-search-results.php">Results</a></li>
                   <!-- <li class="disabled"><a href="#">Contact/Support</a></li>                     -->
                   <li class="nav-last">
                   <?php 

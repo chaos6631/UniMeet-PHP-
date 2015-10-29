@@ -70,14 +70,14 @@ function buildRadio($tableName, $pre_selected = ""){
         $selected = ($pre_selected == $entry['value_id'])?" checked":"";
         // $selected = "";
       }
-      $output .= "\n\t\t\t<input type='radio' name='" . $name . "' value='" . $entry['value_id'] . "' " . $selected . $required . ">" . $entry['property'] . "</input>";
+      $output .= "\n\t\t\t<input type='radio' name='" . $name . "' value='" . $entry['value_id'] . "' " . $selected . $required . "> " . $entry['property'] . " </input>";
     }    
     return $output .= "\n";
   }
 }
 
 //function for form checkbox with $pre_selected as argument for stickiness
-function buildCheckbox($tableName, $pre_selected = ""){
+function buildCheckbox($tableName, $pre_selected){
   //query to array
   global $conn;  
 	$result = pg_prepare($conn, "", 'SELECT * FROM ' . $tableName);
@@ -85,18 +85,29 @@ function buildCheckbox($tableName, $pre_selected = ""){
   $array = pg_fetch_all($result);
   //Removing the first value of the array witch is the label or placeholder for each table
   $label = array_shift($array);
-  $label = $label['property'];
-  $output = "  <div class='col-md-12 text-center'><label>" . $label . "</label></div>";
+  $label = $label['property'];    
+  $important = $required = $title = "";
+  
+  if ($tableName == "seeking" || $tableName == "gender_sought" || $tableName == "status") {    
+    $important = "<span style='color:red;'>* </span>";    
+  }
+  $output = "  <div class='col-md-12 text-center'><label>" . $important . $label . "</label></div>";
   $output .= "\n\t\t  <ul>";
   // $output .= "\t\t\t\t\t<li><input type='checkbox' id='ID'><label for='ID' name='NAME' value='VALUE'>Label</label></li>\n";
   if (!empty($result)) {
-    $i = 1;
+    $i = 0;
     //Fill dropdown
-    foreach ($array as $entry){      
-      $selected = ($pre_selected == $entry['value_id'])?" selected=\"selected\"":"";
-      //ad <td> <tr> to clean up output, store value as an array
+    $count = count($array);
+    $sum = $pre_selected;
+    // for ($i=0; $i < $count; $i++) { 
+    //   $var = isBitSet($i, $sum);
+    //   dump($var);    
+    // }  
+    foreach ($array as $entry){ 
+      $var = isBitSet($i, $sum);       
+      $selected = ($var == TRUE)?" checked":"";      
       $output .= "\n\t\t    <li style='list-style:none;'>";
-      $output .= "\n\t\t      <input type='checkbox' id='" . $tableName . "' name='" . $tableName . "[]' value='" . $entry['value_id'] . "' " . $selected . ">" . $entry['property'] . "";
+      $output .= "\n\t\t      <input type='checkbox' id='" . $tableName . "' " . $required . "name='" . $tableName . "[]' value='" . $entry['value_id'] . "' " . $selected . $title . ">" . $entry['property'] . "";
       $output .= "\n\t\t    </li>";
       $i++;
     }    

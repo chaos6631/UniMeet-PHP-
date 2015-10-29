@@ -1,6 +1,8 @@
 <?php
 
 require_once('inc/header.php');
+checkLoginStatus();
+
 if($_SERVER['REQUEST_METHOD']=="GET")
 {
   $bodyType = (isset($_SESSION['body_id'])?$_SESSION['body_id']:""); 

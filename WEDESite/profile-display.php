@@ -2,7 +2,7 @@
 <?php
 
 require_once('inc/header.php');
-
+checkLoginStatus();
 
 ?>
 			<section class="content">				
