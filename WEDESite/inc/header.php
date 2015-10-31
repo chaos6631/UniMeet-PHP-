@@ -1,5 +1,5 @@
 <?php
-
+ob_start();
 $now = time();
 if (isset($_SESSION['discard_after']) && $now > $_SESSION['discard_after']) {
     // kill session and start a brand new one
@@ -15,7 +15,7 @@ if (session_id() == "") {
 }  
 
 require_once('inc/constants.php');
-require_once ('inc/functions.php');
+require_once('inc/functions.php');
 require_once('inc/db.php');
 $disabled = "";
 if ((isset($_SESSION['user_type'])) && $_SESSION['user_type'] == "i") {

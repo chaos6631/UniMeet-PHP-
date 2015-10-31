@@ -16,57 +16,65 @@
 
 -0.5 DISABLE users not excluded from search results
 
-SELECT profiles.user_id FROM profiles, users 
-  WHERE 1 = 1 AND gender = 2 AND gender_sought = 1 
-  AND (profiles.city = 4 OR profiles.city = 8 OR profiles.city = 64) 
-  AND (profiles.seeking = 1 OR profiles.seeking = 16) 
-  AND (profiles.marital_status = 16 OR profiles.marital_status = 32) 
-  AND users.user_id = profiles.user_id AND users.user_type <> 'd'
-  ORDER BY users.last_access DESC LIMIT 200
+
 */
 
 require_once('inc/header.php');
+
 checkLoginStatus();
 //preselected variables
-$body = $genderSought = $ethnicity = $hair = $language = $religion = $school =  $seeking = $smoker = $status = "";
+$body = $genders = $ethnicity = $hair = $language = $religion = $school =  $seeking = $smoker = $status = "";
 if ($_SERVER['REQUEST_METHOD']=="GET") {
-  $genderSought = (isset($_COOKIE['search_gender_sought']))?($_COOKIE['search_gender_sought']):"";
-  $seeking = (isset($_COOKIE['search_seeking']))?($_COOKIE['search_seeking']):"";
-  $status = (isset($_COOKIE['search_status']))?($_COOKIE['search_status']):"";
-  $smoker = (isset($_COOKIE['search_smoker']))?($_COOKIE['search_smoker']):"";
-  $bodies = (isset($_COOKIE['search_bodies']))?($_COOKIE['search_bodies']):"";
-  $hair = (isset($_COOKIE['search_hair']))?($_COOKIE['search_hair']):"";
-  $schools = (isset($_COOKIE['search_schools']))?($_COOKIE['search_schools']):"";
-  $ethnicity = (isset($_COOKIE['search_ethnicity']))?($_COOKIE['search_ethnicity']):"";
-  $languages = (isset($_COOKIE['search_languages']))?($_COOKIE['search_languages']):"";
-  $religions = (isset($_COOKIE['search_religions']))?($_COOKIE['search_religions']):"";
+  $genders = (isset($_COOKIE['search_gender_id']))?($_COOKIE['search_gender_id']):"";
+  $seeking = (isset($_COOKIE['search_seeking_id']))?($_COOKIE['search_seeking_id']):"";
+  $status = (isset($_COOKIE['search_status_id']))?($_COOKIE['search_status_id']):"";
+  $smoker = (isset($_COOKIE['search_smoker_id']))?($_COOKIE['search_smoker_id']):"";
+  $bodies = (isset($_COOKIE['search_body_id']))?($_COOKIE['search_body_id']):"";
+  $hair = (isset($_COOKIE['search_hair_id']))?($_COOKIE['search_hair_id']):"";
+  $schools = (isset($_COOKIE['search_school_id']))?($_COOKIE['search_school_id']):"";
+  $ethnicity = (isset($_COOKIE['search_ethnic_id']))?($_COOKIE['search_ethnic_id']):"";
+  $languages = (isset($_COOKIE['search_language_id']))?($_COOKIE['search_language_id']):"";
+  $religions = (isset($_COOKIE['search_religion_id']))?($_COOKIE['search_religion_id']):"";
 }
 //Ensure required checkboxes are checked
 
 //Check if $_POST is set and proceed with validation and results retrieval
 if ($_SERVER['REQUEST_METHOD']=="POST") {
-
-  $genderSought = (isset($_POST['gender_sought']))?sumCheckBox($_POST['gender_sought']):"";
-  $seeking = (isset($_POST['seeking']))?sumCheckBox($_POST['seeking']):"";
-  $status = (isset($_POST['status']))?sumCheckBox($_POST['status']):"";
-  $smoker = (isset($_POST['smoker']))?sumCheckBox($_POST['smoker']):"";
-  $bodies = (isset($_POST['bodies']))?sumCheckBox($_POST['bodies']):"";
-  $hair = (isset($_POST['hair']))?sumCheckBox($_POST['hair']):"";
-  $schools = (isset($_POST['schools']))?sumCheckBox($_POST['schools']):"";
-  $ethnicity = (isset($_POST['ethnicity']))?sumCheckBox($_POST['ethnicity']):"";
-  $languages = (isset($_POST['languages']))?sumCheckBox($_POST['languages']):"";
-  $religions = (isset($_POST['religions']))?sumCheckBox($_POST['religions']):"";
+  // dump($_POST);
+  // foreach ($_POST as $key => $value) {
+  //   $_POST[$key] = sumCheckBox($value);
+  // }
+  // dump($_POST);
+  $_POST['gender_id'] = $genders = (isset($_POST['gender_id']))?sumCheckBox($_POST['gender_id']):"";
+  $_POST['seeking_id'] = $seeking = (isset($_POST['seeking_id']))?sumCheckBox($_POST['seeking_id']):"";
+  $_POST['status_id'] = $status = (isset($_POST['status_id']))?sumCheckBox($_POST['status_id']):"";
+  $_POST['smoker_id'] = $smoker = (isset($_POST['smoker_id']))?sumCheckBox($_POST['smoker_id']):"";
+  $_POST['body_id'] = $bodies = (isset($_POST['body_id']))?sumCheckBox($_POST['body_id']):"";
+  $_POST['hair_id'] = $hair = (isset($_POST['hair_id']))?sumCheckBox($_POST['hair_id']):"";
+  $_POST['school_id'] = $schools = (isset($_POST['school_id']))?sumCheckBox($_POST['school_id']):"";
+  $_POST['ethnic_id'] = $ethnicity = (isset($_POST['ethnic_id']))?sumCheckBox($_POST['ethnic_id']):"";
+  $_POST['language_id'] = $languages = (isset($_POST['language_id']))?sumCheckBox($_POST['language_id']):"";
+  $_POST['religion_id'] = $religions = (isset($_POST['religion_id']))?sumCheckBox($_POST['religion_id']):"";
+   
   //Set Cookie
-  setcookie("search_gender_sought", $genderSought, COOKIE_EXPIRE);
-  setcookie("search_seeking", $seeking, COOKIE_EXPIRE);
-  setcookie("search_status", $status, COOKIE_EXPIRE);
-  setcookie("search_smoker", $smoker, COOKIE_EXPIRE);
-  setcookie("search_bodies", $bodies, COOKIE_EXPIRE);
-  setcookie("search_hair", $hair, COOKIE_EXPIRE);
-  setcookie("search_schools", $schools, COOKIE_EXPIRE);
-  setcookie("search_ethnicity", $ethnicity, COOKIE_EXPIRE);
-  setcookie("search_languages", $languages, COOKIE_EXPIRE);
-  setcookie("search_religions", $religions, COOKIE_EXPIRE);
+  setcookie("search_gender_id", $genders, COOKIE_EXPIRE);
+  setcookie("search_seeking_id", $seeking, COOKIE_EXPIRE);
+  setcookie("search_status_id", $status, COOKIE_EXPIRE);
+  setcookie("search_smoker_id", $smoker, COOKIE_EXPIRE);
+  setcookie("search_body_id", $bodies, COOKIE_EXPIRE);
+  setcookie("search_hair_id", $hair, COOKIE_EXPIRE);
+  setcookie("search_school_id", $schools, COOKIE_EXPIRE);
+  setcookie("search_ethnic_id", $ethnicity, COOKIE_EXPIRE);
+  setcookie("search_language_id", $languages, COOKIE_EXPIRE);
+  setcookie("search_religion_id", $religions, COOKIE_EXPIRE);
+
+  // setMultipleCookie("search", $_POST); //setting off an error
+  dump($_POST);
+  // dump($_COOKIE);
+  // unset($_COOKIE['search_genders']);
+  // unset($_COOKIE['search_seeking']);
+  // unset($_COOKIE['search_status']);
+  echo searchUsers($_POST);
 }
 
 ?>
@@ -78,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD']=="POST") {
             <form class="" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" role="form">   
             <!-- <form class="" method="POST" action="test.php" role="form">    -->
             <div class="col-xs-6 col-sm-4 col-md-3 search-box">
-              <?php echo buildCheckbox("gender_sought", $genderSought); ?>
+              <?php echo buildCheckbox("genders", $genders); ?>
               <?php echo buildCheckbox("seeking", $seeking); ?>
               <?php echo buildCheckbox("status", $status); ?>
               <?php echo buildCheckbox("smoker", $smoker); ?>

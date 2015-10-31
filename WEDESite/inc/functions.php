@@ -47,6 +47,60 @@ function checkLoginStatus(){
   }
 }
 
+function convert2ID($tableName){
+  //Will need to add any additional search elements in the future
+  $name = "";
+  switch ($tableName) {
+    case 'bodies':
+      $name =  "body_id";
+      break;
+    
+    case 'cities':
+      $name =  "city_id";
+      break;
+    
+    case 'ethnicity':
+      $name =  "ethnic_id";
+      break;
+    
+    case 'genders':
+      $name =  "gender_id";
+      break;
+    
+    case 'hair':
+      $name =  "hair_id";
+      break;
+
+    case 'languages':
+      $name =  "language_id";
+      break;
+    
+    case 'religions':
+      $name =  "religion_id";
+      break;
+    
+    case 'schools':
+      $name =  "school_id";
+      break;
+
+    case 'seeking':
+      $name =  "seeking_id";
+      break;
+    
+    case 'status':
+      $name =  "status_id";
+      break;
+
+    case 'smoker':
+      $name =  "smoker_id";
+      break;
+
+    default:      
+      break;
+  }
+  return $name;
+}
+
 function dump($arg){
 	echo "<pre>";
 	echo "<br>";echo "<br>";echo "<br>";echo "<br>";echo "<br>";echo "<br>";
@@ -97,6 +151,17 @@ function isBitSet($power, $decimal) {
   else
     return 0;
 } 
+
+//Takes a STRING as $prefix which identifies the cookie and and array 
+function setMultipleCookie($prefix, $array){
+  foreach ($array as $key => $value) {
+    //setcookie("search_gender_sought", $genderSought, COOKIE_EXPIRE);
+    setcookie($prefix . "_" . $key, $value, COOKIE_EXPIRE);
+    ob_flush();
+  }
+  
+}
+
 /*
   this function can be passed an array of numbers 
   (like those submitted as part of a named[] check 

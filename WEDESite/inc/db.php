@@ -88,7 +88,7 @@ function buildCheckbox($tableName, $pre_selected){
   $label = $label['property'];    
   $important = $required = $title = "";
   
-  if ($tableName == "seeking" || $tableName == "gender_sought" || $tableName == "status") {    
+  if ($tableName == "seeking" || $tableName == "genders" || $tableName == "status") {    
     $important = "<span style='color:red;'>* </span>";    
   }
   $output = "  <div class='col-md-12 text-center'><label>" . $important . $label . "</label></div>";
@@ -99,15 +99,12 @@ function buildCheckbox($tableName, $pre_selected){
     //Fill dropdown
     $count = count($array);
     $sum = $pre_selected;
-    // for ($i=0; $i < $count; $i++) { 
-    //   $var = isBitSet($i, $sum);
-    //   dump($var);    
-    // }  
+    $name = convert2ID($tableName);
     foreach ($array as $entry){ 
       $var = isBitSet($i, $sum);       
       $selected = ($var == TRUE)?" checked":"";      
       $output .= "\n\t\t    <li style='list-style:none;'>";
-      $output .= "\n\t\t      <input type='checkbox' id='" . $tableName . "' " . $required . "name='" . $tableName . "[]' value='" . $entry['value_id'] . "' " . $selected . $title . ">" . $entry['property'] . "";
+      $output .= "\n\t\t      <input type='checkbox' id='" . $name . "' " . $required . "name='" . $name . "[]' value='" . $entry['value_id'] . "' " . $selected . $title . ">" . $entry['property'] . "";
       $output .= "\n\t\t    </li>";
       $i++;
     }    
@@ -160,6 +157,47 @@ function lastAccess(){
   global $conn;
   $update = pg_prepare($conn, "user_update", "UPDATE users SET last_access = $1 WHERE user_id = $2");
   $update = pg_execute($conn, "user_update", array($time, $_SESSION['user_id']));
+}
+
+/*funtion that collects user search options and searches all site users 
+  returning an array of userID's*/
+function searchUsers($array){    
+  
+  $statement1 = "SELECT profiles.user_id FROM profiles, users WHERE 1 = 1 ";
+  $statement2 = "";
+  foreach ($array as $key => $sum) {
+    if(!empty($sum)){
+      $statement2 .= "AND (";
+      $value = "";      
+      for($i=0; $i <= MAX_TABLE_PROPERTIES; $i++) { 
+        $var = isBitSet($i, $sum); 
+        $value = pow(2, $i);     
+        if($var == TRUE){     
+          $statement2 .= "profiles." . $key . " = " . $value . " OR ";
+        }
+      }  
+      $statement2 = substr($statement2, 0, (strlen($statement2) - 4));
+      $statement2 .= ") ";
+    }
+
+  }
+  $statement3 = "AND users.user_id = profiles.user_id AND users.user_type <> 'd' ORDER BY users.last_access DESC LIMIT 200";
+  $search = $statement1 . $statement2 . $statement3;
+  return $search;//testing the statement
+  // global $conn;
+  // $result = pg_query($conn, $search);
+  // return $result;
+  // return pg_num_rows($result);
+
+
+  /*------------------------TEMPLATE SELECT STATEMENT----------------------*/
+  /*SELECT profiles.user_id FROM profiles, users 
+  WHERE 1 = 1 AND gender = 2 AND gender_sought = 1 
+  AND (profiles.city = 4 OR profiles.city = 8 OR profiles.city = 64) 
+  AND (profiles.seeking = 1 OR profiles.seeking = 16) 
+  AND (profiles.status = 16 OR profiles.status = 32) 
+  AND users.user_id = profiles.user_id AND users.user_type <> 'd'
+  ORDER BY users.last_access DESC LIMIT 200*/
 }
 
 //storeNewUserInfo function that takes any user data input and stores it in the appropriate db tables
