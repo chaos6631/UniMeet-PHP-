@@ -4,7 +4,7 @@ create table IF NOT EXISTS seeking(value_id smallint not null primary key, prope
 
 INSERT INTO seeking VALUES(0, 'I am Seeking a...');
 INSERT INTO seeking VALUES(1, 'Long-Term Relationship');
-INSERT INTO seeking VALUES(8, 'Casual Dates');
 INSERT INTO seeking VALUES(2, 'Hook-Up');
 INSERT INTO seeking VALUES(4, 'Friend');
+INSERT INTO seeking VALUES(8, 'Casual Dates');
 INSERT INTO seeking VALUES(16, 'Not Sure');

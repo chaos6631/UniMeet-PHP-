@@ -10,7 +10,7 @@ checkLoginStatus();
         	<?php include_once ('inc/side-nav.php'); ?>
           <div class="col-xs-12 col-sm-9 col-md-9" id="content-section">
           	<div class="col-sm-12">
-          		<h1>Profile<?php echo '  "' . $_SESSION['user_id'] . '"'; ?></h1>
+          		<h1>Profile<?php echo '  "' . $_SESSION['view_user_id'] . '"'; ?></h1>
           	</div>              
             <div class="row">
               <div class="col-sm-6 col-md-6">  
@@ -33,7 +33,6 @@ checkLoginStatus();
                 <?php echo buildOutputBox("normal", getProperty(PLACEHOLDER, "ethnicity"), getProperty($_SESSION['ethnic_id'], "ethnicity"));?>
                 <?php echo buildOutputBox("normal", getProperty(PLACEHOLDER, "languages"), getProperty($_SESSION['language_id'], "languages"));?>
                 <?php echo buildOutputBox("normal", getProperty(PLACEHOLDER, "religions"), getProperty($_SESSION['religion_id'], "religions"));?>                
-                <?php echo buildOutputBox("normal", "Email:", $_SESSION['email_address']); ?>
                 <?php echo buildOutputBox("large", "About Me:", "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate."); ?>
               </div>                  
             </div>    

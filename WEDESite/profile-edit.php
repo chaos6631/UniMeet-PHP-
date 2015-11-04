@@ -57,9 +57,9 @@ if ($_SERVER['REQUEST_METHOD']=="POST") {
 }
 // if post is set update the profile in the database
 ?>
-				<section class="content">				
+<section class="content">				
         <div class="row">
-        	<?php include_once ('inc/side-nav.php'); ?>
+          <?php include_once ('inc/side-nav.php'); ?>
           <div class="col-xs-12 col-sm-8 col-md-9 content wp1">
             <h1>
             Edit Your Profile
@@ -128,29 +128,29 @@ if ($_SERVER['REQUEST_METHOD']=="POST") {
             </form>              
           </div>
         </div>        
-			</section>
+     </section>
       <script>
-        // toastr.options.closeButton = true;
-        // toastr.options.positionClass = 'toast-screen-center';
-        // toastr.options.timeOut = 0;
-        // toastr.options.extendedTimeOut = 0;
-        // toastr.success("Thank You, your profile has been updated.", "Successfull Update!!")
+        toastr.options.closeButton = true;
+        toastr.options.positionClass = 'toast-screen-center';
+        toastr.options.timeOut = 0;
+        toastr.options.extendedTimeOut = 0;
+        toastr.success("Thank You, your profile has been updated.", "Successfull Update!!")
 
-          // "closeButton": true,
-          // "debug": false,
-          // "newestOnTop": false,
-          // "progressBar": false,
-          // "positionClass": "toast-top-center",
-          // "preventDuplicates": false,
-          // "onclick": null,
-          // "showDuration": "300",
-          // "hideDuration": "1000",
-          // "timeOut": "5000",
-          // "extendedTimeOut": "1000",
-          // "showEasing": "swing",
-          // "hideEasing": "linear",
-          // "showMethod": "fadeIn",
-          // "hideMethod": "fadeOut"
+          "closeButton": true,
+          "debug": false,
+          "newestOnTop": false,
+          "progressBar": false,
+          "positionClass": "toast-top-center",
+          "preventDuplicates": false,
+          "onclick": null,
+          "showDuration": "300",
+          "hideDuration": "1000",
+          "timeOut": "5000",
+          "extendedTimeOut": "1000",
+          "showEasing": "swing",
+          "hideEasing": "linear",
+          "showMethod": "fadeIn",
+          "hideMethod": "fadeOut"
       </script>
 
 

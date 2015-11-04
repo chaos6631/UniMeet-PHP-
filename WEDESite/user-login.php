@@ -16,6 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	if ($rows == 1) {
 		//collect user data from users table
 		$_SESSION = pg_fetch_assoc($result);
+		$_SESSION['view_user_id'] = $_SESSION['user_id'];
 		//Set cookie for user id expires after 30 days
 		setcookie("user_id", $_SESSION['user_id'], COOKIE_EXPIRE);
 

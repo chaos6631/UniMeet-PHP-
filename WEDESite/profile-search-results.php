@@ -16,18 +16,18 @@
  navigate through all of the search result matches
 */
 
-
-
-
-
-
-
-
-
 require_once('inc/header.php');
 //Check if user is logged in
 checkLoginStatus();
+//Check if SESSION['search_results'] has more than 1 result
+// if (count($_SESSION['search_results']) > 1) {
+//   // rest of code
+// }else{
+//   header("Location: profile-display.php");
+// }
 
+// $_SESSION['view_user_id'] = $_SESSION['search_results'][x];// x equals whatever user is selected
+dump(count($_SESSION['search_results']));
 ?>
       <section class="design" id="design">        
           <div class="row row-top">
@@ -35,86 +35,18 @@ checkLoginStatus();
             <div class="col-sm-9 col-md-9 design-content">
               <div class="col-xs-12">
                 <nav class="text-center">
-                  <ul class="pagination">
-                    <li><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
-                  </ul>
+                  <?php 
+                  echo pagination(count($_SESSION['search_results']), MAX_PAGE_ITEMS, $_SERVER['REQUEST_URI']); 
+                  // dump(substr(strstr($_SERVER['REQUEST_URI'], "?page"), 5)); 
+                  // dump($_SERVER['REQUEST_URI']); 
+                  ?>
                 </nav>
               </div>
-              <div class="col-xs-6 col-sm-3 col-md-2">
-                <img class="img-responsive img-circle" src="img/simpsons-marge-shorthair.gif">
-                <h3>Username</h3>
-                <p>School Name</p>
-                <p>Match Description</p>
-              </div>
-              <div class="col-xs-6 col-sm-3 col-md-2">
-                <img class="img-responsive img-circle" src="img/simpsons-marge-shorthair.gif">
-                <h3>Username</h3>
-                <p>School Name</p>
-                <p>Match Description</p>
-              </div>
-              <div class="col-xs-6 col-sm-3 col-md-2">
-                <img class="img-responsive img-circle" src="img/simpsons-marge-shorthair.gif">
-                <h3>Username</h3>
-                <p>School Name</p>
-                <p>Match Description</p>
-              </div>
-              <div class="col-xs-6 col-sm-3 col-md-2">
-                <img class="img-responsive img-circle" src="img/simpsons-marge-shorthair.gif">
-                <h3>Username</h3>
-                <p>School Name</p>
-                <p>Match Description</p>
-              </div>
-              <div class="col-xs-6 col-sm-3 col-md-2">
-                <img class="img-responsive img-circle" src="img/simpsons-marge-shorthair.gif">
-                <h3>Username</h3>
-                <p>School Name</p>
-                <p>Match Description</p>
-              </div>
-              <div class="col-xs-6 col-sm-3 col-md-2">
-                <img class="img-responsive img-circle" src="img/simpsons-marge-shorthair.gif">
-                <h3>Username</h3>
-                <p>School Name</p>
-                <p>Match Description</p>
-              </div>
-              <div class="col-xs-6 col-sm-3 col-md-2">
-                <img class="img-responsive img-circle" src="img/simpsons-marge-shorthair.gif">
-                <h3>Username</h3>
-                <p>School Name</p>
-                <p>Match Description</p>
-              </div>
-              <div class="col-xs-6 col-sm-3 col-md-2">
-                <img class="img-responsive img-circle" src="img/simpsons-marge-shorthair.gif">
-                <h3>Username</h3>
-                <p>School Name</p>
-                <p>Match Description</p>
-              </div>
-              <div class="col-xs-6 col-sm-3 col-md-2">
-                <img class="img-responsive img-circle" src="img/simpsons-marge-shorthair.gif">
-                <h3>Username</h3>
-                <p>School Name</p>
-                <p>Match Description</p>
-              </div>
-              <div class="col-xs-6 col-sm-3 col-md-2">
-                <img class="img-responsive img-circle" src="img/simpsons-marge-shorthair.gif">
-                <h3>Username</h3>
-                <p>School Name</p>
-                <p>Match Description</p>
-              </div>
+              <!-- Search Results -->              
+              <?php echo buildSearchResult("kerry168"); ?>              
               <div class="col-xs-12">
                 <nav class="text-center">
-                  <ul class="pagination">
-                    <li><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
-                  </ul>
+                  <?php echo pagination(count($_SESSION['search_results']), MAX_PAGE_ITEMS, $_SERVER['REQUEST_URI']); ?>                
                 </nav>
               </div>
             </div>

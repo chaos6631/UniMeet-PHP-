@@ -9,7 +9,7 @@ function db_connect()
 
 	if ($conn == FALSE) {
 		dump($conn);
-		die();
+		die("Sorry, Couldn't Connect to the Database");
 	}
 	return $conn;
 }
@@ -102,7 +102,7 @@ function buildCheckbox($tableName, $pre_selected){
     $name = convert2ID($tableName);
     foreach ($array as $entry){ 
       $var = isBitSet($i, $sum);       
-      $selected = ($var == TRUE)?" checked":"";      
+      $selected = ($var == TRUE)?" checked=\"checked\"":"";      
       $output .= "\n\t\t    <li style='list-style:none;'>";
       $output .= "\n\t\t      <input type='checkbox' id='" . $name . "' " . $required . "name='" . $name . "[]' value='" . $entry['value_id'] . "' " . $selected . $title . ">" . $entry['property'] . "";
       $output .= "\n\t\t    </li>";
@@ -124,6 +124,11 @@ function checkUserName($userName){
     return TRUE;
   }
 }
+
+//
+// function createProfileView(user_id){
+
+// }
 
 //function for displaying user information, boxsizes are small, normal, large.
 function getProperty($propertyID, $tableName){
@@ -147,6 +152,15 @@ function getRandomValue($tableName){
   shuffle($array);
   $value = array_shift($array);
   return $value['value_id'];
+}
+
+// Takes a user ID and returns their user and profile information as an array
+function getUserInfo($user_id){
+  global $conn;
+  $result = pg_prepare($conn, "user_query", 'SELECT * FROM profiles WHERE user_id = $1');
+  $result = pg_execute($conn, "user_query", array($user_id));
+  $result = pg_fetch_assoc($result);
+  return $result;
 }
 
 //lastAccess function that updates the users last_access field
@@ -181,14 +195,19 @@ function searchUsers($array){
     }
 
   }
-  $statement3 = "AND users.user_id = profiles.user_id AND users.user_type <> 'd' ORDER BY users.last_access DESC LIMIT 200";
+  $statement3 = "AND users.user_id = profiles.user_id AND users.user_type <> 'd' ORDER BY users.last_access DESC LIMIT " . MAX_RESULTS;
   $search = $statement1 . $statement2 . $statement3;
-  return $search;//testing the statement
-  // global $conn;
-  // $result = pg_query($conn, $search);
-  // return $result;
-  // return pg_num_rows($result);
-
+  // return $search;//testing the statement
+  global $conn;
+  $result = pg_query($conn, $search); 
+  $matches = pg_fetch_all($result);
+  // $matches = pg_num_rows($result);
+  $x = 0;
+  foreach ($matches as $key => $value) {
+    $match[] = $matches[$key]['user_id'];
+    $x++;
+  }
+  return $match;
 
   /*------------------------TEMPLATE SELECT STATEMENT----------------------*/
   /*SELECT profiles.user_id FROM profiles, users 
@@ -288,37 +307,4 @@ function updateProfileInfo($array){
   $_SESSION = array_merge($_SESSION, $array2);
 }
 
-
-
-// //function for form checkbox with $pre_selected as argument for stickiness
-// function buildCheckbox($tableName, $pre_selected = ""){
-//   //query to array
-//   global $conn;  
-//   $result = pg_prepare($conn, "", 'SELECT * FROM ' . $tableName);
-//   $result = pg_execute($conn, "", array());  
-//   $array = pg_fetch_all($result);
-//   //Removing the first value of the array witch is the label or placeholder for each table
-//   $label = array_shift($array);
-//   $label = $label['property'];
-//   $output = "<div class='btn-group-lg'>";
-//   $output .= "\n\t\t  <label>" . $label . "</label>";
-//   // $output .= "\n\t\t  <button type='button' class'btn btn-primary'>" . $label . "</button>";
-//   $output .= "\n\t\t  <button type='button' data-toggle='dropdown' class='btn dropdown-toggle' data-placeholder='Please Select'>Please Select<span class='caret'></span></button>"; 
-//   $output .= "\n\t\t  <ul class='dropdown-menu'>";
-//   // $output .= "\t\t\t\t\t<li><input type='checkbox' id='ID'><label for='ID' name='NAME' value='VALUE'>Label</label></li>\n";
-//   if (!empty($result)) {
-//     $i = 1;
-//     //Fill dropdown
-//     foreach ($array as $entry){      
-//       $selected = ($pre_selected == $entry['value_id'])?" selected=\"selected\"":"";
-//       //ad <td> <tr> to clean up output, store value as an array
-//       $output .= "\n\t\t    <li>";
-//       $output .= "\n\t\t      <input type='checkbox' id='" . $tableName . "' name='" . $tableName . "[]' value='" . $entry['value_id'] . "'" . $selected . ">";
-//       $output .= "\n\t\t      <label name='" . $tableName . "'>" . $entry['property'] . "</label>";
-//       $output .= "\n\t\t    </li>";
-//       $i++;
-//     }    
-//     return $output .= "\n\t\t  </ul>\n\t\t</div>";
-//   }
-// }
 ?>

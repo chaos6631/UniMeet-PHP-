@@ -1,3 +1,4 @@
+
 ------ TABLE BODIES ------
 create table IF NOT EXISTS bodies(value_id smallint not null primary key, property varchar(25) not null);
 
@@ -19,15 +20,15 @@ create table IF NOT EXISTS cities(value_id smallint NOT null primary key, proper
 --Inserts
 
 insert into cities values(0, 'City:');
-insert into cities values(16, 'Oshawa');
 insert into cities values(1, 'Whitby');
 insert into cities values(2, 'Ajax');
-insert into cities values(32, 'Pickering');
 insert into cities values(4, 'Scarborough');
+insert into cities values(8, 'Mississauga');
+insert into cities values(16, 'Oshawa');
+insert into cities values(32, 'Pickering');
 insert into cities values(64, 'Bowmanville');
 insert into cities values(128, 'Port Perry');
 insert into cities values(256, 'Markham');
-insert into cities values(8, 'Mississauga');
 insert into cities values(512, 'Brampton');
 insert into cities values(1024, 'Peterborough');
 
@@ -39,9 +40,9 @@ create table IF NOT EXISTS ethnicity(value_id smallint not null primary key, pro
 insert into ethnicity values(0, 'Ethnicity:');
 insert into ethnicity values(1, 'Caucasion');
 insert into ethnicity values(2, 'Latin American');
+insert into ethnicity values(4, 'Native American');
 insert into ethnicity values(8, 'Asian');
 insert into ethnicity values(16, 'East Indian');
-insert into ethnicity values(4, 'Native American');
 insert into ethnicity values(32, 'African American');
 
 ------ TABLE EDUCATION ------
@@ -112,13 +113,14 @@ create table IF NOT EXISTS religions(value_id smallint not null primary key, pro
 --Inserts
 
 INSERT INTO religions VALUES(0, 'Religion:');
-INSERT INTO religions VALUES(16, 'Atheist');
 INSERT INTO religions VALUES(1, 'Catholic');
-INSERT INTO religions VALUES(2, 'Buhddist');
-INSERT INTO religions VALUES(32, 'Islamic');
-INSERT INTO religions VALUES(4, 'Jewish');
-INSERT INTO religions VALUES(8, 'Rather Not Say');
-INSERT INTO religions VALUES(64, 'Not Sure');
+INSERT INTO religions VALUES(2, 'Buhddism');
+INSERT INTO religions VALUES(4, 'Judaism');
+INSERT INTO religions VALUES(8, 'Islam');
+INSERT INTO religions VALUES(16, 'Atheist');
+INSERT INTO religions VALUES(32, 'Not Sure');
+INSERT INTO religions VALUES(64, 'Rather Not Say');
+INSERT INTO religions VALUES(128, 'Hinduism');
 
 ------ TABLE SCHOOLS ------
 create table IF NOT EXISTS schools(value_id smallint NOT null primary key, property Varchar(100) not null);
@@ -126,11 +128,19 @@ create table IF NOT EXISTS schools(value_id smallint NOT null primary key, prope
 --Inserts
 
 INSERT INTO schools VALUES(0, 'Current School:');
-INSERT INTO schools VALUES(8, 'school 1');
-INSERT INTO schools VALUES(1, 'school 2');
-INSERT INTO schools VALUES(2, 'school 3');
-INSERT INTO schools VALUES(16, 'school 4');
-INSERT INTO schools VALUES(4, 'school 5');
+INSERT INTO schools VALUES(1, 'Centennial College');
+INSERT INTO schools VALUES(2, 'Durham College');
+INSERT INTO schools VALUES(4, 'Fleming College');
+INSERT INTO schools VALUES(8, 'George Brown College');
+INSERT INTO schools VALUES(16, 'Humber College');
+INSERT INTO schools VALUES(32, 'OCAD University');
+INSERT INTO schools VALUES(64, 'Ryerson University');
+INSERT INTO schools VALUES(128, 'Seneca College');
+INSERT INTO schools VALUES(256, 'Sheridan College');
+INSERT INTO schools VALUES(512, 'Trent University');
+INSERT INTO schools VALUES(1024, 'UIOT(Oshawa) University');
+INSERT INTO schools VALUES(2048, 'University of Toronto');
+INSERT INTO schools VALUES(4096, 'York University');
 
 ------ TABLE SEEKING ------
 create table IF NOT EXISTS seeking(value_id smallint not null primary key, property varchar(80) not null);
@@ -139,9 +149,9 @@ create table IF NOT EXISTS seeking(value_id smallint not null primary key, prope
 
 INSERT INTO seeking VALUES(0, 'I am Seeking a...');
 INSERT INTO seeking VALUES(1, 'Long-Term Relationship');
-INSERT INTO seeking VALUES(8, 'Casual Dates');
 INSERT INTO seeking VALUES(2, 'Hook-Up');
 INSERT INTO seeking VALUES(4, 'Friend');
+INSERT INTO seeking VALUES(8, 'Casual Dates');
 INSERT INTO seeking VALUES(16, 'Not Sure');
 
 ------ TABLE SMOKER ------

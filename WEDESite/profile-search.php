@@ -25,6 +25,7 @@ checkLoginStatus();
 //preselected variables
 $body = $genders = $ethnicity = $hair = $language = $religion = $school =  $seeking = $smoker = $status = "";
 if ($_SERVER['REQUEST_METHOD']=="GET") {
+  //Data retention for initial page load
   $genders = (isset($_COOKIE['search_gender_id']))?($_COOKIE['search_gender_id']):"";
   $seeking = (isset($_COOKIE['search_seeking_id']))?($_COOKIE['search_seeking_id']):"";
   $status = (isset($_COOKIE['search_status_id']))?($_COOKIE['search_status_id']):"";
@@ -35,16 +36,13 @@ if ($_SERVER['REQUEST_METHOD']=="GET") {
   $ethnicity = (isset($_COOKIE['search_ethnic_id']))?($_COOKIE['search_ethnic_id']):"";
   $languages = (isset($_COOKIE['search_language_id']))?($_COOKIE['search_language_id']):"";
   $religions = (isset($_COOKIE['search_religion_id']))?($_COOKIE['search_religion_id']):"";
+
 }
 //Ensure required checkboxes are checked
 
 //Check if $_POST is set and proceed with validation and results retrieval
 if ($_SERVER['REQUEST_METHOD']=="POST") {
-  // dump($_POST);
-  // foreach ($_POST as $key => $value) {
-  //   $_POST[$key] = sumCheckBox($value);
-  // }
-  // dump($_POST);
+  $_POST['city_id'] = $_SESSION['search_cities'];
   $_POST['gender_id'] = $genders = (isset($_POST['gender_id']))?sumCheckBox($_POST['gender_id']):"";
   $_POST['seeking_id'] = $seeking = (isset($_POST['seeking_id']))?sumCheckBox($_POST['seeking_id']):"";
   $_POST['status_id'] = $status = (isset($_POST['status_id']))?sumCheckBox($_POST['status_id']):"";
@@ -57,24 +55,49 @@ if ($_SERVER['REQUEST_METHOD']=="POST") {
   $_POST['religion_id'] = $religions = (isset($_POST['religion_id']))?sumCheckBox($_POST['religion_id']):"";
    
   //Set Cookie
-  setcookie("search_gender_id", $genders, COOKIE_EXPIRE);
-  setcookie("search_seeking_id", $seeking, COOKIE_EXPIRE);
-  setcookie("search_status_id", $status, COOKIE_EXPIRE);
-  setcookie("search_smoker_id", $smoker, COOKIE_EXPIRE);
-  setcookie("search_body_id", $bodies, COOKIE_EXPIRE);
-  setcookie("search_hair_id", $hair, COOKIE_EXPIRE);
-  setcookie("search_school_id", $schools, COOKIE_EXPIRE);
-  setcookie("search_ethnic_id", $ethnicity, COOKIE_EXPIRE);
-  setcookie("search_language_id", $languages, COOKIE_EXPIRE);
-  setcookie("search_religion_id", $religions, COOKIE_EXPIRE);
+  // setcookie("search_gender_id", $genders, COOKIE_EXPIRE);
+  // setcookie("search_seeking_id", $seeking, COOKIE_EXPIRE);
+  // setcookie("search_status_id", $status, COOKIE_EXPIRE);
+  // setcookie("search_smoker_id", $smoker, COOKIE_EXPIRE);
+  // setcookie("search_body_id", $bodies, COOKIE_EXPIRE);
+  // setcookie("search_hair_id", $hair, COOKIE_EXPIRE);
+  // setcookie("search_school_id", $schools, COOKIE_EXPIRE);
+  // setcookie("search_ethnic_id", $ethnicity, COOKIE_EXPIRE);
+  // setcookie("search_language_id", $languages, COOKIE_EXPIRE);
+  // setcookie("search_religion_id", $religions, COOKIE_EXPIRE);
 
-  // setMultipleCookie("search", $_POST); //setting off an error
+  setMultipleCookie("search", $_POST);
   dump($_POST);
-  // dump($_COOKIE);
-  // unset($_COOKIE['search_genders']);
-  // unset($_COOKIE['search_seeking']);
-  // unset($_COOKIE['search_status']);
-  echo searchUsers($_POST);
+  dump($_COOKIE);
+  // echo searchUsers($_POST);  
+  $_SESSION['search_results'] = searchUsers($_POST);
+  // dump(count(searchUsers($_POST)));
+  // dump($_SESSION['search_results'][0]);
+  // dump($_SESSION['search_results']);
+  if (!empty(searchUsers($_POST)) && count(searchUsers($_POST)) == 1) {
+    $_SESSION['view_user_id'] = $_SESSION['search_results'][0];
+    header("Location: profile-display.php");
+  }elseif (!empty(searchUsers($_POST)) && count(searchUsers($_POST)) > 1) {
+    header("Location: profile-search-results.php");
+  }else{
+    $error = TRUE;
+  }
+  //Passing results as an array into SESSION
+  
+
+  //TESTING redirect and no results message
+  // $a = 0;
+  // if ($a == 1) {
+  //   $error = FALSE;
+  //   header("Location: profile-display.php");
+  // }elseif ($a >= 2) {
+  //   $error = FALSE;
+  //   header("Location: profile-search-results.php");
+  // }else{
+  //   $error = TRUE;  
+  // }
+  // echo $a;
+  
 }
 
 ?>
@@ -110,4 +133,20 @@ if ($_SERVER['REQUEST_METHOD']=="POST") {
           </div>            
         </div>        
       </section>
+      <script>
+      <?php
+      if (isset($_POST) && $error == TRUE) {
+        echo "toastr.options.closeButton = true;\n
+        toastr.options.positionClass = 'toast-screen-center';\n
+        toastr.options.timeOut = 0;\n
+        toastr.options.extendedTimeOut = 0;\n
+        toastr.warning(\"We're sorry, we couldn't find any matches!! Please refine your search and try again\")\n";
+        /*----------------------------------OPTIONS--------------------------------------------------*/
+          // "closeButton": true, "debug": false, "newestOnTop": false, "progressBar": false,
+          // "positionClass": "toast-top-center", "preventDuplicates": false, "onclick": null,
+          // "showDuration": "300", "hideDuration": "1000", "timeOut": "5000", "extendedTimeOut": "1000",
+          // "showEasing": "swing", "hideEasing": "linear", "showMethod": "fadeIn", "hideMethod": "fadeOut"
+      }  
+      ?>
+      </script>
 <?php include_once('inc/footer.php'); ?>

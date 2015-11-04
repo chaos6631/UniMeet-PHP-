@@ -99,11 +99,11 @@ if($_SERVER['REQUEST_METHOD']=="GET")
         </div>        
       </section>    
       <script>
-        // toastr.options.closeButton = true;
-        // toastr.options.positionClass = 'toast-screen-center';
-        // toastr.options.timeOut = 0;
-        // toastr.options.extendedTimeOut = 0;
-        // toastr.success("Thank You for becoming a member, you may proceed with your profile or skip this step and check out the site.", "Successfull Registration!!")
+        toastr.options.closeButton = true;
+        toastr.options.positionClass = 'toast-screen-center';
+        toastr.options.timeOut = 0;
+        toastr.options.extendedTimeOut = 0;
+        toastr.success("Thank You for becoming a member, you may proceed with your profile or skip this step and check out the site.", "Successfull Registration!!")
 
           // "closeButton": true,
           // "debug": false,
