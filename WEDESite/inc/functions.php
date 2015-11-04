@@ -38,15 +38,15 @@ function buildOutputBox($boxSize, $label, $property){
   $output = '<label>' . $label . '</label><div class="output-box-' . $boxSize .'"><p>' . $property . '</p></div>';
   return $output;
 }
-function buildSearchResult($user_id){
+function createProfilePreview($user_id){
   $user = getUserInfo($user_id);
   $userName = $user['user_id'];
   $school = getProperty($user['school_id'], "schools");
   $match = $user['match_description'];
 
   $output = "<div class=\"col-xs-6 col-sm-3 col-md-2 search-box-results\">\n";
-  $output .= "  <img class=\"img-responsive img-circle\" src=\"img/placeholder-user.png\">\n";
-  $output .= "  <h3>$userName</h3>\n";
+  $output .= "  <a href='profile-display.php?user_id=$userName'><img class=\"img-responsive img-circle\" src=\"img/placeholder-user.png\"></a>\n";
+  $output .= "  <a href='profile-display.php?user_id=$userName'><h3>$userName</h3></a>\n";
   $output .= "  <p>$school</p>\n";
   $output .= "  <p>$match</p>\n";
   $output .= "</div>\n";
@@ -54,7 +54,7 @@ function buildSearchResult($user_id){
 }
 function checkLoginStatus(){
   //Check if user is logged in
-  if ($_SESSION['user_id'] == NULL) {
+  if ($_SESSION['user_id'] == NULL || $_SESSION['user_type'] == "d") {
     header("Location: user-login.php");   
     exit;
   }
@@ -124,35 +124,6 @@ function displayCopyrightInfo(){
   echo "&copy; UniMeet. All rights reserved.";
 }
 
-//Redirect user to appropriate dashboard
-// function dashboardRedirect(){
-//   global $conn;
-//   if ($_SESSION['user_type'] == "d") {
-//         $errorMessage = "Sorry your account has been disabled, please contact us to resolve this issue";
-//         // exit();
-//   }elseif($_SESSION['user_type'] == "c"){
-//     $result = pg_prepare($conn, "profile_query", "SELECT * FROM profiles WHERE user_id = $1");
-//     $result = pg_execute($conn, "profile_query", array($userName));
-//     $profile = pg_fetch_assoc($result);
-//     //Removing duplicate user_id key from Array
-//     $a = array_shift($profile);
-//     unset($a);                
-//     $_SESSION = array_merge($_SESSION, $profile);       
-//     header("Location: user-dashboard.php");       
-//   }elseif($_SESSION['user_type'] == "a"){
-//     $result = pg_prepare($conn, "profile_query", "SELECT * FROM profiles WHERE user_id = $1");
-//     $result = pg_execute($conn, "profile_query", array($userName));
-//     $profile = pg_fetch_assoc($result);
-//     //Removing duplicate user_id key from Array
-//     $a = array_shift($profile);
-//     unset($a);                
-//     $_SESSION = array_merge($_SESSION, $profile);       
-//     header("Location: admin-dashboard.php");     
-//   }else{
-//     header("Location: user-dashboard.php");
-//   }       
-// }
-
 /*
   this function should be passed a integer power of 2, and any 
   decimal number, it will return true (1) if the power of 2 is 
@@ -168,7 +139,7 @@ function isBitSet($power, $decimal) {
 function pagination($totalRecords, $maxItemsPage, $page, $url = '?'){
   $total = $totalRecords;
   $minAdjacents = "4"; 
-  $page = substr(strstr($page, "?page"), 5);
+  $page = substr(strstr($page, "?page"), 6);
   $page = ($page == 0 ? 1 : $page);
   $start = ($page - 1) * $maxItemsPage;               
   $prev = $page - 1;              
@@ -187,11 +158,11 @@ function pagination($totalRecords, $maxItemsPage, $page, $url = '?'){
     $pagination .= "<ul class='pagination'>";
     if ($page > 1){ 
       //Previous Button    
-      $pagination.= "<li><a href='{$url}page$prev' aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span></a></li>";
+      $pagination.= "<li><a href='{$url}page=$prev' aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span></a></li>";
     }else{
       $pagination.= "<li class='disabled'><a aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span></a></li>";
-    }
-    
+    }  
+    //Displaying for 10 pages or less  
     if ($lastpage < 7 + $minAdjacents){  
       for ($counter = 1; $counter <= $lastpage; $counter++){
         if($counter == $page){
@@ -200,11 +171,12 @@ function pagination($totalRecords, $maxItemsPage, $page, $url = '?'){
           if($counter == 1){
             $pagination.= "<li><a href='{$url}'>$counter</a></li>";
           }else{
-            $pagination.= "<li><a href='{$url}page$counter'>$counter</a></li>";
+            $pagination.= "<li><a href='{$url}page=$counter'>$counter</a></li>";
           }
         }
       }
     }
+    // Displaying for more than 10 pages
     elseif($lastpage > 4 + $minAdjacents){
       if($page < 1 + $minAdjacents){
         for ($counter = 1; $counter < 5 + $minAdjacents; $counter++){
@@ -214,33 +186,33 @@ function pagination($totalRecords, $maxItemsPage, $page, $url = '?'){
             if($counter == 1){
               $pagination.= "<li><a href='{$url}'>$counter</a></li>";
             }else{
-              $pagination.= "<li><a href='{$url}page$counter'>$counter</a></li>";
+              $pagination.= "<li><a href='{$url}page=$counter'>$counter</a></li>";
             }
           }
         }
-        $pagination.= "<li><a class='current'>...</a></li>";
-        $pagination.= "<li><a href='{$url}page$lpm1'>$lpm1</a></li>";
-        $pagination.= "<li><a href='{$url}page$lastpage'>$lastpage</a></li>";   
+        $pagination.= "<li class='disabled'><a>...</a></li>";
+        $pagination.= "<li><a href='{$url}page=$lpm1'>$lpm1</a></li>";
+        $pagination.= "<li><a href='{$url}page=$lastpage'>$lastpage</a></li>";   
       }elseif($lastpage - $minAdjacents > $page && $page > $minAdjacents){
-        $pagination.= "<li><a href='{$url}page1'>1</a></li>";
-        $pagination.= "<li><a class='current'>...</a></li>";
+        $pagination.= "<li><a href='{$url}page=1'>1</a></li>";        
+        $pagination.= "<li class='disabled'><a>...</a></li>";
         for ($counter = $page - $minAdjacents; $counter <= $page + $minAdjacents; $counter++){
           if($counter == $page){
             $pagination.= "<li><a class='btn-primary active'>$counter</a></li>";
           }else{
-            if($counter == 1){
-              $pagination.= "<li><a href='{$url}'>$counter</a></li>";
+            if($counter == 1 || $counter == 2){
+              continue;
             }else{
-              $pagination.= "<li><a href='{$url}page$counter'>$counter</a></li>";
+              $pagination.= "<li><a href='{$url}page=$counter'>$counter</a></li>";
             }
           }
         }
-        $pagination.= "<li><a class='current'>...</a></li>";
-        $pagination.= "<li><a href='{$url}page$lastpage'>$lastpage</a></li>";   
+        $pagination.= "<li class='disabled'><a>...</a></li>";
+        $pagination.= "<li><a href='{$url}page=$lastpage'>$lastpage</a></li>";   
       }else{
-        $pagination.= "<li><a href='{$url}page1'>1</a></li>";
-        $pagination.= "<li><a href='{$url}page2'>2</a></li>";
-        $pagination.= "<li><a class='current'>...</a></li>";
+        $pagination.= "<li><a href='{$url}page=1'>1</a></li>";
+        $pagination.= "<li><a href='{$url}page=2'>2</a></li>";
+        $pagination.= "<li class='disabled'><a>...</a></li>";
         for ($counter = $lastpage - (2 + $minAdjacents); $counter <= $lastpage; $counter++){
           if ($counter == $page){
             $pagination.= "<li><a class='btn-primary active'>$counter</a></li>";
@@ -248,15 +220,15 @@ function pagination($totalRecords, $maxItemsPage, $page, $url = '?'){
             if($counter == 1){
               $pagination.= "<li><a href='{$url}'>$counter</a></li>";
             }else{
-              $pagination.= "<li><a href='{$url}page$counter'>$counter</a></li>";
+              $pagination.= "<li><a href='{$url}page=$counter'>$counter</a></li>";
             }
           }
         }
       }
     }  
     if ($page < $counter - 1){ 
-      // $pagination.= "<li><a href='{$url}page$next'>Next</a></li>";//original style
-      $pagination.= "<li><a href='{$url}page$next' aria-label=\"Next\"><span aria-hidden=\"true\">&raquo;</span></a></li>";
+      //Next Button
+      $pagination.= "<li><a href='{$url}page=$next' aria-label=\"Next\"><span aria-hidden=\"true\">&raquo;</span></a></li>";
     }else{
       $pagination.= "<li class='disabled'><a aria-label=\"Next\"><span aria-hidden=\"true\">&raquo;</span></a></li>";
     }

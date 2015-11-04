@@ -157,10 +157,12 @@ function getRandomValue($tableName){
 // Takes a user ID and returns their user and profile information as an array
 function getUserInfo($user_id){
   global $conn;
-  $result = pg_prepare($conn, "user_query", 'SELECT * FROM profiles WHERE user_id = $1');
-  $result = pg_execute($conn, "user_query", array($user_id));
-  $result = pg_fetch_assoc($result);
-  return $result;
+  $result = pg_prepare($conn, "", 'SELECT * FROM profiles WHERE user_id = $1');
+  $result = pg_execute($conn, "", array($user_id));
+  $user = pg_fetch_assoc($result);
+  $result = pg_query($conn, "SELECT * FROM users WHERE user_id ='" . $user_id . "'");
+  $user = array_merge(pg_fetch_assoc($result), $user);
+  return $user;
 }
 
 //lastAccess function that updates the users last_access field

@@ -22,6 +22,9 @@
 require_once('inc/header.php');
 
 checkLoginStatus();
+if ($_SESSION['user_type'] == "i") {
+ header("Location: profile-edit.php");
+}
 //preselected variables
 $body = $genders = $ethnicity = $hair = $language = $religion = $school =  $seeking = $smoker = $status = "";
 if ($_SERVER['REQUEST_METHOD']=="GET") {
