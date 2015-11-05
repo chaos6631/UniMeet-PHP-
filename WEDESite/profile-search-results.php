@@ -13,10 +13,10 @@ if (count($_SESSION['search_results']) > 1) {
   header("Location: profile-display.php");
 }
 
+$counter = checkPageNum($_SERVER['REQUEST_URI']);
 
-// $_SESSION['view_user_id'] = $_SESSION['search_results'][x];// x equals whatever user is selected
-dump(count($_SESSION['search_results']));
-
+// dump($counter);
+// dump(count($_SESSION['search_results']));
 ?>
       <section class="design" id="design">        
           <div class="row row-top">
@@ -30,8 +30,9 @@ dump(count($_SESSION['search_results']));
               <!-- Search Results -->              
               <?php 
               for ($i=1; $i <= MAX_PAGE_ITEMS; $i++) { 
-                if (!empty($_SESSION['search_results'][$i])) {
-                  echo createProfilePreview($_SESSION['search_results'][$i]);
+                if (!empty($_SESSION['search_results'][$counter])) {
+                  echo createProfilePreview($_SESSION['search_results'][$counter], $counter+1);
+                  $counter++;
                 }                 
               }              
               ?>              

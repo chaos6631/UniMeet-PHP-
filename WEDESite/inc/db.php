@@ -179,11 +179,11 @@ function lastAccess(){
   returning an array of userID's*/
 function searchUsers($array){    
   
-  $statement1 = "SELECT profiles.user_id FROM profiles, users WHERE 1 = 1 ";
+  $statement1 = "SELECT profiles.user_id FROM profiles, users WHERE 1 = 1";
   $statement2 = "";
   foreach ($array as $key => $sum) {
     if(!empty($sum)){
-      $statement2 .= "AND (";
+      $statement2 .= " AND profiles.gender_sought= " . $_SESSION['gender_id'] . " AND (";
       $value = "";      
       for($i=0; $i <= MAX_TABLE_PROPERTIES; $i++) { 
         $var = isBitSet($i, $sum); 
@@ -210,15 +210,6 @@ function searchUsers($array){
     $x++;
   }
   return $match;
-
-  /*------------------------TEMPLATE SELECT STATEMENT----------------------*/
-  /*SELECT profiles.user_id FROM profiles, users 
-  WHERE 1 = 1 AND gender = 2 AND gender_sought = 1 
-  AND (profiles.city = 4 OR profiles.city = 8 OR profiles.city = 64) 
-  AND (profiles.seeking = 1 OR profiles.seeking = 16) 
-  AND (profiles.status = 16 OR profiles.status = 32) 
-  AND users.user_id = profiles.user_id AND users.user_type <> 'd'
-  ORDER BY users.last_access DESC LIMIT 200*/
 }
 
 //storeNewUserInfo function that takes any user data input and stores it in the appropriate db tables

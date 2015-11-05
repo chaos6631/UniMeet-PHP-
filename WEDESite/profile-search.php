@@ -73,6 +73,7 @@ if ($_SERVER['REQUEST_METHOD']=="POST") {
   dump($_POST);
   dump($_COOKIE);
   // echo searchUsers($_POST);  
+  // die;
   $_SESSION['search_results'] = searchUsers($_POST);
   // dump(count(searchUsers($_POST)));
   // dump($_SESSION['search_results'][0]);

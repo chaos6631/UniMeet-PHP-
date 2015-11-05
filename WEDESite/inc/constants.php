@@ -1,7 +1,7 @@
 <?php
 
 //Constants
-define("ADD_USERS", 0);// amount of random users to generate
+define("ADD_USERS", 500);// amount of random users to generate
 define("BASE_URL", './');
 define("BRAND_NAME", "UniMeet");
 define("BRAND_LOGO", "img/logo6.png");

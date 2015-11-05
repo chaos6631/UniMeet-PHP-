@@ -48,7 +48,7 @@ $profilesTableStatement = "INSERT INTO profiles(
 
 /*---------Loop runs and creates the amount of users specified in the ADD_USERS constant------*/
 
-for ($i=0; $i <= ADD_USERS; $i++) { 
+for ($i=0; $i < ADD_USERS; $i++) { 
 
 	/*-------------------------------------Table information-----------------------------------*/
 															
@@ -104,7 +104,7 @@ for ($i=0; $i <= ADD_USERS; $i++) {
 	$city_id = getRandomValue("cities");
 	$education_id = getRandomValue("education");// This is probably going to be removed
 	$ethnic_id = getRandomValue("ethnicity");
-	$gender_sought = getRandomValue("genders");
+	$gender_sought = getRandomValue("gender_sought");
 	$hair_id = getRandomValue("hair");
 	$language_id = getRandomValue("languages");//needs to be adjusted for secondary language
 	$religion_id = getRandomValue("religions");

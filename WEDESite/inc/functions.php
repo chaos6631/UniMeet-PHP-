@@ -2,7 +2,6 @@
 // /*---------------------------------Functions-----------------------------------*/
 //     //Function that takes a user input as an argument and uses various built in php functions to sanitize it.
 
-// Sanitizes a single variable
 //calculates age of a users
 function ageCalculate($var){
   $age = "";
@@ -38,18 +37,19 @@ function buildOutputBox($boxSize, $label, $property){
   $output = '<label>' . $label . '</label><div class="output-box-' . $boxSize .'"><p>' . $property . '</p></div>';
   return $output;
 }
-function createProfilePreview($user_id){
+function createProfilePreview($user_id, $num){
   $user = getUserInfo($user_id);
   $userName = $user['user_id'];
   $school = getProperty($user['school_id'], "schools");
   $match = $user['match_description'];
-
+  
   $output = "<div class=\"col-xs-6 col-sm-3 col-md-2 search-box-results\">\n";
-  $output .= "  <a href='profile-display.php?user_id=$userName'><img class=\"img-responsive img-circle\" src=\"img/placeholder-user.png\"></a>\n";
-  $output .= "  <a href='profile-display.php?user_id=$userName'><h3>$userName</h3></a>\n";
-  $output .= "  <p>$school</p>\n";
-  $output .= "  <p>$match</p>\n";
-  $output .= "</div>\n";
+  $output .= "\t\t <a href='profile-display.php?user_id=$userName'><img class=\"img-responsive img-circle\" src=\"img/placeholder-user.png\"></a>\n";
+  $output .= "\t\t <a href='profile-display.php?user_id=$userName'><h3>$userName</h3></a>\n";
+  $output .= "\t\t <p>$school</p>\n";
+  $output .= "\t\t <p>$match</p>\n";  
+  $output .= "\t\t <p class='bg-primary' style='position: absolute; bottom: 0; left: 5; width: 93%;'>$num</p>\n";
+  $output .= "\t\t</div>\n\t      ";
   return $output;
 }
 function checkLoginStatus(){
@@ -58,6 +58,19 @@ function checkLoginStatus(){
     header("Location: user-login.php");   
     exit;
   }
+}
+
+function checkPageNum($url){
+  $page = substr(strstr($url, "?page"), 6);
+  for ($i=0; $i <= 20; $i++) {   
+    if ($page == $i) {
+      $num = ($page * 10 - 10);
+    }
+    if ($page == 1 || $page == NULL) {
+      $num = 0;
+    }  
+  }
+  return $num;
 }
 
 function convert2ID($tableName){
@@ -149,9 +162,9 @@ function pagination($totalRecords, $maxItemsPage, $page, $url = '?'){
   $pagination = ""; 
   //Textual Page Display
   if ($lastpage <= 1) {
-    $pagination .= "<h2 style='margin-bottom: 5px; font-size: 1em; color: #428bca;'>Page $page of $lastpage</h2>";//displays selected page as text
+    $pagination .= "<h2 style='margin-bottom: 5px; font-size: 1em; color: #428bca;'>Page $page of $lastpage ($total Matches)</h2>";//displays selected page as text
   }else{
-    $pagination .= "<h2 style='margin-bottom: -15px; font-size: 1em; color: #428bca;'>Page $page of $lastpage</h2>";//displays selected page as text    
+    $pagination .= "<h2 style='margin-bottom: -15px; font-size: 1em; color: #428bca;'>Page $page of $lastpage ($total Matches)</h2>";//displays selected page as text    
   }  
   //Numerical Page Display
   if($lastpage > 1){  
