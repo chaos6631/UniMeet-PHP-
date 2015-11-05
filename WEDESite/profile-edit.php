@@ -52,7 +52,8 @@ if ($_SERVER['REQUEST_METHOD']=="POST") {
     header("Location: user-dashboard.php");
   }else{
     updateProfileInfo($_POST);
-    header("Location: profile-display.php");
+    $auth = TRUE;
+    // header("Location: profile-display.php");
   }  
 }
 // if post is set update the profile in the database
@@ -130,27 +131,15 @@ if ($_SERVER['REQUEST_METHOD']=="POST") {
         </div>        
      </section>
       <script>
-        toastr.options.closeButton = true;
-        toastr.options.positionClass = 'toast-screen-center';
-        toastr.options.timeOut = 0;
-        toastr.options.extendedTimeOut = 0;
-        toastr.success("Thank You, your profile has been updated.", "Successfull Update!!")
-
-          "closeButton": true,
-          "debug": false,
-          "newestOnTop": false,
-          "progressBar": false,
-          "positionClass": "toast-top-center",
-          "preventDuplicates": false,
-          "onclick": null,
-          "showDuration": "300",
-          "hideDuration": "1000",
-          "timeOut": "5000",
-          "extendedTimeOut": "1000",
-          "showEasing": "swing",
-          "hideEasing": "linear",
-          "showMethod": "fadeIn",
-          "hideMethod": "fadeOut"
+      <?php
+      if($auth == TRUE){
+        echo "toastr.options.closeButton = true;\n
+          toastr.options.positionClass = 'toast-screen-center';\n
+          toastr.options.timeOut = 0;\n
+          toastr.options.extendedTimeOut = 0;\n
+          toastr.success(\"Thank You, your profile has been updated.\", \"Successfull Update!!\")";
+      }
+      ?>
       </script>
 
 
