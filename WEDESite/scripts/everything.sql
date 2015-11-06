@@ -15,7 +15,7 @@ INSERT INTO bodies VALUES(64, 'Full Figured');
 INSERT INTO bodies VALUES(128, 'Rather Not Say');
 
 ------ TABLE CITIES ------
-create table IF NOT EXISTS cities(value_id smallint NOT null primary key, property Varchar(50) not null);
+create table IF NOT EXISTS cities(value_id int NOT null primary key, property Varchar(50) not null);
 
 --Inserts
 
@@ -30,7 +30,14 @@ insert into cities values(64, 'Bowmanville');
 insert into cities values(128, 'Port Perry');
 insert into cities values(256, 'Markham');
 insert into cities values(512, 'Brampton');
-insert into cities values(1024, 'Peterborough');
+insert into cities values(1024, 'Etobicoke');
+insert into cities values(2048, 'Brooklin');
+insert into cities values(4096, 'Caledon');
+insert into cities values(8192, 'York');
+insert into cities values(16384, 'Vaughn');
+insert into cities values(32768, 'Richmond Hill');
+insert into cities values(65536, 'Uxbridge');
+insert into cities values(131072, 'Stouffville');
 
 ------ TABLE ETHNICITY ------
 create table IF NOT EXISTS ethnicity(value_id smallint not null primary key, property varchar(80) not null);

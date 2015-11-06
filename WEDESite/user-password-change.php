@@ -31,6 +31,7 @@ if ($_SERVER['REQUEST_METHOD']=="POST") {
 		$stmt2 = pg_prepare($conn, "user_password_update", 'UPDATE users SET password = $1 WHERE user_id = $2');
 		$result = pg_execute($conn, "user_password_update", array(md5($_POST['new_password']),$_SESSION['user_id']));
 		//$message = "Successfully updated!";
+		
 	}
 }
 ?>
@@ -42,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD']=="POST") {
 			<h1>
 				Update your password
 			</h1>
-			<?php echo $message ?>
+			<?php //echo $message ?>
 			<form class="form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" role="form">
 				<div class="col-md-6 form-group">
 					<input class='password form-control' type='password' name='password' placeholder='Enter your password' required>

@@ -36,13 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			lastAccess();
 			header("Location: user-dashboard.php");				
 		}elseif($_SESSION['user_type'] == "a"){
-			$result = pg_prepare($conn, "profile_query", "SELECT * FROM profiles WHERE user_id = $1");
-			$result = pg_execute($conn, "profile_query", array($userName));
-			$profile = pg_fetch_assoc($result);
-			//Removing duplicate user_id key from Array
-			$a = array_shift($profile);
-			unset($a);								
-			$_SESSION = array_merge($_SESSION, $profile);	
+			
 			//updating last access time
 			lastAccess();
 			header("Location: admin-dashboard.php");		 

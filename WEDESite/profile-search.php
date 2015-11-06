@@ -26,7 +26,7 @@ if ($_SESSION['user_type'] == "i") {
  header("Location: profile-edit.php");
 }
 //preselected variables
-$body = $genders = $ethnicity = $hair = $language = $religion = $school =  $seeking = $smoker = $status = "";
+$city = $body = $genders = $ethnicity = $hair = $language = $religion = $school =  $seeking = $smoker = $status = "";
 if ($_SERVER['REQUEST_METHOD']=="GET") {
   //Data retention for initial page load
   $genders = (isset($_COOKIE['search_gender_id']))?($_COOKIE['search_gender_id']):"";
@@ -39,12 +39,17 @@ if ($_SERVER['REQUEST_METHOD']=="GET") {
   $ethnicity = (isset($_COOKIE['search_ethnic_id']))?($_COOKIE['search_ethnic_id']):"";
   $languages = (isset($_COOKIE['search_language_id']))?($_COOKIE['search_language_id']):"";
   $religions = (isset($_COOKIE['search_religion_id']))?($_COOKIE['search_religion_id']):"";
-
+  if (isset($_GET['city'])) {
+    $_SESSION['search_cities'] = $_GET['city'];
+  }
 }
 //Ensure required checkboxes are checked
 
 //Check if $_POST is set and proceed with validation and results retrieval
 if ($_SERVER['REQUEST_METHOD']=="POST") {
+  // if (empty($_POST['gender_id']) || empty($_POST['seeking_id']) || empty($_POST['status_id'])) {
+  //   die;
+  // }
   $_POST['city_id'] = $_SESSION['search_cities'];
   $_POST['gender_id'] = $genders = (isset($_POST['gender_id']))?sumCheckBox($_POST['gender_id']):"";
   $_POST['seeking_id'] = $seeking = (isset($_POST['seeking_id']))?sumCheckBox($_POST['seeking_id']):"";
@@ -69,15 +74,15 @@ if ($_SERVER['REQUEST_METHOD']=="POST") {
   // setcookie("search_language_id", $languages, COOKIE_EXPIRE);
   // setcookie("search_religion_id", $religions, COOKIE_EXPIRE);
 
-  setMultipleCookie("search", $_POST);
-  dump($_POST);
-  dump($_COOKIE);
-  // echo searchUsers($_POST);  
-  // die;
+  setMultipleCookie("search", $_POST);  
+  // dump($_POST);    //TESTING
+  // dump($_COOKIE);    //TESTING
+  
   $_SESSION['search_results'] = searchUsers($_POST);
-  // dump(count(searchUsers($_POST)));
-  // dump($_SESSION['search_results'][0]);
-  // dump($_SESSION['search_results']);
+  // dump(searchUsers($_POST));    //TESTING
+  // dump($_SESSION['search_results'][0]);    //TESTING
+  // dump($_SESSION['search_results']);    //TESTING
+
   if (!empty(searchUsers($_POST)) && count(searchUsers($_POST)) == 1) {
     $_SESSION['view_user_id'] = $_SESSION['search_results'][0];
     header("Location: profile-display.php");
@@ -85,25 +90,9 @@ if ($_SERVER['REQUEST_METHOD']=="POST") {
     header("Location: profile-search-results.php");
   }else{
     $error = TRUE;
-  }
-  //Passing results as an array into SESSION
-  
-
-  //TESTING redirect and no results message
-  // $a = 0;
-  // if ($a == 1) {
-  //   $error = FALSE;
-  //   header("Location: profile-display.php");
-  // }elseif ($a >= 2) {
-  //   $error = FALSE;
-  //   header("Location: profile-search-results.php");
-  // }else{
-  //   $error = TRUE;  
-  // }
-  // echo $a;
-  
+  }    
 }
-
+// dump($_SESSION['search_cities']);    //TESTING
 ?>
 <section class="design" id="design">         
         <div class="row">

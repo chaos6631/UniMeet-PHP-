@@ -3,6 +3,12 @@ a:hover{
 }
 
 /*Class Elements*/
+.align-vertical-middle{
+  vertical-align: middle;
+  height: 200px;
+  margin: 0,auto;
+  /*display: inline-block;*/
+}
 
 .hero h1{
 	font-size: 5em;
@@ -22,6 +28,10 @@ a:hover{
   width: 100%;
 }
 .content { padding-top: 50px; background-color: #fff; position: relative; }
+.filler{
+  background-color: #fff;
+  height: 800px;
+}
 .footer{
   height: 300px;
   padding-top:30px;
@@ -158,9 +168,9 @@ input[type="text"], [type="email"], [type="password"], [type="date"]{
 
 /*ID Elements*/
 
-/*#footer{
-  height:300px;
-}*/
+#content-header{
+  margin-bottom:20px;
+}
 #dashboard-nav{
   /*margin:0px, 0px, 0px, 0px;*/
   /*padding: 0px, 0px, 0px, 0px;*/

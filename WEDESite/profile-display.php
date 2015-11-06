@@ -19,9 +19,14 @@ if (isset($_GET['user_id'])) {
         <div class="row row-top">
         	<?php include_once ('inc/side-nav.php'); ?>
           <div class="col-xs-12 col-sm-9 col-md-9" id="content-section">
-          	<div class="col-sm-12">
-          		<h1>Profile<?php echo '  "' . $user['user_id'] . '"'; ?></h1>
-          	</div>              
+            <div class="row" id="content-header">               
+              <div class=" col-xs-2 col-sm-2 col-md-2">
+                <img class="img-responsive img-circle" src="img/placeholder-user.png">
+              </div> 
+              <div class="col-sm-10 col-md-10">
+                <h1>Profile<span class="text-primary"><?php echo " " . $user['user_id']; ?></span></h1>
+              </div>              
+            </div>            
             <div class="row">
               <div class="col-sm-6 col-md-6">  
                 <?php echo buildOutputBox("small", getProperty(PLACEHOLDER, "genders"),getProperty($user['gender_id'], "genders")); ?>             

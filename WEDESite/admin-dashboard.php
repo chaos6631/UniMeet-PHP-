@@ -1,4 +1,3 @@
-
 <?php
 
 /*---------------------------Things that Must be done---------------------------
@@ -8,4 +7,19 @@
 
 */
 
+require_once('inc/header.php');
+checkLoginStatus();
+
+if ($_SESSION['user_type'] != "a") {
+  header("Location: index.php");
+}
+
 ?>
+<section class="design" id="design">        
+        <div class="row">
+          <?php include_once ('inc/side-nav.php'); ?> 
+          <div class="col-xs-12 col-sm-9 col-md-10 filler"><br>Stuff Here!!!</div>         
+        </div>   
+
+      </section>
+<?php include_once('inc/footer.php'); ?>

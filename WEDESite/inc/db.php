@@ -89,10 +89,16 @@ function buildCheckbox($tableName, $pre_selected){
   $important = $required = $title = "";
   
   if ($tableName == "seeking" || $tableName == "genders" || $tableName == "status") {    
-    $important = "<span style='color:red;'>* </span>";    
+    $important = "<span style='color:red;'>* </span>"; 
+    $required = "required";
   }
   $output = "  <div class='col-md-12 text-center'><label>" . $important . $label . "</label></div>";
   $output .= "\n\t\t  <ul>";
+  if ($tableName == "cities") {
+    $output .= "\n\t\t    <li style='list-style:none;'>";
+    $output .= "\n\t\t      <input type=\"checkbox\"  id=\"city_toggle\" onclick=\"cityToggleAll();\" name=\"city[]\" value=\"0\"><span class='text-danger'><b>All Cities</b></span></input>"; 
+    $output .= "\n\t\t    </li>";
+  }
   // $output .= "\t\t\t\t\t<li><input type='checkbox' id='ID'><label for='ID' name='NAME' value='VALUE'>Label</label></li>\n";
   if (!empty($result)) {
     $i = 0;
@@ -180,10 +186,10 @@ function lastAccess(){
 function searchUsers($array){    
   
   $statement1 = "SELECT profiles.user_id FROM profiles, users WHERE 1 = 1";
-  $statement2 = "";
+  $statement2 = " AND profiles.gender_sought= " . $_SESSION['gender_id'];
   foreach ($array as $key => $sum) {
     if(!empty($sum)){
-      $statement2 .= " AND profiles.gender_sought= " . $_SESSION['gender_id'] . " AND (";
+      $statement2 .= " AND (";
       $value = "";      
       for($i=0; $i <= MAX_TABLE_PROPERTIES; $i++) { 
         $var = isBitSet($i, $sum); 
@@ -205,10 +211,15 @@ function searchUsers($array){
   $matches = pg_fetch_all($result);
   // $matches = pg_num_rows($result);
   $x = 0;
-  foreach ($matches as $key => $value) {
+  if (!empty($matches)) {
+    foreach ($matches as $key => $value) {
     $match[] = $matches[$key]['user_id'];
     $x++;
+    }
+  }else{
+    $match = FALSE;
   }
+  
   return $match;
 }
 
