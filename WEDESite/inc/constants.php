@@ -1,10 +1,12 @@
 <?php
+//URL Paths
+define("BASE_URL", './');
+define("BRAND_LOGO", "img/logo6.png");
+define("IMAGE_FOLDER", "D:/UniMeetProfileImages/");
 
 //Constants
 define("ADD_USERS", 500);// amount of random users to generate
-define("BASE_URL", './');
 define("BRAND_NAME", "UniMeet");
-define("BRAND_LOGO", "img/logo6.png");
 define("COOKIE_EXPIRE", time()+ 60*60*24*30);
 define("MIN_AGE", time() - 60*60*24*365*18);//user age
 define("MAX_AGE", time() - 60*60*24*365*40);//user age

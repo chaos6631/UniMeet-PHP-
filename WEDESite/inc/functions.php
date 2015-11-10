@@ -37,7 +37,7 @@ function buildImageBox($image, $num){
   $output .= "\t\t      <div class=\"flat-box\">\n";
   $output .= "\t\t\t<div class=\"colourway\"><img class=\"img-responsive img-rounded\" src=\"$image\"></div>\n"; 
   $output .= "\t\t      </div>\n";
-  $output .= "\t\t      <p class='bg-primary' style=''>$num</p>\n";
+  $output .= "\t\t      <p class='bg-primary text-center'>$num <input type='checkbox' name='images[]' value='$num'/></p>\n";
   $output .= "\t\t    </div>\n\t\t    ";  
   return $output;
 }
