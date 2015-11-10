@@ -20,8 +20,15 @@ require_once('inc/db.php');
 $disabled = $disabledTypei = "";
 if (!isset($_SESSION['user_id'])) {
   $disabled = "hidden";
+  $editProfile = "Create Profile";
+  $contentHeader = "Create";
 }elseif ((isset($_SESSION['user_type'])) && $_SESSION['user_type'] == "i") {
   $disabledTypei = "disabled";
+  $editProfile = "Create Profile";
+  $contentHeader = "Create";
+}else{
+  $editProfile = "Edit Profile";
+  $contentHeader = "Edit";
 }
 
 // $disabled = (isset($_SESSION['user_type']) == "i"?"disabled":" ");
@@ -82,7 +89,8 @@ if (!isset($_SESSION['user_id'])) {
                   <li class=""><a href="user-register.php">Sign Up</a></li>
                   <li class="<?php echo $disabled . ' ' . $disabledTypei; ?>"><a href="user-dashboard.php">Dashboard</a></li>
                   <li class="<?php echo $disabled . ' ' . $disabledTypei; ?>"><a href="profile-display.php">Profile</a></li>
-                  <li class="<?php echo $disabled; ?>"><a href="profile-edit.php">Profile Edit</a></li>
+                  <li class="<?php echo $disabled; ?>"><a href="profile-edit.php"><?php echo $editProfile; ?></a></li>
+                  <li class="<?php echo $disabled . ' ' . $disabledTypei; ?>"><a href="profile-images.php">Images</a></li>
                   <li class="<?php echo $disabled . ' ' . $disabledTypei; ?>"><a href="profile-search.php">Search</a></li>
                   <li class="<?php echo $disabled . ' ' . $disabledTypei; ?>"><a href="profile-search-results.php">Results</a></li>
                   <!-- <li class="disabled"><a href="#">Contact/Support</a></li>                     -->

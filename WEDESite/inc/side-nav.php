@@ -21,8 +21,9 @@ if (!isset($_SESSION['user_id'])) {
             <div class="col-xs-6 col-sm-12">
               <nav>
                 <ul class="nav nav-pills nav-sidebar nav-stacked text-center">
-                  <li><a href="profile-edit.php">Edit Profile</a></li>
+                  <li><a href="profile-edit.php"><?php echo $contentHeader; ?> Profile</a></li>
                   <li><a href="user-password-change.php">Change Password</a></li>
+                  <li class="<?php echo $disabled . ' ' . $disabledTypei; ?>"><a href="profile-images.php">Images</a></li>
                   <li class="<?php echo $disabled . ' ' . $disabledTypei; ?>"><a href="profile-select-city.php">Search City</a></li>
                   <li class="<?php echo $disabled . ' ' . $disabledTypei; ?>"><a href="#">Friends</a></li>
                   <li class="<?php echo $disabled . ' ' . $disabledTypei; ?>"><a href="#">Messages</a></li>

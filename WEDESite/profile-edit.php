@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD']=="POST") {
           <?php include_once ('inc/side-nav.php'); ?>
           <div class="col-xs-12 col-sm-8 col-md-9 content wp1">
             <h1>
-            Edit Your Profile
+            <?php echo $contentHeader; ?> Your Profile
             </h1>
             <p>Enter your information below to update your profile. Required fields are highlighted <span style="color:red"><b>red!!</b></span></p>              
             <form class="form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" role="form">

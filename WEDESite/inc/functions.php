@@ -31,6 +31,17 @@ function arraySanitize($var){
     }
     return $var;
 }
+//Profile Image builder
+function buildImageBox($image, $num){
+  $output = "<div class=\"col-sm-4\">\n";
+  $output .= "\t\t      <div class=\"flat-box\">\n";
+  $output .= "\t\t\t<div class=\"colourway\"><img class=\"img-responsive img-rounded\" src=\"$image\"></div>\n"; 
+  $output .= "\t\t      </div>\n";
+  $output .= "\t\t      <p class='bg-primary' style=''>$num</p>\n";
+  $output .= "\t\t    </div>\n\t\t    ";  
+  return $output;
+}
+// Profile Info Box Builder
 function buildOutputBox($boxSize, $label, $property){
   /*builds box for displaying user data, size is small, normal, large. $property is information you want to display, 
   most likely using the getProperty function*/
