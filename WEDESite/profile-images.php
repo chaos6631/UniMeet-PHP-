@@ -11,6 +11,14 @@ $image = "img/simpsons-young-homer.png";
 $count = "1";
 $maxImagePage = 9;
 // dump($_SESSION);
+$path = IMAGE_FOLDER . $_SESSION['user_id'] . "/";
+$userImages = scanUserDirectory($path);
+$a = 0;
+// $totalImages = count($userImages);
+// $sum = $totalImages/MAX_IMAGE_PER_PAGE;
+// dump($sum);
+// echo($path);
+// die;
 ?>
 <section class="design" id="design">        
         <div class="row">
@@ -28,28 +36,7 @@ $maxImagePage = 9;
             </div>    
             <form id="image_form" name="image_form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" role="Image Gallery Adjustment">        
               <div class="col-xs-12 col-sm-12 col-md-12" id="secondSlider">
-                <ul class="slides">
-                  <li>                  
-                    <div class="col-sm-12 col-md-9">
-                      <?php 
-                      for ($i=0; $i < $maxImagePage; $i++) { 
-                        echo buildImageBox($image, $count);
-                        $count++;
-                      }  
-                      ?>                    
-                    </div>                                       
-                  </li>
-                  <li>                  
-                    <div class="col-sm-12 col-md-9">
-                      <?php 
-                      for ($i=0; $i < $maxImagePage; $i++) { 
-                        echo buildImageBox($image, $count);
-                        $count++;
-                      }   
-                      ?>
-                    </div>                    
-                  </li>
-                </ul>
+              <?php echo buildImagePages($path, $userImages); ?>
               </div>
             </form>
             <div class="col-md-1 col-md-offset-6 text-right controls">
@@ -68,7 +55,7 @@ $maxImagePage = 9;
                     </div>
                     <div class="modal-body">
                       <div id="messages"></div>
-                      <input type="file" name="images[]" id="upload_form">
+                      <input type="file" name="upload_img" id="upload_form">
                     </div>
                     <div>
                       <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -92,19 +79,23 @@ $maxImagePage = 9;
         }
       </script>
       <script>/*SCript for error or success message*/
-        <?php    
-        $output = "toastr.options.closeButton = true;\n";
-        $output .= "\t  toastr.options.positionClass = 'toast-screen-center';\n";
-        $output .= "\t  toastr.options.timeOut = 0;\n";
-        $output .= "\t  toastr.options.extendedTimeOut = 0;\n";
-        if($_SESSION['requested_action'] == FALSE){
-          $output .= "\t  toastr.error(\"" . $_SESSION['info_message'] . "\", \"Error!!\")";          
-        }elseif ($_SESSION['requested_action'] == TRUE) {
-          $output .= "\t  toastr.success(\"" . $_SESSION['info_message'] . "\", \"Success!!\")";
+        <?php
+        if (isset($_SESSION['requested_action'])) {
+          $output = "toastr.options.closeButton = true;\n";
+          $output .= "\t  toastr.options.positionClass = 'toast-screen-center';\n";
+          $output .= "\t  toastr.options.timeOut = 0;\n";
+          $output .= "\t  toastr.options.extendedTimeOut = 0;\n";
+          if($_SESSION['requested_action'] == FALSE){
+            $output .= "\t  toastr.error(\"" . $_SESSION['info_message'] . "\", \"Error!!\")";          
+          }elseif($_SESSION['requested_action'] == TRUE) {
+            $output .= "\t  toastr.success(\"" . $_SESSION['info_message'] . "\", \"Success!!\")";
+          }else{
+            $output .= "";
+          }
+          echo($output);
+          unset($_SESSION['info_message']);
+          unset($_SESSION['requested_action']);
         }
-        echo($output);
-        unset($_SESSION['info_message']);
-        unset($_SESSION['requested_action']);
         ?>
       </script>
 <?php include_once('inc/footer.php'); ?>

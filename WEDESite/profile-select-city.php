@@ -1,23 +1,4 @@
 <?php
-/*---------------------------Things that Must be done---------------------------
--1 does not redirect to profile-select-city.php page if no city is stored on the $_SESSION or saved in a cookie. 
-
--1 check box inputs not built from database. 
-
--0.5 check box inputs not built "" (do not pass the sum of the inputted or stored info to the buildCheckBox() function) 
-
--0.5 search results not ordered by user's last_access 
-
--0.5 search results not limited to 200 using a constant 
-
--1 the user_ids of the matches not loaded onto the $_SESSION as an array. 
-
--1 page redirect not appropriate based on number of search results. i.e. no records found, stay on page with a message; exactly one match found, send directly to profile-display.php (if they are logged in as a completed user); and, multiple matches, send to profile-search-results.php
-
--0.5 DISABLE users not excluded from search results
-
-
-*/
 
 require_once('inc/header.php');
 
@@ -39,12 +20,10 @@ if ($_SERVER['REQUEST_METHOD']=="POST") {
   $_SESSION['search_cities'] = $_POST['city_id'] = $city = (isset($_POST['city_id']))?sumCheckBox($_POST['city_id']):"";
      
   //Set Cookie
-  setcookie("search_city_id", $city, COOKIE_EXPIRE);
-
-  // dump($_POST);
-  // dump($_COOKIE);
-  // $_SESSION['search_cities'] = sumCheckBox($_POST['city_id']);
-  // dump($_SESSION['search_cities']);
+  if (trim($_POST['city_id']) != "") {
+    setcookie("search_city_id", $city, COOKIE_EXPIRE);
+  } 
+  
   if (!empty($_POST['city_id'])) {    
     header("Location: profile-search.php");
   }else{
@@ -57,12 +36,13 @@ if ($_SERVER['REQUEST_METHOD']=="POST") {
           <?php include_once ('inc/side-nav.php'); ?>
           <div class="col-xs-12 col-sm-9 col-md-10 design-content">
             <h1>City Search</h1>
+            <p>Select multiple cities or simply click on a city in the map to search individually</p>
             <form class="" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" role="form">               
-            <div class="col-xs-4 col-sm-4 col-md-3 search-box">              
-              <?php echo buildCheckbox("cities", $city); ?> 
-              <div class="col-sm-12 text-center">
+            <div class="col-xs-4 col-sm-4 col-md-3 search-box">    
+              <div class="col-sm-12 text-center" style="padding-top: 8px;">
                 <input class="login-btn" type="submit" value="Search"></input>              
-              </div>             
+              </div>          
+              <?php echo buildCheckbox("cities", $city); ?>                            
             </div>
             <div class="col-xs-8 col-sm-8 col-md-9">
               <img src="img/mapGTA.png" alt="Map of Greater Toronto Area" usemap="mapGTA">

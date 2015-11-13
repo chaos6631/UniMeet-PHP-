@@ -32,15 +32,39 @@ function arraySanitize($var){
     return $var;
 }
 //Profile Image builder
-function buildImageBox($image, $num){
-  $output = "<div class=\"col-sm-4\">\n";
-  $output .= "\t\t      <div class=\"flat-box\">\n";
-  $output .= "\t\t\t<div class=\"colourway\"><img class=\"img-responsive img-rounded\" src=\"$image\"></div>\n"; 
-  $output .= "\t\t      </div>\n";
-  $output .= "\t\t      <p class='bg-primary text-center'>$num <input type='checkbox' name='images[]' value='$num'/></p>\n";
-  $output .= "\t\t    </div>\n\t\t    ";  
+function buildImageBox($path, $num){
+  ($num<10)?$num = ("0" . $num): $num;
+  // if (file_exists($image)) {
+    $output = "\t\t      <div class=\"col-sm-4\">\n";
+    $output .= "\t\t        <div class=\"flat-box\">\n";
+    $output .= "\t\t\t  <div class=\"colourway\"><img class=\"img-responsive img-rounded\" src=\"/../.." . $path . "pic-" . $num . ".jpg\"></div>\n"; 
+    $output .= "\t\t        </div>\n";
+    $output .= "\t\t        <p class='bg-primary text-center'>$num <input type='checkbox' name='images[]' value='$num'/></p>\n";
+    $output .= "\t\t      </div>\n";  
+    return $output;
+  // }  
+}
+//builds the pages used within a sliding page element
+function buildImagePages($path, $userImages){
+  $totalImages = count($userImages);  
+  $num = 1;  
+  $output = "\t<ul class=\"slides\">";
+  for ($a=0; $a <= $totalImages/MAX_IMAGE_PER_PAGE; $a++) { 
+    $output .= "\n\t\t  <li>\n";
+    $output .= "\t\t    <div class=\"col-sm-12 col-md-9\">\n";
+    for ($i=0; $i < MAX_IMAGE_PER_PAGE; $i++) { 
+      if ($num <= $totalImages) {
+        $output .= buildImageBox($path, $num);
+        $num++;
+      }            
+    }  
+    $output .= "\t\t    </div>\n";
+    $output .= "\t\t  </li>";
+  }  
+  $output .= "\n\t\t</ul>\n";
   return $output;
 }
+
 // Profile Info Box Builder
 function buildOutputBox($boxSize, $label, $property){
   /*builds box for displaying user data, size is small, normal, large. $property is information you want to display, 
@@ -48,6 +72,7 @@ function buildOutputBox($boxSize, $label, $property){
   $output = '<label>' . $label . '</label><div class="output-box-' . $boxSize .'"><p>' . $property . '</p></div>';
   return $output;
 }
+
 function createProfilePreview($user_id, $num){
   $user = getUserInfo($user_id);
   $userName = $user['user_id'];
@@ -102,6 +127,10 @@ function convert2ID($tableName){
     
     case 'genders':
       $name =  "gender_id";
+      break;
+
+    case 'gender_sought':
+      $name = "gender_id";
       break;
     
     case 'hair':
@@ -260,15 +289,24 @@ function pagination($totalRecords, $maxItemsPage, $page, $url = '?'){
   }
   return $pagination;
 }
+/*Scans a directory returning an array of the files inside*/
+function scanUserDirectory($path){
+  /*Scan user directory and count number of current images, also removing any non image files*/
+  $array = scandir($path, SCANDIR_SORT_ASCENDING); 
+  array_shift($array);
+  array_shift($array);
+  array_shift($array);
+  return $array;
+}
 
 //Takes a STRING as $prefix which identifies the cookie and and array 
-function setMultipleCookie($prefix, $array){
+function setMultipleCookie($prefix, $array){  
   foreach ($array as $key => $value) {
-    //setcookie("search_gender_sought", $genderSought, COOKIE_EXPIRE);
-    setcookie($prefix . "_" . $key, $value, COOKIE_EXPIRE);
-    ob_flush();
-  }
-  
+    if (trim($value) != "") {
+      setcookie($prefix . "_" . $key, $value, COOKIE_EXPIRE);
+      ob_end_flush();
+    }    
+  }  
 }
 
 /*

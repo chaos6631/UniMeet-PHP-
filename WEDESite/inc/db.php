@@ -86,11 +86,11 @@ function buildCheckbox($tableName, $pre_selected){
   //Removing the first value of the array witch is the label or placeholder for each table
   $label = array_shift($array);
   $label = $label['property'];    
-  $important = $required = $title = "";
+  $important = $required = "";
   
-  if ($tableName == "seeking" || $tableName == "genders" || $tableName == "status") {    
+  if ($tableName == "seeking" || $tableName == "gender_sought" || $tableName == "status") {    
     $important = "<span style='color:red;'>* </span>"; 
-    $required = "required";
+    // $required = "required";
   }
   $output = "  <div class='col-md-12 text-center'><label>" . $important . $label . "</label></div>";
   $output .= "\n\t\t  <ul>";
@@ -110,7 +110,7 @@ function buildCheckbox($tableName, $pre_selected){
       $var = isBitSet($i, $sum);       
       $selected = ($var == TRUE)?" checked=\"checked\"":"";      
       $output .= "\n\t\t    <li style='list-style:none;'>";
-      $output .= "\n\t\t      <input type='checkbox' id='" . $name . "' " . $required . "name='" . $name . "[]' value='" . $entry['value_id'] . "' " . $selected . $title . ">" . $entry['property'] . "";
+      $output .= "\n\t\t      <input type='checkbox' id='" . $name . "' name='" . $name . "[]' value='" . $entry['value_id'] . "' " . $selected . " " . $required . ">" . $entry['property'] . "";
       $output .= "\n\t\t    </li>";
       $i++;
     }    
@@ -203,7 +203,7 @@ function searchUsers($array){
     }
 
   }
-  $statement3 = "AND users.user_id = profiles.user_id AND users.user_type <> 'd' ORDER BY users.last_access DESC LIMIT " . MAX_RESULTS;
+  $statement3 = "AND users.user_id = profiles.user_id AND users.user_type <> 'd' AND users.user_id <> '" . $_SESSION['user_id'] . "' ORDER BY users.last_access DESC LIMIT " . MAX_RESULTS;
   $search = $statement1 . $statement2 . $statement3;
   // return $search;//testing the statement
   global $conn;

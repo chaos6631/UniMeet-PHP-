@@ -2,7 +2,7 @@ create table IF NOT EXISTS seeking(value_id smallint not null primary key, prope
 
 --Inserts
 
-INSERT INTO seeking VALUES(0, 'I am Seeking a...');
+INSERT INTO seeking VALUES(0, 'Seeking a...');
 INSERT INTO seeking VALUES(1, 'Long-Term Relationship');
 INSERT INTO seeking VALUES(2, 'Hook-Up');
 INSERT INTO seeking VALUES(4, 'Friend');

@@ -2,7 +2,8 @@
 //URL Paths
 define("BASE_URL", './');
 define("BRAND_LOGO", "img/logo6.png");
-define("IMAGE_FOLDER", "D:/UniMeetProfileImages/");
+define("IMAGE_FOLDER", "/UniMeetProfileImages/");
+
 
 //Constants
 define("ADD_USERS", 500);// amount of random users to generate
@@ -10,7 +11,8 @@ define("BRAND_NAME", "UniMeet");
 define("COOKIE_EXPIRE", time()+ 60*60*24*30);
 define("MIN_AGE", time() - 60*60*24*365*18);//user age
 define("MAX_AGE", time() - 60*60*24*365*40);//user age
-define('MAX_PAGE_ITEMS', 10);//items displayed per paginated page
+define('MAX_PAGE_ITEMS', 10);//user results displayed per paginated page
+define('MAX_IMAGE_PER_PAGE', 9);//profile images displayed per page
 define("MIN_PASS", 6);//password length
 define("MAX_PASS", 8);//password length
 define("MAX_TABLE_PROPERTIES", 15);//maximum count of properties within a search related table

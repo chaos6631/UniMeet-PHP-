@@ -91,7 +91,7 @@ if (!isset($_SESSION['user_id'])) {
                   <li class="<?php echo $disabled . ' ' . $disabledTypei; ?>"><a href="profile-display.php">Profile</a></li>
                   <li class="<?php echo $disabled; ?>"><a href="profile-edit.php"><?php echo $editProfile; ?></a></li>
                   <li class="<?php echo $disabled . ' ' . $disabledTypei; ?>"><a href="profile-images.php">Images</a></li>
-                  <li class="<?php echo $disabled . ' ' . $disabledTypei; ?>"><a href="profile-search.php">Search</a></li>
+                  <li class="<?php echo $disabled . ' ' . $disabledTypei; ?>"><a href="profile-select-city.php">Search</a></li>
                   <li class="<?php echo $disabled . ' ' . $disabledTypei; ?>"><a href="profile-search-results.php">Results</a></li>
                   <!-- <li class="disabled"><a href="#">Contact/Support</a></li>                     -->
                   <li class="nav-last">
