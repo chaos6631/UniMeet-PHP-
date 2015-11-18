@@ -72,6 +72,9 @@ a:hover{
   color: white;
   text-decoration: none;
 }
+.profile-image{
+  max-height: 120px;
+}
 .search-box{
   min-height: 560px;
   margin-bottom: 10px;
@@ -181,7 +184,10 @@ input[type="text"], [type="email"], [type="password"], [type="date"]{
 #dashboard-nav-pic{
   padding-top: 35px;
 }
-
+#no-image-message{
+  font-size: 3em;
+  font-weight: bold;
+}
 #profile-display-pic{
   width: 250px;
   height: 250px;
@@ -196,10 +202,10 @@ input[type="text"], [type="email"], [type="password"], [type="date"]{
 #selects{
   color: black;
 }
-/*#welcome-title{
-  border: 1px solid black;
-  margin-top: 100px;
-}*/
+#secondSlider{
+/*  padding-right: 0px;
+  padding-left: 0px;*/
+}
 #welcome-title-img{
   width: 330px;
   height: 132px;

@@ -32,14 +32,20 @@ function arraySanitize($var){
     return $var;
 }
 //Profile Image builder
-function buildImageBox($path, $num){
+function buildImageBox($path, $num){    
   ($num<10)?$num = ("0" . $num): $num;
+  $fileName = $_SESSION['user_id'] . "/" . $_SESSION['user_id'] . "-" . $num . ".jpg";  
+  $path = $path . $_SESSION['user_id'] . "-" . $num . ".jpg";
+  //if for some reason file doesn't exist, placeholder will be displayed
+  if (!file_exists($path)) {
+     $path = "/img/placeholder-user.png";
+  }
   // if (file_exists($image)) {
     $output = "\t\t      <div class=\"col-sm-4\">\n";
     $output .= "\t\t        <div class=\"flat-box\">\n";
-    $output .= "\t\t\t  <div class=\"colourway\"><img class=\"img-responsive img-rounded\" src=\"/../.." . $path . "pic-" . $num . ".jpg\"></div>\n"; 
+    $output .= "\t\t\t  <div class=\"colourway\"><img class=\"img-responsive img-rounded profile-image\" src=\"" . $path . "\"></div>\n"; 
     $output .= "\t\t        </div>\n";
-    $output .= "\t\t        <p class='bg-primary text-center'>$num <input type='checkbox' name='images[]' value='$num'/></p>\n";
+    $output .= "\t\t        <p class='bg-primary text-center'>$num <input type='checkbox' name='images[]' value='$fileName'/></p>\n";
     $output .= "\t\t      </div>\n";  
     return $output;
   // }  
@@ -292,10 +298,15 @@ function pagination($totalRecords, $maxItemsPage, $page, $url = '?'){
 /*Scans a directory returning an array of the files inside*/
 function scanUserDirectory($path){
   /*Scan user directory and count number of current images, also removing any non image files*/
-  $array = scandir($path, SCANDIR_SORT_ASCENDING); 
-  array_shift($array);
-  array_shift($array);
-  array_shift($array);
+  $array = "";
+  if (is_dir($path) == TRUE) {
+    $array = scandir($path, SCANDIR_SORT_ASCENDING); 
+    if(!empty($array)){
+      array_shift($array);
+      array_shift($array);
+      array_shift($array);
+    }
+  }  
   return $array;
 }
 

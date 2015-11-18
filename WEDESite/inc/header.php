@@ -53,6 +53,7 @@ if (!isset($_SESSION['user_id'])) {
     <link href="css/toastr.css" rel="stylesheet">  
     <link href="css/toastr.min.css" rel="stylesheet">        
     <link href="css/main.css" rel="stylesheet">
+    
     <!-- Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
       <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

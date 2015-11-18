@@ -6,19 +6,15 @@ checkLoginStatus();
 if ($_SESSION['user_type'] == "i") {
   header("Location: profile-edit.php");
 }
-
-$image = "img/simpsons-young-homer.png";
-$count = "1";
-$maxImagePage = 9;
-// dump($_SESSION);
 $path = IMAGE_FOLDER . $_SESSION['user_id'] . "/";
+// if (scanUserDirectory($path) == FALSE) {
+//   $userImages = 0;
+// }else{
+//   $userImages = scanUserDirectory($path);
+// }
 $userImages = scanUserDirectory($path);
-$a = 0;
-// $totalImages = count($userImages);
-// $sum = $totalImages/MAX_IMAGE_PER_PAGE;
-// dump($sum);
-// echo($path);
-// die;
+dump($userImages);
+die;
 ?>
 <section class="design" id="design">        
         <div class="row">
@@ -30,21 +26,29 @@ $a = 0;
               </div>  
               <div class="col-xs-6 col-sm-6 col-md-6" style=" padding-right: 0px;">
                 <button class="btn btn-success" data-toggle="modal" data-target="#uploadModal" style="float: right; ">Upload</button>
-                <button type="submit" class="btn btn-danger" onclick="submitForm1('delete-img.php')" style="float: right;  margin-right: 5px;">Delete</button>
-                <button type="submit" class="btn btn-info" onclick="submitForm2('update-profile-img.php')" style="float: right;  margin-right: 5px;">Profile Pic</button>
+                <button type="submit" class="btn btn-danger" onclick="submitForm1('img-delete.php')" style="float: right;  margin-right: 5px;">Delete</button>
+                <button type="submit" class="btn btn-info" onclick="submitForm2('img-update-profile.php')" style="float: right;  margin-right: 5px;">Profile Pic</button>
               </div>                          
             </div>    
             <form id="image_form" name="image_form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" role="Image Gallery Adjustment">        
-              <div class="col-xs-12 col-sm-12 col-md-12" id="secondSlider">
-              <?php echo buildImagePages($path, $userImages); ?>
+              <div class="col-xs-1 col-sm-1 col-md-1 controls">
+                <a href="prev" class="prev"><i class="fa fa-angle-left fa-3x"></i></a>                
               </div>
-            </form>
-            <div class="col-md-1 col-md-offset-6 text-right controls">
-              <a href="prev" class="prev"><i class="fa fa-angle-left fa-3x"></i></a>
-              <a href="next" class="next"><i class="fa fa-angle-right fa-3x"></i></a>
-            </div>  
+              <div class="col-xs-10 col-sm-10 col-md-10" id="secondSlider" style="border:1px solid black;">
+              <?php 
+              echo buildImagePages($path, $userImages); 
+              if ($userImages == 0) {
+                echo "<br><br><br><br><br>";
+                echo "<div class='col-md-12 text-center text-info' style='margin-bottom: 300px;'><h1 id='no-image-message'>NO IMAGES</h1><p>Click the <span style='color: #5cb85c; font-weight: bold;'>Upload Button</span> at the top right corner to add an image.</p></div>";
+              }
+              ?>
+              </div>
+              <div class="col-xs-1 col-sm-1 col-md-1 controls">
+                <a href="next" class="next"><i class="fa fa-angle-right fa-3x"></i></a>
+              </div>
+            </form>      
 
-            <!-- --------------UPLOAD IMAGE MODAL------------------------ -->
+            <!----------------UPLOAD IMAGE MODAL-------------------------->
             <div class="modal fade" id="uploadModal">
               <div class="modal-dialog">
                 <div class="modal-content">
@@ -59,7 +63,7 @@ $a = 0;
                     </div>
                     <div>
                       <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                      <button type="submit" class="btn btn-primary" onclick="submitForm2('upload-img.php')">Save</button>
+                      <button type="submit" class="btn btn-primary" onclick="submitForm2('img-upload.php')">Save</button>
                     </div>
                   </form>                  
                 </div>
@@ -80,7 +84,7 @@ $a = 0;
       </script>
       <script>/*SCript for error or success message*/
         <?php
-        if (isset($_SESSION['requested_action'])) {
+        if (!empty($_SESSION['requested_action'])) {
           $output = "toastr.options.closeButton = true;\n";
           $output .= "\t  toastr.options.positionClass = 'toast-screen-center';\n";
           $output .= "\t  toastr.options.timeOut = 0;\n";
