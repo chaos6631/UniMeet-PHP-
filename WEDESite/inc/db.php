@@ -171,6 +171,14 @@ function getUserInfo($user_id){
   return $user;
 }
 
+// update a users image count
+function imageCountUpdate($num, $user){
+  global $conn;
+  
+  $update = pg_prepare($conn, "profile_image_update", "UPDATE profiles SET images = $1 WHERE user_id = $2");
+  $update = pg_execute($conn, "profile_image_update", array($num, $user_id));
+}
+
 //lastAccess function that updates the users last_access field
 function lastAccess(){
   date_default_timezone_set('America/Toronto');
@@ -311,4 +319,10 @@ function updateProfileInfo($array){
   $_SESSION = array_merge($_SESSION, $array2);
 }
 
+function updateProfileImage($image){
+  global $conn;
+  $update = "UPDATE profiles SET profile_image='" . $image . "' WHERE user_id = '" . $_SESSION['user_id'] . "';";
+  // return $update;
+  pg_query($conn, $update);
+}
 ?>

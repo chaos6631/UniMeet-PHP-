@@ -13,8 +13,7 @@ $path = IMAGE_FOLDER . $_SESSION['user_id'] . "/";
 //   $userImages = scanUserDirectory($path);
 // }
 $userImages = scanUserDirectory($path);
-dump($userImages);
-die;
+$countUserImages = count($userImages);
 ?>
 <section class="design" id="design">        
         <div class="row">
@@ -27,17 +26,17 @@ die;
               <div class="col-xs-6 col-sm-6 col-md-6" style=" padding-right: 0px;">
                 <button class="btn btn-success" data-toggle="modal" data-target="#uploadModal" style="float: right; ">Upload</button>
                 <button type="submit" class="btn btn-danger" onclick="submitForm1('img-delete.php')" style="float: right;  margin-right: 5px;">Delete</button>
-                <button type="submit" class="btn btn-info" onclick="submitForm2('img-update-profile.php')" style="float: right;  margin-right: 5px;">Profile Pic</button>
+                <button type="submit" class="btn btn-info" onclick="submitForm1('img-update-profile.php')" style="float: right;  margin-right: 5px;">Profile Pic</button>
               </div>                          
             </div>    
             <form id="image_form" name="image_form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" role="Image Gallery Adjustment">        
               <div class="col-xs-1 col-sm-1 col-md-1 controls">
                 <a href="prev" class="prev"><i class="fa fa-angle-left fa-3x"></i></a>                
               </div>
-              <div class="col-xs-10 col-sm-10 col-md-10" id="secondSlider" style="border:1px solid black;">
+              <div class="col-xs-10 col-sm-10 col-md-10" id="secondSlider">
               <?php 
               echo buildImagePages($path, $userImages); 
-              if ($userImages == 0) {
+              if ($countUserImages < 1) {
                 echo "<br><br><br><br><br>";
                 echo "<div class='col-md-12 text-center text-info' style='margin-bottom: 300px;'><h1 id='no-image-message'>NO IMAGES</h1><p>Click the <span style='color: #5cb85c; font-weight: bold;'>Upload Button</span> at the top right corner to add an image.</p></div>";
               }
@@ -83,23 +82,22 @@ die;
         }
       </script>
       <script>/*SCript for error or success message*/
-        <?php
-        if (!empty($_SESSION['requested_action'])) {
-          $output = "toastr.options.closeButton = true;\n";
-          $output .= "\t  toastr.options.positionClass = 'toast-screen-center';\n";
-          $output .= "\t  toastr.options.timeOut = 0;\n";
-          $output .= "\t  toastr.options.extendedTimeOut = 0;\n";
-          if($_SESSION['requested_action'] == FALSE){
-            $output .= "\t  toastr.error(\"" . $_SESSION['info_message'] . "\", \"Error!!\")";          
-          }elseif($_SESSION['requested_action'] == TRUE) {
-            $output .= "\t  toastr.success(\"" . $_SESSION['info_message'] . "\", \"Success!!\")";
-          }else{
-            $output .= "";
-          }
-          echo($output);
-          unset($_SESSION['info_message']);
-          unset($_SESSION['requested_action']);
+        <?php   
+        //print_r($_SESSION);     
+        $output = "\n\t  toastr.options.closeButton = true;\n";
+        $output .= "\t  toastr.options.positionClass = 'toast-screen-center';\n";
+        $output .= "\t  toastr.options.timeOut = 0;\n";
+        $output .= "\t  toastr.options.extendedTimeOut = 0;\n";
+        if($_SESSION['requested_action'] == 0){
+          $output .= "\t  toastr.error(\"" . $_SESSION['info_message'] . "\", \"Error!!\");\n";          
         }
+        if($_SESSION['requested_action'] == TRUE) {
+          $output .= "\t  toastr.success(\"" . $_SESSION['info_message'] . "\", \"Success!!\");\n";
+        }
+        echo($output);
+        unset($_SESSION['info_message']);
+        unset($_SESSION['requested_action']);        
         ?>
+
       </script>
 <?php include_once('inc/footer.php'); ?>

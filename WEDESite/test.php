@@ -49,6 +49,21 @@ require_once ('inc/db.php');
   
 		
 	?>
-	
+	<div class="col-md-3">
+    <div class="dropdown">    
+      <button type="button" class="btn btn-info dropdown-toggle"  data-toggle="dropdown">User Menu
+        <span class="caret"></span>      
+      </button>
+      <ul class="dropdown-menu">
+        <li><a href="profile-edit.php"><?php echo $contentHeader; ?> Profile</a></li>
+        <li><a href="user-password-change.php">Change Password</a></li>
+        <li class="<?php echo $disabled . ' ' . $disabledTypei; ?>"><a href="profile-images.php">Images</a></li>
+        <li class="<?php echo $disabled . ' ' . $disabledTypei; ?>"><a href="profile-select-city.php">Search City</a></li>
+        <li class="<?php echo $disabled . ' ' . $disabledTypei; ?>"><a href="#">Friends</a></li>
+        <li class="<?php echo $disabled . ' ' . $disabledTypei; ?>"><a href="#">Messages</a></li>
+        <li><a href="user-logout.php">Log Out</a></li> 
+      </ul>
+    </div>
+  </div>
 </body>
 </html>

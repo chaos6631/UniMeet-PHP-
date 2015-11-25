@@ -9,7 +9,6 @@ if (isset($_SESSION['discard_after']) && $now > $_SESSION['discard_after']) {
 
 // Session is destroyed after 30 mins 
 $_SESSION['discard_after'] = $now + 1800;
-
 if (session_id() == "") {
   session_start();
 }  

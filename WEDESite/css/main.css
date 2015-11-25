@@ -75,6 +75,9 @@ a:hover{
 .profile-image{
   max-height: 120px;
 }
+.nav-profile-image{
+  max-height: 120px;
+}
 .search-box{
   min-height: 560px;
   margin-bottom: 10px;
@@ -198,6 +201,7 @@ input[type="text"], [type="email"], [type="password"], [type="date"]{
 #content-section{
   background-color: #FFFFFF;
   padding-top: 45px;
+  min-height: 600px;
 }
 #selects{
   color: black;

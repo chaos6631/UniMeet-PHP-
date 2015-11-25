@@ -32,10 +32,11 @@ function arraySanitize($var){
     return $var;
 }
 //Profile Image builder
-function buildImageBox($path, $num){    
+function buildImageBox($path, $num, $userImage){    
   ($num<10)?$num = ("0" . $num): $num;
-  $fileName = $_SESSION['user_id'] . "/" . $_SESSION['user_id'] . "-" . $num . ".jpg";  
-  $path = $path . $_SESSION['user_id'] . "-" . $num . ".jpg";
+  $fileName = $_SESSION['user_id'] . "/" . $userImage;  
+  // $path = $path . $_SESSION['user_id'] . "-" . $num . ".jpg";
+  $path = $path . $userImage;
   //if for some reason file doesn't exist, placeholder will be displayed
   if (!file_exists($path)) {
      $path = "/img/placeholder-user.png";
@@ -55,12 +56,12 @@ function buildImagePages($path, $userImages){
   $totalImages = count($userImages);  
   $num = 1;  
   $output = "\t<ul class=\"slides\">";
-  for ($a=0; $a <= $totalImages/MAX_IMAGE_PER_PAGE; $a++) { 
+  for ($a=0; $a < $totalImages/MAX_IMAGE_PER_PAGE; $a++) { 
     $output .= "\n\t\t  <li>\n";
     $output .= "\t\t    <div class=\"col-sm-12 col-md-9\">\n";
     for ($i=0; $i < MAX_IMAGE_PER_PAGE; $i++) { 
       if ($num <= $totalImages) {
-        $output .= buildImageBox($path, $num);
+        $output .= buildImageBox($path, $num, $userImages[($num-1)]);
         $num++;
       }            
     }  

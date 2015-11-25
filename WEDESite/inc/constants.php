@@ -2,7 +2,7 @@
 //URL Paths
 define("BASE_URL", './');
 define("BRAND_LOGO", "img/logo6.png");
-define("IMAGE_FOLDER", "/../../UniMeetProfileImages/");
+define("IMAGE_FOLDER", "UniMeetProfileImages/");
 
 
 //Constants
