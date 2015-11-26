@@ -2,16 +2,29 @@
 
 require_once ('inc/header.php');
 $message = "";
+$new_pass="";
 if ($_SERVER['REQUEST_METHOD']=="POST") {
 	arraySanitize($_POST);
 	$validated = false;
 	if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-		$stmt1 = pg_prepare($conn, "user_password_request", 'SELECT * FROM users WHERE user_id = $1 AND email_address = $2');
+		$stmtRequest = pg_prepare($conn, "user_password_request", 'SELECT * FROM users WHERE user_id = $1 AND email_address = $2');
 		$result = pg_execute($conn, "user_password_request", array($_POST['user_id'],$_POST['email']));
 		$rows = pg_num_rows($result);
 		if ($rows==1){
 			$validated=true;
 		}
+	}
+	
+	if ($validated==true) {
+		$new_pass = generateRandomPassword();
+		$mail_to=$_POST['email'];
+		$mail_subject="New Password Requested for " . $_POST['user_id'];
+		$mail_body=file_get_contents('inc/passwordRequestEmail.php');
+		mail($mail_to, $mail_subject, $mail_body);
+		
+		
+		$stmtUpdate = pg_prepare($conn, "request_password_update", 'UPDATE users SET password = $1 WHERE user_id = $2');
+		$result = pg_execute($conn, "request_password_update", array(md5($new_pass),$_POST['user_id']));
 	}
 }
 ?>
@@ -22,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD']=="POST") {
 				Forgot Your Password, We'll Send You A New One!!
 			</h1>
 			<p>Once logged in we recommend changing your password for security prurposes</p>
-			<?php echo $validated; ?>
+			<?php echo $new_pass; ?>
 			<form class="form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" role="form">
 				<div class="col-md-6 form-group">
 					<input class='password form-control' type='text' name='user_id' placeholder='Enter your user name' required>
