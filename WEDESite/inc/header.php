@@ -87,7 +87,7 @@ if (!isset($_SESSION['user_id'])) {
                 <ul class="nav nav-tabs navbar-right">
                   <li class=""><a href="index.php">Home</a></li>
                   <li class=""><a href="user-register.php">Sign Up</a></li>
-                  <li class=""><a href="#">Password Request</a></li>
+                  <li class=""><a href="user-password-request.php">Password Request</a></li>
                   <li class="<?php echo $disabled . ' ' . $disabledTypei; ?>"><a href="user-dashboard.php">Dashboard</a></li>
                   <li class="<?php echo $disabled . ' ' . $disabledTypei; ?>"><a href="profile-display.php">Profile</a></li>
                   <li class="<?php echo $disabled; ?>"><a href="profile-edit.php"><?php echo $editProfile; ?></a></li>
