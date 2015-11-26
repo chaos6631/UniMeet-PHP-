@@ -296,6 +296,19 @@ function pagination($totalRecords, $maxItemsPage, $page, $url = '?'){
   }
   return $pagination;
 }
+
+function generateRandomPassword() {
+  $pass = "";
+  srand();
+  $characters = "abcdehmnprsuvwxyzABCDEFGHKLMNPRSTUVWXYZ1234567890";
+ 
+  while(strlen($pass) < MAX_PASS) {
+      $pass .= substr($characters, rand() % (strlen($characters)),1);
+  }
+  return $pass;
+}
+
+
 /*Scans a directory returning an array of the files inside*/
 function scanUserDirectory($path){
   /*Scan user directory and count number of current images, also removing any non image files*/
