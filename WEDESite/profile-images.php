@@ -14,6 +14,7 @@ $path = IMAGE_FOLDER . $_SESSION['user_id'] . "/";
 // }
 $userImages = scanUserDirectory($path);
 $countUserImages = count($userImages);
+// dump($_SESSION);
 ?>
 <section class="design" id="design">        
         <div class="row">

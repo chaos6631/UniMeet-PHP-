@@ -325,4 +325,12 @@ function updateProfileImage($image){
   // return $update;
   pg_query($conn, $update);
 }
+
+function updateImageCount($count, $user_id){
+  global $conn;
+  $update = "UPDATE profiles SET images='" . $count . "' WHERE user_id = '" . $user_id . "';";
+  // return $update;
+  pg_query($conn, $update);
+}
+
 ?>

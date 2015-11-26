@@ -8,9 +8,9 @@ if (!isset($_SESSION['user_id'])) {
 }
 // dump($_SESSION['profile_image']);
 //profile image check
-if ($_SESSION['profile_image'] == 0) {
+if ($_SESSION['profile_image'] == 0 || !file_exists(IMAGE_FOLDER . $_SESSION['user_id'] . "/" . $_SESSION['user_id'] . "-" . $_SESSION['profile_image'] . ".jpg")) {
   $profileImage = "img/placeholder-user.png";
-}else{  
+}else{    
   $profileImage = IMAGE_FOLDER . $_SESSION['user_id'] . "/" . $_SESSION['user_id'] . "-" . $_SESSION['profile_image'] . ".jpg";    
 }
 
