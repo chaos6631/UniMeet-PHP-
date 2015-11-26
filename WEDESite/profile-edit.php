@@ -23,6 +23,7 @@ if($_SERVER['REQUEST_METHOD']=="GET")
   $seeking = (isset($_SESSION['seeking_id'])?$_SESSION['seeking_id']:"");
   $smoker = (isset($_SESSION['smoker_id'])?$_SESSION['smoker_id']:"");
   $status = (isset($_SESSION['status_id'])?$_SESSION['status_id']:"");
+  $selfDescription = (isset($_SESSION['self_description'])?$_SESSION['self_description']:"");
 }
 else{
   //fix the session variables so that Null is passed if nothing is entered
@@ -44,6 +45,7 @@ else{
   $seeking = (isset($_POST['seeking_id']) AND !empty($_POST['seeking_id']))?$_POST['seeking_id']:"";
   $smoker = (isset($_POST['smoker_id']) AND !empty($_POST['smoker_id']))?$_POST['smoker_id']:"";
   $status = (isset($_POST['status_id']) AND !empty($_POST['status_id']))?$_POST['status_id']:"";
+  $selfDescription = (isset($_POST['self_description']) AND !empty($_POST['self_description']))?$_POST['self_description']:"";
 }
 if ($_SERVER['REQUEST_METHOD']=="POST") {
   arraySanitize($_POST);
@@ -66,15 +68,15 @@ if ($_SERVER['REQUEST_METHOD']=="POST") {
             <?php echo $contentHeader; ?> Your Profile
             </h1>
             <p>Enter your information below to update your profile. Required fields are highlighted <span style="color:red"><b>red!!</b></span></p>              
-            <form class="form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" role="form">
+            <form class="form" id="edit-profile" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" role="form">
             <!-- <form class="form" method="POST" action="test.php" role="form"> -->
             <div class="row">
               <div class="col-md-6 form-group">
-                <input class="hidden" type="text" name="user_type" value="c">
-                <input class="name form-control" type="text" name="first_name" value="<?php echo $firstName; ?>" placeholder="First Name">
-                <input class="name form-control" type="text" name="last_name" value="<?php echo $lastName; ?>" placeholder="Last Name">
-                <input class="name form-control" type="email" name="email_address" value="<?php echo $email; ?>" placeholder="Email">
-                <input class="name form-control" type="date" name="birth_date" value="<?php echo $birthDate; ?>">
+                <input class="hidden" type="text" name="user_type" value="c"/>
+                <input class="name form-control" type="text" name="first_name" value="<?php echo $firstName; ?>" placeholder="First Name"/>
+                <input class="name form-control" type="text" name="last_name" value="<?php echo $lastName; ?>" placeholder="Last Name"/>
+                <input class="name form-control" type="email" name="email_address" value="<?php echo $email; ?>" placeholder="Email"/>
+                <input class="name form-control" type="date" name="birth_date" value="<?php echo $birthDate; ?>"/>
                 <div class="output-box-normal required">
                   <?php echo buildRadio("genders", $gender); ?>
                 </div>
@@ -96,9 +98,8 @@ if ($_SERVER['REQUEST_METHOD']=="POST") {
                                               
               </div>
               <div class="col-md-6 form-group">
-                <input class="hidden" type="text" name="head_line" value="head_line">
-                <input class="hidden" type="text" name="self_description" value="self_description">
-                <input class="hidden" type="text" name="match_description" value="match_description">
+                <input class="hidden" type="text" name="head_line" value="head_line"/>                
+                <input class="hidden" type="text" name="match_description" value="match_description"/>
                 <select class="dropdown-large form-control required" id="city_id" name="city_id" required>
                   <?php echo buildDropDown("cities", $city); ?>
                 </select>
@@ -120,7 +121,8 @@ if ($_SERVER['REQUEST_METHOD']=="POST") {
                 </select>  
                 <select class="dropdown-large form-control" id="smoker_id" name="smoker_id">
                   <?php echo buildDropDown("smoker", $smoker); ?>
-                </select>                
+                </select>        
+                <textarea form="edit-profile" class="form-control" type="text" name="self_description" value="<?php echo $selfDescription; ?>" placeholder="About Me"></textarea>
               </div>  
               <div class="col-xs-12 col-sm-12 form-group">
                 <input class="login-btn" type="submit" value="Update">

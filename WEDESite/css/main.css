@@ -172,6 +172,8 @@ input[type="text"], [type="email"], [type="password"], [type="date"]{
   /*border: 1px solid #BD0026;*/
 }
 
+
+
 /*ID Elements*/
 
 #content-header{
@@ -210,6 +212,7 @@ input[type="text"], [type="email"], [type="password"], [type="date"]{
 /*  padding-right: 0px;
   padding-left: 0px;*/
 }
+
 #welcome-title-img{
   width: 330px;
   height: 132px;

@@ -41,11 +41,12 @@ require_once ('inc/db.php');
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/toastr.min.js"></script>
   </head>
-<body>
-	<p>Hello</p>
-	<br/>
+<body>	
 	<?php
-	echo $_SERVER['DOCUMENT_ROOT'];
+	// $email = include_once 'inc/passwordRequestEmail.php';
+
+  $email = file_get_contents('inc/passwordRequestEmail.php');
+  echo($email);
   
 		
 	?>

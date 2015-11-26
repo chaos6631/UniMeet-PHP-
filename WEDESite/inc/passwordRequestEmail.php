@@ -4,8 +4,8 @@ require_once('constants.php');
 require_once('functions.php');
 require_once('db.php');
 
-$password = "";     /*$_GET['password']*/
-$password = generateRandomPassword();//test
+$new_pass = "";     /*$_GET['password']*/
+$new_pass = generateRandomPassword();//test
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -171,7 +171,7 @@ $password = generateRandomPassword();//test
             <table class="outer" align="center">
                 <tr>
                     <td class="full-width-image">
-                        <img src="../img/brand-logo-header-mini.jpg" width="600" alt="UniMeet header" />
+                        <img src="img/brand-logo-header-mini.jpg" width="600" alt="UniMeet header" />
                     </td>
                 </tr>
                 <tr>
@@ -180,7 +180,7 @@ $password = generateRandomPassword();//test
                             <tr>
                                 <td class="inner contents">
                                     <p class="h1">Password Request</p>
-                                    <p>This email is in response to the request that was made associated with this email address. 
+                                    <p>Hi **first_name** **last_name** this email is in response to the request that was made on **time_stamp** associated with this email address. 
                                     Please use the provided password to log in to your account. We strongly recommend that you change your password as soon as possible for security reasons.</p>
                                 </td>
                             </tr>
@@ -192,8 +192,9 @@ $password = generateRandomPassword();//test
                         <table width="100%">
                             <tr>
                                 <td class="inner contents">
+                                    <p class="h1">USER ID: **user_id**</p>                                    
                                     <p class="h1">TEMPORARY PASSWORD</p>
-                                    <p class="password"><?php echo $password; ?></p>
+                                    <p class="password">**new_pass**</p>
                                     <p>Thank You for being a valued member of the UniMeet community!</p>
                                     <p>You didn't ask to change your password? Then just ignore this email. And if you have questions, we're always happy to help. Please contact us <a href="">support@unimeet.com</a></p>
                                     <p>-Your Friends at UniMeet</p>
@@ -204,7 +205,7 @@ $password = generateRandomPassword();//test
                 </tr>                               
                 <tr>
                     <td class="full-width-image">
-                        <img src="../img/brand-logo-footer-mini.jpg" width="600" alt="UniMeet header" />
+                        <img src="img/brand-logo-footer-mini.jpg" width="600" alt="UniMeet header" />
                     </td>
                 </tr> 
             </table>
