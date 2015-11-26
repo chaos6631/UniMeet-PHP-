@@ -1,3 +1,13 @@
+<?php
+
+require_once('constants.php');
+require_once('functions.php');
+require_once('db.php');
+
+$password = "";     /*$_GET['password']*/
+$password = generateRandomPassword();
+?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -13,12 +23,12 @@
         Margin: 0;
             padding: 0;
             min-width: 100%;
-            background-color: #526E7B;
+            background-color: #ffffff;
         }
         table {
             border-spacing: 0;
             font-family: sans-serif;
-            color: #ffffff;
+            color: #000;
         }
         td {
             padding: 0;
@@ -27,6 +37,7 @@
             border: 0;
         }
         p {
+            text-align: center;
             Margin: 0;
         }
         a {
@@ -182,71 +193,15 @@
                             <tr>
                                 <td class="inner contents">
                                     <p class="h1">TEMPORARY PASSWORD</p>
-                                    <p class="password">PASSWORD</p>
+                                    <p class="password"><?php echo $password; ?></p>
+                                    <p>Thank You for being a valued member of the UniMeet community!</p>
+                                    <p>You didn't ask to change your password? Then just ignore this email. And if you have questions, we're always happy to help. Please contact us <a href="">support@unimeet.com</a></p>
+                                    <p>-Your Friends at UniMeet</p>
                                 </td>
                             </tr>
                         </table>
                     </td>
-                </tr>
-                <tr>
-                    <td class="two-column">
-                        <!--[if (gte mso 9)|(IE)]>
-                        <table width="100%">
-                        <tr>
-                        <td width="50%" valign="top">
-                        <![endif]-->
-                        <div class="column">
-                            <table width="100%">
-                                <tr>
-                                    <td class="inner">
-                                        <table class="contents">
-                                            <tr>
-                                                <td>
-                                                    <img src="../img/email2.jpg" width="280" alt="" />
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text">
-                                                    <span style="padding-bottom: 15px; font-size: 25px; color: #BD0026;">Discover...</span>
-                                                    <!-- <p>Find someone with similar interests to experience all of lifes greatest moments with!</p> -->
-                                                </td>                                                
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                        <!--[if (gte mso 9)|(IE)]>
-                        </td><td width="50%" valign="top">
-                        <![endif]-->
-                        <div class="column">
-                            <table width="100%">
-                                <tr>
-                                    <td class="inner">
-                                        <table class="contents">
-                                            <tr>
-                                                <td>
-                                                    <img src="../img/email1.jpg" width="280" alt="" />
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text">
-                                                    <span style="padding-bottom: 15px; font-size: 25px; color: #BD0026;">Cherish...</span>
-                                                    <!-- <p>Share a moment with somone special!</p> -->
-                                                </td>                                                
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                        <!--[if (gte mso 9)|(IE)]>
-                        </td>
-                        </tr>
-                        </table>
-                        <![endif]-->
-                    </td>
-                </tr>                 
+                </tr>                               
                 <tr>
                     <td class="full-width-image">
                         <img src="../img/brand-logo-footer-mini.jpg" width="600" alt="UniMeet header" />
