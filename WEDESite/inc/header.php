@@ -17,8 +17,10 @@ require_once('inc/constants.php');
 require_once('inc/functions.php');
 require_once('inc/db.php');
 $disabled = $disabledTypei = "";
+$hidden = "hidden"; // for logged in users
 if (!isset($_SESSION['user_id'])) {
   $disabled = "hidden";
+  $hidden = ""; // for non-logged in users
   $editProfile = "Create Profile";
   $contentHeader = "Create";
 }elseif ((isset($_SESSION['user_type'])) && $_SESSION['user_type'] == "i") {
@@ -86,8 +88,8 @@ if (!isset($_SESSION['user_id'])) {
               <div class="collapse navbar-collapse" id="navbar-brand">
                 <ul class="nav nav-tabs navbar-right">
                   <li class=""><a href="index.php">Home</a></li>
-                  <li class=""><a href="user-register.php">Sign Up</a></li>
-                  <li class=""><a href="#">Password Request</a></li>
+                  <li class="<?php echo $hidden; ?>"><a href="user-register.php">Sign Up</a></li>
+                  <li class="<?php echo $hidden; ?>"><a href="#">Password Request</a></li>
                   <li class="<?php echo $disabled . ' ' . $disabledTypei; ?>"><a href="user-dashboard.php">Dashboard</a></li>
                   <li class="<?php echo $disabled . ' ' . $disabledTypei; ?>"><a href="profile-display.php">Profile</a></li>
                   <li class="<?php echo $disabled; ?>"><a href="profile-edit.php"><?php echo $editProfile; ?></a></li>
