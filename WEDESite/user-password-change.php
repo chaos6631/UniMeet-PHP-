@@ -28,10 +28,7 @@ if ($_SERVER['REQUEST_METHOD']=="POST") {
 	$message .= " ";
 	$message .= $validated;
 	if ($validated==true){
-		$stmt2 = pg_prepare($conn, "user_password_update", 'UPDATE users SET password = $1 WHERE user_id = $2');
-		$result = pg_execute($conn, "user_password_update", array(md5($_POST['new_password']),$_SESSION['user_id']));
-		//$message = "Successfully updated!";
-		
+		updatePassword(md5($_POST['new_password']), $_SESSION['user_id']);
 	}
 }
 ?>

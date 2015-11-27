@@ -314,6 +314,27 @@ function generateRandomPassword() {
   return $pass;
 }
 
+function recursiveDelete($target) {
+  if (!file_exists($target)){ //no target, implies nothing to delete, function is done
+    return true;
+  }
+  if (!is_dir($target)) {  //target is a file, not a directory, delete it with unlink() function
+    return unlink($target); //will return false is Apache does not have write permissions in $target
+  }
+  
+  $directoryContents = scandir($target); //target is a directory, get a list of files and directories inside the specified path as an array
+  
+  foreach ($directoryContents as $file) { //loop through the target's files and sub-directories
+    echo "<br/>File/folder to be deleted: " . $file;
+    if ($file == '..' || $file == '.') { //ignore parent and current diectories in file listing
+      continue;
+    }
+    if (!recursiveDelete($target. "/" . $file)) {  //delete items, and sub-directories recursively
+      return false;
+    }
+  }
+  return rmdir($target); //delete the original target, now empty
+}
 
 /*Scans a directory returning an array of the files inside*/
 function scanUserDirectory($path){
@@ -324,7 +345,7 @@ function scanUserDirectory($path){
     if(!empty($array)){
       array_shift($array);
       array_shift($array);
-      array_shift($array);
+      array_shift($array); /*Must be commented for opentech server*/
     }
   }  
   return $array;

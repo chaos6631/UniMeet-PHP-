@@ -31,11 +31,11 @@ if ($_SERVER['REQUEST_METHOD']=="POST") {
 	  $mail_body = str_replace("**new_pass**", $new_pass, $mail_body);
 	  date_default_timezone_set('EST5EDT');
 	  $mail_body = str_replace("**time_stamp**", date('l jS \of F Y h:i A '), $mail_body);
-		mail($mail_to, $mail_subject, $mail_body);
+		mail($mail_to, $mail_subject, $mail_body);		
 		
-		
-		$stmtUpdate = pg_prepare($conn, "request_password_update", 'UPDATE users SET password = $1 WHERE user_id = $2');
-		$result = pg_execute($conn, "request_password_update", array(md5($new_pass),$_POST['user_id']));
+		// updatePassword(md5($new_pass), $_POST['user_id']);
+		/*-----Choosing not to redirect for testing purposes, want to be able to see the new password-----*/
+		// header("Location: user-login.php");
 	}
 }
 ?>
@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD']=="POST") {
 				Forgot Your Password, We'll Send You A New One!!
 			</h1>
 			<p>Once logged in we recommend changing your password for security prurposes</p>
-			<?php echo $new_pass; ?>
+			<?php echo "New Password: " . $new_pass; ?>
 			<form class="form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" role="form">
 				<div class="col-md-6 form-group">
 					<input class='password form-control' type='text' name='user_id' placeholder='Enter your user name' required>

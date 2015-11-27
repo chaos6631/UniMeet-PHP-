@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	dump($_POST);
 	if (count($_POST['images']) > 1) {
 		$_SESSION['info_message'] = "Sorry please select only one image.";
-		$_SESSION['requested_action'] = 0;		
+		$_SESSION['requested_action'] = "error";		
 		header("Location: profile-images.php");
 	}else{
 		$image = strstr($_POST['images'][0], "-");
@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		// die;
 		$_SESSION['profile_image'] = $image;
 		$_SESSION['info_message'] = "Profile Image Updated.";
-		$_SESSION['requested_action'] = TRUE;
+		$_SESSION['requested_action'] = "success";
 		header("Location: profile-images.php");
 	}
 	

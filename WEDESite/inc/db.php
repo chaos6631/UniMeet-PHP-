@@ -332,5 +332,9 @@ function updateImageCount($count, $user_id){
   // return $update;
   pg_query($conn, $update);
 }
-
+ function updatePassword($new_pass, $user_id){
+  global $conn;
+  $stmtUpdate = pg_prepare($conn, "request_password_update", 'UPDATE users SET password = $1 WHERE user_id = $2');
+  $result = pg_execute($conn, "request_password_update", array($new_pass, $user_id));
+ }
 ?>

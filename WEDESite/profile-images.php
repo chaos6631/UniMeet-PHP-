@@ -14,7 +14,7 @@ $path = IMAGE_FOLDER . $_SESSION['user_id'] . "/";
 // }
 $userImages = scanUserDirectory($path);
 $countUserImages = count($userImages);
-// dump($_SESSION);
+dump($countUserImages);
 ?>
 <section class="design" id="design">        
         <div class="row">
@@ -84,15 +84,16 @@ $countUserImages = count($userImages);
       </script>
       <script>/*SCript for error or success message*/
         <?php   
-        //print_r($_SESSION);     
+        //print_r($_SESSION); 
+            
         $output = "\n\t  toastr.options.closeButton = true;\n";
         $output .= "\t  toastr.options.positionClass = 'toast-screen-center';\n";
         $output .= "\t  toastr.options.timeOut = 0;\n";
         $output .= "\t  toastr.options.extendedTimeOut = 0;\n";
-        if($_SESSION['requested_action'] == 0){
+        if($_SESSION['requested_action'] == "error"){
           $output .= "\t  toastr.error(\"" . $_SESSION['info_message'] . "\", \"Error!!\");\n";          
         }
-        if($_SESSION['requested_action'] == TRUE) {
+        if($_SESSION['requested_action'] == "success") {
           $output .= "\t  toastr.success(\"" . $_SESSION['info_message'] . "\", \"Success!!\");\n";
         }
         echo($output);

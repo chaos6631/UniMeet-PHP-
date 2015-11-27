@@ -22,14 +22,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		}else{
 			echo "<br>File Not Found - " . $path;
 			$_SESSION['info_message'] = "Sorry couldn't delete your image(s), please try again.";
-			$_SESSION['requested_action'] = FALSE;
+			$_SESSION['requested_action'] = "error";
 		}
 	}
 	if ($auth == TRUE) {
 		$_SESSION['info_message'] = "Images Deleted.";
-		$_SESSION['requested_action'] = TRUE;
+		$_SESSION['requested_action'] = "success";
 	}
 	//The last action to be executed will be the redirect back to profile-images.php
-	header("Location: profile-images.php");
+	$directory = IMAGE_FOLDER . $_SESSION['user_id'];
+	dump(count(scanUserDirectory($directory)));
+	if (count(scanUserDirectory($directory)) == 0) {
+		// echo count(scanUserDirectory($directory));		
+		recursiveDelete($directory);
+		updateImageCount(0, $_SESSION['user_id']);
+	}
+	// header("Location: profile-images.php");
 }
 ?>
