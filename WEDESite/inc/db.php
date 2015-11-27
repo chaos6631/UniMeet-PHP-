@@ -67,10 +67,10 @@ function buildRadio($tableName, $pre_selected = ""){
       if (!isset($_POST) and $entry['value_id'] == 1){
         $selected = "checked";
       }else{
-        $selected = ($pre_selected == $entry['value_id'])?" checked":"";
+        $selected = ($pre_selected == $entry['value_id'])?"checked":"";
         // $selected = "";
       }
-      $output .= "\n\t\t\t<input type='radio' name='" . $name . "' value='" . $entry['value_id'] . "' " . $selected . $required . "> " . $entry['property'] . " </input>";
+      $output .= "\n\t\t\t<input type='radio' name='" . $name . "' value='" . $entry['value_id'] . "' " . $selected . " " . $required . "> " . $entry['property'] . " </input>";
     }    
     return $output .= "\n";
   }

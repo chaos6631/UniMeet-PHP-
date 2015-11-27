@@ -174,6 +174,12 @@ function convert2ID($tableName){
   return $name;
 }
 
+function createMatchDescription($firstName, $lastName, $age, $city, $school, $religion, $seeking){
+  $output = "My name is " . $firstName . " " . $lastName . " and I am " . $age . " years old.";
+  $output .= " I currently live in " . $city . " and attend " . $school . ".";
+  $output .= "My religious belief is " . $religion . " and I a looking for a " . $seeking . ".";
+}
+
 function dump($arg){
 	echo "<pre>";
 	echo "<br>";echo "<br>";echo "<br>";echo "<br>";echo "<br>";echo "<br>";

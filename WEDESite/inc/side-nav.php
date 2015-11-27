@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_id'])) {
 }
 // dump($_SESSION['profile_image']);
 //profile image check
-if ($_SESSION['profile_image'] == 0 || !file_exists(IMAGE_FOLDER . $_SESSION['user_id'] . "/" . $_SESSION['user_id'] . "-" . $_SESSION['profile_image'] . ".jpg")) {
+if (!isset($_SESSION['profile_image']) || $_SESSION['profile_image'] == 0 || !file_exists(IMAGE_FOLDER . $_SESSION['user_id'] . "/" . $_SESSION['user_id'] . "-" . $_SESSION['profile_image'] . ".jpg")) {
   $profileImage = "img/placeholder-user.png";
 }else{    
   $profileImage = IMAGE_FOLDER . $_SESSION['user_id'] . "/" . $_SESSION['user_id'] . "-" . $_SESSION['profile_image'] . ".jpg";    
@@ -31,7 +31,7 @@ if ($_SESSION['profile_image'] == 0 || !file_exists(IMAGE_FOLDER . $_SESSION['us
                   <li><a href="profile-edit.php"><?php echo $contentHeader; ?> Profile</a></li>
                   <li><a href="user-password-change.php">Change Password</a></li>
                   <li class="<?php echo $disabled . ' ' . $disabledTypei; ?>"><a href="profile-images.php">Images</a></li>
-                  <li class="<?php echo $disabled . ' ' . $disabledTypei; ?>"><a href="profile-select-city.php">Search City</a></li>
+                  <li class="<?php echo $disabled . ' ' . $disabledTypei; ?>"><a href="profile-select-city.php">Search</a></li>
                   <li class="<?php echo $disabled . ' ' . $disabledTypei; ?>"><a href="#">Friends</a></li>
                   <li class="<?php echo $disabled . ' ' . $disabledTypei; ?>"><a href="#">Messages</a></li>
                   <li><a href="user-logout.php">Log Out</a></li>

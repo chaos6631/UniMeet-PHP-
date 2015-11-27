@@ -26,6 +26,10 @@ if($_SERVER['REQUEST_METHOD']=="GET")
   $selfDescription = (isset($_SESSION['self_description'])?$_SESSION['self_description']:"");
 }
 else{
+  
+}
+if ($_SERVER['REQUEST_METHOD']=="POST") {
+  arraySanitize($_POST);
   //fix the session variables so that Null is passed if nothing is entered
   $bodyType = (isset($_POST['body_id']) AND !empty($_POST['body_id']))?$_POST['body_id']:"";
   $birthDate = (isset($_POST['birth_date']) AND !empty($_POST['birth_date']))?$_POST['birth_date']:"";
@@ -46,9 +50,6 @@ else{
   $smoker = (isset($_POST['smoker_id']) AND !empty($_POST['smoker_id']))?$_POST['smoker_id']:"";
   $status = (isset($_POST['status_id']) AND !empty($_POST['status_id']))?$_POST['status_id']:"";
   $selfDescription = (isset($_POST['self_description']) AND !empty($_POST['self_description']))?$_POST['self_description']:"";
-}
-if ($_SERVER['REQUEST_METHOD']=="POST") {
-  arraySanitize($_POST);
   if ($_SESSION['user_type'] == "i") {
     storeNewProfileInfo($_POST);
     header("Location: user-dashboard.php");

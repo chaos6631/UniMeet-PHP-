@@ -16,10 +16,21 @@ if ($_SERVER['REQUEST_METHOD']=="POST") {
 	}
 	
 	if ($validated==true) {
+		$user = getUserInfo($_POST['user_id']);
 		$new_pass = generateRandomPassword();
+		$first_name = $user['first_name'];
+		$last_name = $user['last_name'];
+	
+
 		$mail_to=$_POST['email'];
-		$mail_subject="New Password Requested for " . $_POST['user_id'];
-		$mail_body=file_get_contents('inc/passwordRequestEmail.php');
+		$mail_subject="New Password Requested for " . $_POST['user_id'];		
+		$mail_body = file_get_contents('inc/passwordRequestEmail.html');
+	  $mail_body = str_replace("**first_name**", $first_name, $mail_body);
+	  $mail_body = str_replace("**last_name**", $last_name, $mail_body);
+	  $mail_body = str_replace("**user_id**", $_POST['user_id'], $mail_body);
+	  $mail_body = str_replace("**new_pass**", $new_pass, $mail_body);
+	  date_default_timezone_set('EST5EDT');
+	  $mail_body = str_replace("**time_stamp**", date('l jS \of F Y h:i A '), $mail_body);
 		mail($mail_to, $mail_subject, $mail_body);
 		
 		
