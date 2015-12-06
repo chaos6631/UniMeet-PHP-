@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD']=="POST") {
 </section>
 
 <?php
-if(isset($_POST) && $validated==true){
+if(isset($_POST) && isset($validated) == true){
 $output="<script>
 	toastr.options.closeButton = true;
 	toastr.options.positionClass = 'toast-screen-center';

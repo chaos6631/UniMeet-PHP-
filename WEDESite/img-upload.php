@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	
 	/*Checking file type and size*/
 	$allowedExt = array("image/jpeg");
-	if ((!in_array($_FILES['upload_img']['type'], $allowedExt)) || ($_FILES['upload_img']['size'] > 500000)) {
+	if ((!in_array($_FILES['upload_img']['type'], $allowedExt)) || ($_FILES['upload_img']['size'] > MAX_FILE_SIZE)) {
 		$_SESSION['requested_action'] = "error";
 		$auth = FALSE;
 		$_SESSION['info_message'] = "Sorry we only accept \\\"jpeg\\\" type images that are less than 500kb, please try another image.";				

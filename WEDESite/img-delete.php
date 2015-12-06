@@ -37,6 +37,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		recursiveDelete($directory);
 		updateImageCount(0, $_SESSION['user_id']);
 	}
-	// header("Location: profile-images.php");
+	header("Location: profile-images.php");
 }
 ?>

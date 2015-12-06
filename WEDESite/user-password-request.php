@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD']=="POST") {
 	  $mail_body = str_replace("**time_stamp**", date('l jS \of F Y h:i A '), $mail_body);
 		mail($mail_to, $mail_subject, $mail_body);		
 		
-		// updatePassword(md5($new_pass), $_POST['user_id']);
+		updatePassword(md5($new_pass), $_POST['user_id']);
 		/*-----Choosing not to redirect for testing purposes, want to be able to see the new password-----*/
 		// header("Location: user-login.php");
 	}
@@ -62,16 +62,16 @@ if ($_SERVER['REQUEST_METHOD']=="POST") {
 </section>
 
 <?php
-//if(isset($_POST) && $validated==true){
-//$output="<script>
-//	toastr.options.closeButton = true;
-//	toastr.options.positionClass = 'toast-screen-center';
-//	toastr.options.timeOut = 0;
-//	toastr.options.extendedTimeOut = 0;
-//	toastr.success(\"An email with your new password has been sent!\");
-//</script>";
-//echo $output;
-//}
+if(isset($_POST) && isset($validated) == true){
+$output="<script>
+	toastr.options.closeButton = true;
+	toastr.options.positionClass = 'toast-screen-center';
+	toastr.options.timeOut = 0;
+	toastr.options.extendedTimeOut = 0;
+	toastr.success(\"An email with your new password has been sent!\", \"Success\");
+</script>";
+echo $output;
+}
 ?>
 			
 <?php include_once('inc/footer.php'); ?>

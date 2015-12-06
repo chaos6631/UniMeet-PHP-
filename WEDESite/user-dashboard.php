@@ -109,4 +109,13 @@ if ($_SESSION['user_type'] == "i") {
           </div>
         </div>        
       </section>
+        <div class="row">
+          <div class="col-xs-6 col-sm-6 col-md-6"> <!-- Interests --> 
+            <h3>My Interests</h3>            
+          </div>
+          <div class="col-xs-6 col-sm-6 col-md-6"> <!-- People Interested -->
+            <h3>Interested in Me</h3>            
+          </div>
+        </div>
+     
 <?php include_once('inc/footer.php'); ?>

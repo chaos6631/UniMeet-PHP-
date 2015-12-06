@@ -7,14 +7,18 @@ if ($_SESSION['user_type'] == "i") {
   header("Location: profile-edit.php");
 }
 $path = IMAGE_FOLDER . $_SESSION['user_id'] . "/";
-// if (scanUserDirectory($path) == FALSE) {
-//   $userImages = 0;
-// }else{
-//   $userImages = scanUserDirectory($path);
-// }
-$userImages = scanUserDirectory($path);
-$countUserImages = count($userImages);
-dump($countUserImages);
+if (scanUserDirectory($path) == FALSE) {
+  $userImages = 0;
+  $countUserImages = 0;
+}else{
+  $userImages = scanUserDirectory($path);
+  $countUserImages = count($userImages);
+}
+
+// dump($userImages);
+// dump($countUserImages);
+// dump($userImages);
+// die;
 ?>
 <section class="design" id="design">        
         <div class="row">
@@ -32,11 +36,14 @@ dump($countUserImages);
             </div>    
             <form id="image_form" name="image_form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" role="Image Gallery Adjustment">        
               <div class="col-xs-1 col-sm-1 col-md-1 controls">
-                <a href="prev" class="prev"><i class="fa fa-angle-left fa-3x"></i></a>                
+                <?php if ($countUserImages > 0) { echo "<a href=\"prev\" class=\"prev\"><i class=\"fa fa-angle-left fa-3x\"></i></a>"; } ?>
               </div>
               <div class="col-xs-10 col-sm-10 col-md-10" id="secondSlider">
               <?php 
-              echo buildImagePages($path, $userImages); 
+              if ($countUserImages > 0) {
+                echo buildImagePages($path, $userImages); 
+              }
+              // echo buildImagePages($path, $userImages); 
               if ($countUserImages < 1) {
                 echo "<br><br><br><br><br>";
                 echo "<div class='col-md-12 text-center text-info' style='margin-bottom: 300px;'><h1 id='no-image-message'>NO IMAGES</h1><p>Click the <span style='color: #5cb85c; font-weight: bold;'>Upload Button</span> at the top right corner to add an image.</p></div>";
@@ -44,7 +51,7 @@ dump($countUserImages);
               ?>
               </div>
               <div class="col-xs-1 col-sm-1 col-md-1 controls">
-                <a href="next" class="next"><i class="fa fa-angle-right fa-3x"></i></a>
+                <?php if ($countUserImages > 0) { echo "<a href=\"next\" class=\"next\"><i class=\"fa fa-angle-right fa-3x\"></i></a>"; } ?>
               </div>
             </form>      
 

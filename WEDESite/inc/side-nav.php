@@ -3,8 +3,13 @@
 $disabled = $disabledTypei = "";
 if (!isset($_SESSION['user_id'])) {
   $disabled = "hidden";
-}elseif ((isset($_SESSION['user_type'])) && $_SESSION['user_type'] == "i") {
+}elseif ((isset($_SESSION['user_type'])) && $_SESSION['user_type'] == INCOMPLETE_USER) {
   $disabledTypei = "disabled";
+}
+if ((isset($_SESSION['user_type'])) && $_SESSION['user_type'] == ADMIN_USER) {
+  $disabledTypeAdmin = "";
+}else{
+  $disabledTypeAdmin = "hidden";
 }
 // dump($_SESSION['profile_image']);
 //profile image check
@@ -27,12 +32,13 @@ if (!isset($_SESSION['profile_image']) || $_SESSION['profile_image'] == 0 || !fi
             </div>
             <div class="col-xs-6 col-sm-12">            
               <nav>
-                <ul class="nav nav-pills nav-sidebar nav-stacked text-center">                  
+                <ul class="nav nav-pills nav-sidebar nav-stacked text-center">   
+                  <li class="<?php echo $disabledTypeAdmin; ?>"><a href="admin-disabled-users.php">Disabled Users</a></li>               
+                  <li class="<?php echo $disabledTypeAdmin; ?>"><a href="admin-dashboard.php">Flagged Users</a></li>               
                   <li><a href="profile-edit.php"><?php echo $contentHeader; ?> Profile</a></li>
                   <li><a href="user-password-change.php">Change Password</a></li>
                   <li class="<?php echo $disabled . ' ' . $disabledTypei; ?>"><a href="profile-images.php">Images</a></li>
-                  <li class="<?php echo $disabled . ' ' . $disabledTypei; ?>"><a href="profile-select-city.php">Search</a></li>
-                  <li class="<?php echo $disabled . ' ' . $disabledTypei; ?>"><a href="#">Friends</a></li>
+                  <li class="<?php echo $disabled . ' ' . $disabledTypei; ?>"><a href="interests.php">Interests</a></li>
                   <li class="<?php echo $disabled . ' ' . $disabledTypei; ?>"><a href="#">Messages</a></li>
                   <li><a href="user-logout.php">Log Out</a></li>
                 </ul>

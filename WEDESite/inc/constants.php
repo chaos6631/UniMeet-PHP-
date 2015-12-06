@@ -21,6 +21,13 @@ define("MIN_USER", 6);//user_id length
 define("MAX_USER", 20);//user_id length
 define("MAX_USER_IMAGES", 15);//maximum allowed saved images per user
 define("PLACEHOLDER", 0);//value_id of the placeholder within a database table
+define("INCOMPLETE_USER", "i");
+define("COMPLETE_USER", "c");
+define("ADMIN_USER", "a");
+define("DISABLED_USER", "d");
+define("MAX_FILE_SIZE", 500000);
+define("RESOLVED", "resolved");
+define("UNRESOLVED", "un-resolved");
 
 //add db connect info
 define("DB_HOST", "localhost");

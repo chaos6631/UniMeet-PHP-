@@ -36,11 +36,7 @@ function buildImageBox($path, $num, $userImage){
   ($num<10)?$num = ("0" . $num): $num;
   $fileName = $_SESSION['user_id'] . "/" . $userImage;  
   // $path = $path . $_SESSION['user_id'] . "-" . $num . ".jpg";
-  $path = $path . $userImage;
-  //if for some reason file doesn't exist, placeholder will be displayed
-  if (!file_exists($path)) {
-     $path = "/img/placeholder-user.png";
-  }
+  $path = $path . $userImage;  
   // if (file_exists($image)) {
     $output = "\t\t      <div class=\"col-sm-4\">\n";
     $output .= "\t\t        <div class=\"flat-box\">\n";
@@ -87,7 +83,7 @@ function createProfilePreview($user_id, $num){
   $match = $user['match_description'];
   
   $output = "<div class=\"col-xs-6 col-sm-3 col-md-2 search-box-results\">\n";
-  $output .= "\t\t <a href='profile-display.php?user_id=$userName'><img class=\"img-responsive img-circle\" src=\"img/placeholder-user.png\"></a>\n";
+  $output .= "\t\t <a href='profile-display.php?user_id=$userName'><img class=\"img-responsive img-circle\" src=\"img/placeholder-user.png\" alt=\"User Image\"/></a>\n";
   $output .= "\t\t <a href='profile-display.php?user_id=$userName'><h3>$userName</h3></a>\n";
   $output .= "\t\t <p>$school</p>\n";
   $output .= "\t\t <p>$match</p>\n";  
@@ -95,6 +91,51 @@ function createProfilePreview($user_id, $num){
   $output .= "\t\t</div>\n\t      ";
   return $output;
 }
+
+function createInterestPreview($user_id, $match){
+  $user = getUserInfo($user_id);
+  $userName = $user['user_id'];
+  $school = getProperty($user['school_id'], "schools");
+  $desc = $user['match_description'];
+  if ($match == 1) {
+    $highlight = "interest-match";
+  }else{
+    $highlight = "";
+  }
+  
+  $output = "<div class=\"col-xs-12 col-sm-6 col-md-4 interest-box-results $highlight\">\n";
+  $output .= "\t\t <a href='profile-display.php?user_id=$userName'><img class=\"img-responsive img-circle\" src=\"img/placeholder-user.png\" alt=\"User Image\"/></a>\n";
+  $output .= "\t\t <a href='profile-display.php?user_id=$userName'><h4>$userName</h4></a>\n";
+  $output .= "\t\t <p>$school</p>\n"; 
+  $output .= "\t\t <a href=\"remove-interest.php?user_id=$userName\" class=\"btn btn-danger btn-xs\" role=\"button\">Remove</a>";  
+  $output .= "\t\t</div>\n\t      ";
+  return $output;
+}
+
+function createTableRowFlagged($offensive_user_id, $reporting_user_id, $report_date, $status ){
+  $output = "";
+  $output .= "\t<tr>";
+  $output .= "\t  <td>$status</td>";
+  $output .= "\t  <td><a href=\"profile-display.php?user_id=$offensive_user_id\">$offensive_user_id</a></td>";
+  $output .= "\t  <td>$report_date</td>";
+  $output .= "\t  <td><a href=\"profile-display.php?user_id=$reporting_user_id\">$reporting_user_id</a></td>";  
+  $output .= "\t</tr>";
+  return $output;
+}
+
+function createTableRowDisabled($user_id, $first_name, $last_name, $email){
+  $output = "";
+  $output .= "\t<tr>";
+  $output .= "\t  <td><a href=\"profile-display.php?user_id=$user_id\">$user_id</a></td>";
+  $output .= "\t  <td>disabled</td>";
+  $output .= "\t  <td>$first_name</td>";
+  $output .= "\t  <td>$last_name</td>";
+  $output .= "\t  <td>$email</td>";
+  $output .= "\t  <td style=\"text-align: center;\"><a href=\"\" class=\"btn btn-success btn-xs\" role=\"button\">Enable User</a><a href=\"\" class=\"btn btn-danger btn-xs\" role=\"button\">Delete User</a></td>";
+  $output .= "\t</tr>";
+  return $output;
+}
+
 function checkLoginStatus(){
   //Check if user is logged in
   if ($_SESSION['user_id'] == NULL || $_SESSION['user_type'] == "d") {
@@ -342,11 +383,15 @@ function scanUserDirectory($path){
   $array = "";
   if (is_dir($path) == TRUE) {
     $array = scandir($path, SCANDIR_SORT_ASCENDING); 
-    if(!empty($array)){
-      array_shift($array);
-      array_shift($array);
-      array_shift($array); /*Must be commented for opentech server*/
-    }
+    // if(!empty($array)){
+    //   array_shift($array);
+    //   array_shift($array);
+    //   array_shift($array); /*Must be commented for opentech server*/
+    // }
+    array_shift($array);
+    array_shift($array);
+    array_shift($array); /*Must be commented for opentech server*/
+
   }  
   return $array;
 }

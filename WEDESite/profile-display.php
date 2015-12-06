@@ -6,14 +6,45 @@ checkLoginStatus();
 if ($_SESSION['user_type'] == "i") {
  header("Location: profile-edit.php");
 }
-// dump($_GET['user_id']);
+$interested = "";
+$disabled3 = "";
 if (isset($_GET['user_id'])) {
   $user = getUserInfo($_GET['user_id']);
+  $interested = checkInterest($_SESSION['user_id'], $_GET['user_id']);
+  $hidden = "";
+  if ($interested == 1) {
+    $disabled1 = "disabled = \"disabled\"";    
+    $disabled2 = "";    
+  }else{    
+    $disabled1 = "";
+    $disabled2 = "disabled = \"disabled\"";
+  }
+  $flagged = checkOffensives($_GET['user_id'], "incomplete");
+  // dump($flagged);
+  if ($flagged == 1) {
+    $disabled3 = "disabled = \"disabled\"";
+    $btnlbl = "Already Reported";
+  }else{
+    $disabled3 = "";
+    $btnlbl = "Report User";
+  }
 }else{
   $user = $_SESSION;
+  $hidden = "hidden";
 }
-
-// dump($user);
+if ($_SESSION['user_type'] == ADMIN_USER) {
+  $hidden = "hidden";
+  $admin = "";
+  if ($user['user_type'] == COMPLETE_USER || $user['user_type'] == INCOMPLETE_USER || $user['user_type'] == ADMIN_USER) {
+    $disabled1 = "disabled = \"disabled\"";    
+    $disabled2 = "";    
+  }else{    
+    $disabled1 = "";
+    $disabled2 = "disabled = \"disabled\"";
+  }
+}else{
+  $admin = "hidden";
+}
 ?>
 			<section class="content">				
         <div class="row row-top">
@@ -23,8 +54,15 @@ if (isset($_GET['user_id'])) {
               <div class=" col-xs-2 col-sm-2 col-md-2">
                 <img class="img-responsive img-circle" src="img/placeholder-user.png">
               </div> 
-              <div class="col-sm-10 col-md-10">
+              <div class="col-xs-4 col-sm-4 col-md-4">
                 <h1>Profile<span class="text-primary"><?php echo " " . $user['user_id']; ?></span></h1>
+              </div>   
+              <div class="col-xs-6 col-sm-6 col-md-6" style=" padding-right: 0px;">
+                <a href="flag-user.php?user_id=<?php echo $_GET['user_id']; ?>" class="btn btn-danger <?php echo $hidden; ?>" type="button" style="float: right;" <?php echo $disabled3; ?>><?php echo $btnlbl; ?></a>
+                <a href="user-disable.php?user_id=<?php echo $_GET['user_id']; ?>" class="btn btn-danger <?php echo $admin; ?>" type="button" style="float: right;" <?php echo $disabled2; ?>>Disable</a>
+                <a href="remove-interest.php?user_id=<?php echo $_GET['user_id']; ?>" class="btn btn-warning <?php echo $hidden; ?>" type="button" style="float: right; margin-right: 5px;" <?php echo $disabled2; ?>>Not Interested</a>                
+                <a href="add-interest.php?user_id=<?php echo $_GET['user_id']; ?>" class="btn btn-success <?php echo $hidden; ?>" type="button" style="float: right; margin-right: 5px;" <?php echo $disabled1; ?>>Interested</a>
+                <a href="user-enable.php?user_id=<?php echo $_GET['user_id']; ?>" class="btn btn-success <?php echo $admin; ?>" type="button" style="float: right; margin-right: 5px;" <?php echo $disabled1; ?>>Enable</a>
               </div>              
             </div>            
             <div class="row">
@@ -54,6 +92,27 @@ if (isset($_GET['user_id'])) {
           </div>
         </div>        
 			</section>
+      <script>/*SCript for error or success message*/
+        <?php           
+            
+        $output = "\n\t  toastr.options.closeButton = true;\n";
+        $output .= "\t  toastr.options.positionClass = 'toast-screen-center';\n";
+        $output .= "\t  toastr.options.timeOut = 0;\n";
+        $output .= "\t  toastr.options.extendedTimeOut = 0;\n";
+        if(isset($_SESSION['requested_action']) && $_SESSION['requested_action'] == "error"){
+          $output .= "\t  toastr.error(\"" . $_SESSION['info_message'] . "\", \"Error!!\");\n";          
+        }
+        if(isset($_SESSION['requested_action']) && $_SESSION['requested_action'] == "success") {
+          $output .= "\t  toastr.success(\"" . $_SESSION['info_message'] . "\", \"Success!!\");\n";
+        }
+        echo($output);
+        if (isset($_SESSION['requested_action'])) {
+          unset($_SESSION['info_message']);
+          unset($_SESSION['requested_action']);
+        }
+        ?>
+
+      </script>
 
 
 <?php include_once('inc/footer.php'); ?>

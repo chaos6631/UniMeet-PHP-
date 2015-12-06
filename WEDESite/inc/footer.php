@@ -3,7 +3,7 @@
           <div class="row">
             <div class="col-md-12 text-center">
               <a href="#"><img class="img-responsive center-block" src="<?php echo BASE_URL . BRAND_LOGO; ?>" alt="UniMeet Logo"></a>
-              <p class="footer-credit">Template Design by <a href="http://www.blazrobar.com">Blaz Robar</a> & <a href="http://www.peterfinlan.com">Peter Finlan</a></p>
+              <p class="footer-credit"><a href="legal-aup.php" style="padding-right:30px;"><b>Acceptable Use</b></a><a href="legal-privacy-policy.php"><b>Privacy Policy</b></a></p>
               <p class="footer-credit"><?php displayCopyrightInfo() ?></p>
               <p class="footer-credit"><a href="https://validator.w3.org/">W3 VALIDATOR</a></p>
             </div>

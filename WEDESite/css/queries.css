@@ -2,7 +2,7 @@
 @media screen and (max-width:480px) {
 	.download-now { background-image: none; }
 	.design-content { margin-top: 55px; }
-	.get-started-btn { padding: 20px 50px; }
+	.get-started-btn { padding: 20px 50px; }	
 	.sidebar { height: 100px; }
 	.login-btn { display: block; }
 	#content-section { margin-top: 55px; }
@@ -10,7 +10,7 @@
 }
 /* For iphone: */
 @media screen and (max-width:320px) {
-	.design-content { margin-top: 55px; }
+	.design-content { margin-top: 55px; }	
 	.sidebar { height: 100px; }
 	#content-section { margin-top: 55px; }
 	#hide4phone{ display: none; }

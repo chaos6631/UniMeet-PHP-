@@ -196,7 +196,7 @@ nav ul li a { color: rgba(255, 255, 255, 0.6); padding: 20px; display: block; bo
 nav ul li a:hover, nav ul li a:focus { color: rgba(255, 255, 255, 1); text-decoration: none; }
 .indicator { position: absolute; right: 0 !important; }
 .pull { display: none; }
-.hero { background: url('../img/header-background-copy.jpg') no-repeat 50%; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; padding: 65px 0; height: auto; }
+.hero { background: url('../img/homepage-background.jpg') no-repeat 50%; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; padding: 65px 0; height: auto; }
 .hero p { margin-top: 15px; color: #d0e7e9; font-style: italic; font-size: 17px; }
 .hero a { color: #fff; }
 .hero img{ margin-top: 95px; }
@@ -204,7 +204,7 @@ nav ul li a:hover, nav ul li a:focus { color: rgba(255, 255, 255, 1); text-decor
 .hero-play-btn:hover, .hero-play-btn:focus { transform: translate(0, -15px); -webkit-transform: translate(0, -15px); -o-transform: translate(0, -15px); -moz-transform: translate(0, -15px); }
 .get-started-btn { background-color: #7accc8; padding: 20px 80px; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; font-size: 22px; letter-spacing: 2px; box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.4); transition: all 0.5s ease; -moz-transition: all 0.5s ease; -webkit-transition: all 0.5s ease; -o-transition: all 0.5s ease; display: inline-block; }
 .get-started-btn:hover, .get-started-btn:focus { text-decoration: none; background-color: #e8b968; }
-.download-now { background: #BD0026 url('../img/couple2-movies.png') no-repeat; background-position: 125% 55px; background-size: 80%; min-height: 600px; padding-left: 20px;}
+.download-now { background: #BD0026 url('../img/couple2-movies.jpg') no-repeat; background-position: 125% 55px; background-size: 80%; min-height: 600px; padding-left: 20px;}
 .download-now p { color: #fff; font-size: 16px; margin: 40px 30px 40px 0; line-height: 30px; }
 .testimonials { background: #5b6869 url('../img/tBG01.jpg') no-repeat left center; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; padding: 130px 0; }
 .features { background: #fff url('../img/arrowBG.png') no-repeat center -1px; padding: 70px 0; }

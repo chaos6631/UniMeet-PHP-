@@ -15,6 +15,94 @@ function db_connect()
 }
 $conn = db_connect();
 
+/*------Statements--------*/
+$query1 = pg_prepare($conn, "check_interest", "SELECT * FROM interests WHERE user_id=$1 AND profile_of_interest=$2");
+$query2 = pg_prepare($conn, "check_offensives", "SELECT * FROM offensives WHERE offensive_user_id=$1 AND status=$2");
+$query3 = pg_prepare($conn, "delete_interest", "DELETE FROM interests WHERE user_id=$1 AND profile_of_interest=$2");
+$query4 = pg_prepare($conn, "disabled_users", "SELECT user_id, email_address, first_name, last_name FROM users WHERE user_type=$1");
+$query5 = pg_prepare($conn, "flagged_users", "SELECT * FROM offensives WHERE status=$1");
+$query6 = pg_prepare($conn, "interested_in_user", "SELECT * FROM interests WHERE profile_of_interest=$1");
+$query7 = pg_prepare($conn, "user_interests", "SELECT * FROM interests WHERE user_id=$1");
+
+function addInterest($interestedUser, $userOfInterest){
+  global $conn;
+  $query = pg_execute($conn, "check_interest", array($interestedUser, $userOfInterest));
+  if (pg_num_rows($query) == TRUE) {    
+    $_SESSION['info_message'] = "You have already shown interest in this person";
+    $_SESSION['requested_action'] = "error"; 
+    header("Location: profile-display.php?user_id=$userOfInterest");
+  }else{
+    $insert = pg_prepare($conn, "add_interest", "INSERT INTO interests(user_id, profile_of_interest) VALUES($1, $2)");
+    $insert = pg_execute($conn, "add_interest", array($interestedUser, $userOfInterest));    
+    return TRUE;
+  }  
+}
+
+function checkInterest($interestedUser, $userOfInterest){
+  global $conn;
+  $result = pg_execute($conn, "check_interest", array($interestedUser, $userOfInterest));
+  if (pg_num_rows($result) == 0) {
+    return 0;
+  }else{
+    return 1;
+  }  
+}
+
+function checkOffensives($flagged_user, $status){
+  global $conn;  
+  $result = pg_execute($conn, "check_offensives", array($flagged_user, $status));
+  if (pg_num_rows($result) == 0) {
+    return 0;
+  }else{
+    return 1;
+  }  
+}
+
+function removeInterest($interestedUser, $userOfInterest){
+  global $conn;
+  // $query = pg_prepare($conn, "delete_interest", "DELETE FROM interests WHERE user_id=$1 AND profile_of_interest=$2");
+  $delete = pg_execute($conn, "delete_interest", array($interestedUser, $userOfInterest));
+  if(!pg_num_rows($delete)){
+    return 1;
+  }else{
+    return 0;
+  }  
+}
+function searchDisabledUsers(){
+  global $conn;
+  $result = pg_execute($conn, "disabled_users", array(DISABLED_USER));
+  $array = pg_fetch_all($result);  
+  return $array;
+}
+
+function searchFlaggedUsers($status){
+  global $conn;
+  $result = pg_execute($conn, "flagged_users", array($status));
+  $array = pg_fetch_all($result);  
+  return $array;
+}
+
+function collectInterests($user_id){
+  global $conn;
+  $result = pg_execute($conn, "user_interests", array($user_id));
+  $array = pg_fetch_all($result);
+  foreach ($array as $key => $value) {
+    $array[$key] = $value['profile_of_interest'];
+  } 
+  return $array;
+}
+
+function collectProfilesInterested($user_id){
+  global $conn;
+  $result = pg_execute($conn, "interested_in_user", array($user_id));
+  $array = pg_fetch_all($result);
+  foreach ($array as $key => $value) {
+    $array[$key] = $value['user_id'];
+  } 
+  return $array;
+}
+
+
 //function for form dropdown with $pre_selected as argument for stickiness
 function buildDropDown($tableName, $pre_selected)  {
 	//query to array
@@ -119,10 +207,10 @@ function buildCheckbox($tableName, $pre_selected){
 }
 
 //function that ensures user_id has not already been taken
-function checkUserName($userName){
+function checkUserName($user_id){
   global $conn;
   $result = pg_prepare($conn, "", 'SELECT * FROM users WHERE user_id = $1');
-  $result = pg_execute($conn, "", array($userName));  
+  $result = pg_execute($conn, "", array($user_id));  
   $rows = pg_num_rows($result);
   if ($rows == 1) {
     return FALSE;
@@ -131,10 +219,18 @@ function checkUserName($userName){
   }
 }
 
-//
-// function createProfileView(user_id){
+function setUserType($user_id, $user_type){
+  global $conn;
+  $query = pg_prepare($conn, "enable_user", "UPDATE users SET user_type=$1 WHERE user_id=$2");
+  $result = pg_execute($conn, "enable_user", array($user_type, $user_id));
+}
 
-// }
+function flagUser($user_id, $flagged_user, $time){
+  global $conn;
+  $result = pg_prepare($conn, "flag_user", "INSERT INTO offensives(offensive_user_id, reporting_user_id, report_date, status) VALUES($1, $2, $3, $4)");
+  $result = pg_execute($conn, "flag_user", array($flagged_user, $user_id, $time, UNRESOLVED));
+
+}
 
 //function for displaying user information, boxsizes are small, normal, large.
 function getProperty($propertyID, $tableName){
@@ -187,6 +283,11 @@ function lastAccess(){
   global $conn;
   $update = pg_prepare($conn, "user_update", "UPDATE users SET last_access = $1 WHERE user_id = $2");
   $update = pg_execute($conn, "user_update", array($time, $_SESSION['user_id']));
+}
+function updateOffensiveStatus($status, $user_id){
+  global $conn;
+  $query = pg_prepare($conn, "offensive_update", "UPDATE offensives SET status=$1 WHERE offensive_user_id=$2");
+  $result = pg_execute($conn, "offensive_update", array($status, $user_id));
 }
 
 /*funtion that collects user search options and searches all site users 
@@ -313,7 +414,7 @@ function updateProfileInfo($array){
   // return $update;  
 
 //Store profile data
-  pg_query($conn, $update);
+  pg_query($conn, $update);// was having issues with a prepared statement so i chose to use this method instead
   //update SESSION with new user info
   $_SESSION = array_merge($_SESSION, $array);
   $_SESSION = array_merge($_SESSION, $array2);
@@ -336,5 +437,46 @@ function updateImageCount($count, $user_id){
   global $conn;
   $stmtUpdate = pg_prepare($conn, "request_password_update", 'UPDATE users SET password = $1 WHERE user_id = $2');
   $result = pg_execute($conn, "request_password_update", array($new_pass, $user_id));
- }
+}
+
+/*FUNCTION FOR TESTING PURPOSES*/
+function generateInterests(){
+  global $conn;
+  $query = pg_prepare($conn, "all_complete_users", "SELECT user_id FROM users WHERE user_type=$1");
+  $query = pg_execute($conn, "all_complete_users", array(COMPLETE_USER));
+  //more here
+  $users = pg_fetch_all($query);
+  foreach ($users as $key => $value) {
+    $users[$key] = $value['user_id'];
+  }  
+  $usersTest = $users;
+  // $usersTest = array_slice($users, 0, 10);
+  $result = array();    
+    
+  $insert = pg_prepare($conn, "add_interest", "INSERT INTO interests(user_id, profile_of_interest) VALUES($1, $2)");
+  $a = 0;//testing
+  foreach ($usersTest as $key => $value) {
+    $interests = array();
+    for ($i=0; $i < 10; $i++) { 
+      $userOfInterest = $users[mt_rand(0, count($users)-1)];
+      if ($userOfInterest == $value) {
+        $userOfInterest = $users[mt_rand(0, count($users)-1)];
+      }elseif ($userOfInterest == array_search($userOfInterest, $interests)) {
+        $userOfInterest = $users[mt_rand(0, count($users)-1)];
+      }
+      $interests[$i] = $userOfInterest;      
+    }
+    for ($i=0; $i < 10; $i++) { 
+      /*-------TESTING-------*/
+      $insert = pg_execute($conn, "add_interest", array($value, $interests[$i]));
+      // $output = $value . " => " . $interests[$i];
+      // $result[$a] = $output;
+      // $a++;
+    }
+  }  
+  /*-------TESTING-------*/
+  // return $result;
+  // return $usersTest;
+}
+
 ?>

@@ -45,14 +45,17 @@ require_once ('inc/db.php');
 	<?php
 	// $email = include_once 'inc/passwordRequestEmail.php';
 
-  $email = file_get_contents('inc/passwordRequestEmail.html');
-  $email = str_replace("**first_name**", "Chris", $email);
-  $email = str_replace("**last_name**", "Calder", $email);
-  $email = str_replace("**user_id**", "chris2015", $email);
-  $email = str_replace("**new_pass**", generateRandomPassword(), $email);
-  date_default_timezone_set('EST5EDT');
-  $email = str_replace("**time_stamp**", date('l jS \of F Y h:i A '), $email);
-  echo($email);
+  // $email = file_get_contents('inc/passwordRequestEmail.html');
+  // $email = str_replace("**first_name**", "Chris", $email);
+  // $email = str_replace("**last_name**", "Calder", $email);
+  // $email = str_replace("**user_id**", "chris2015", $email);
+  // $email = str_replace("**new_pass**", generateRandomPassword(), $email);
+  // date_default_timezone_set('EST5EDT');
+  // $email = str_replace("**time_stamp**", date('l jS \of F Y h:i A '), $email);
+  // echo($email);
+  
+  // $a = generateInterests();
+
   		
 	?>
 	

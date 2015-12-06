@@ -1,5 +1,6 @@
 <?php
 ob_start();
+date_default_timezone_set('America/Toronto');
 $now = time();
 if (isset($_SESSION['discard_after']) && $now > $_SESSION['discard_after']) {
     // kill session and start a brand new one
@@ -18,12 +19,12 @@ require_once('inc/functions.php');
 require_once('inc/db.php');
 $disabled = $disabledTypei = "";
 $hidden = "hidden"; // for logged in users
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['user_id']) || $_SESSION['user_type'] == DISABLED_USER) {
   $disabled = "hidden";
   $hidden = ""; // for non-logged in users
   $editProfile = "Create Profile";
   $contentHeader = "Create";
-}elseif ((isset($_SESSION['user_type'])) && $_SESSION['user_type'] == "i") {
+}elseif ((isset($_SESSION['user_type'])) && $_SESSION['user_type'] == INCOMPLETE_USER) {
   $disabledTypei = "disabled";
   $editProfile = "Create Profile";
   $contentHeader = "Create";
@@ -31,9 +32,11 @@ if (!isset($_SESSION['user_id'])) {
   $editProfile = "Edit Profile";
   $contentHeader = "Edit";
 }
-
-// $disabled = (isset($_SESSION['user_type']) == "i"?"disabled":" ");
-
+if ((isset($_SESSION['user_type'])) && $_SESSION['user_type'] == ADMIN_USER){
+  $dashboard = "admin-dashboard.php";
+}else{
+  $dashboard = "user-dashboard.php";
+}
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
@@ -88,9 +91,9 @@ if (!isset($_SESSION['user_id'])) {
               <div class="collapse navbar-collapse" id="navbar-brand">
                 <ul class="nav nav-tabs navbar-right">
                   <li class=""><a href="index.php">Home</a></li>
-                  <li class="<?php echo $hidden; ?>"><a href="user-register.php">Sign Up</a></li>
+                  <li class="<?php echo $hidden . " " . $disabled; ?>"><a href="user-register.php">Sign Up</a></li>
                   <li class="<?php echo $hidden; ?>"><a href="user-password-request.php">Password Request</a></li>
-                  <li class="<?php echo $disabled . ' ' . $disabledTypei; ?>"><a href="user-dashboard.php">Dashboard</a></li>
+                  <li class="<?php echo $disabled . ' ' . $disabledTypei; ?>"><a href="<?php echo $dashboard; ?>">Dashboard</a></li>
                   <li class="<?php echo $disabled . ' ' . $disabledTypei; ?>"><a href="profile-display.php">Profile</a></li>
                   <li class="<?php echo $disabled; ?>"><a href="profile-edit.php"><?php echo $editProfile; ?></a></li>
                   <li class="<?php echo $disabled . ' ' . $disabledTypei; ?>"><a href="profile-images.php">Images</a></li>

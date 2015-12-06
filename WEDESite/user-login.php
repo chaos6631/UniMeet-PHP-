@@ -20,10 +20,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		//Set cookie for user id expires after 30 days
 		setcookie("user_id", $_SESSION['user_id'], COOKIE_EXPIRE);
 
-		if ($_SESSION['user_type'] == "d") {
-				$errorMessage = "Sorry your account has been disabled, please contact us to resolve this issue";
-				// exit();
-		}elseif($_SESSION['user_type'] == "c"){
+		if ($_SESSION['user_type'] == DISABLED_USER) {
+				header("Location: legal-aup.php");
+		}elseif($_SESSION['user_type'] == COMPLETE_USER){
 			//collecting user data for SESSION
 			$result = pg_prepare($conn, "profile_query", "SELECT * FROM profiles WHERE user_id = $1");
 			$result = pg_execute($conn, "profile_query", array($userName));
@@ -35,8 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			//updating last access time
 			lastAccess();
 			header("Location: user-dashboard.php");				
-		}elseif($_SESSION['user_type'] == "a"){
-			
+		}elseif($_SESSION['user_type'] == ADMIN_USER){			
 			//updating last access time
 			lastAccess();
 			header("Location: admin-dashboard.php");		 
