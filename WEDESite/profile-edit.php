@@ -5,6 +5,7 @@ checkLoginStatus();
 
 if($_SERVER['REQUEST_METHOD']=="GET")
 {
+    
   $bodyType = (isset($_SESSION['body_id'])?$_SESSION['body_id']:""); 
   $birthDate = (isset($_SESSION['birth_date'])?$_SESSION['birth_date']:"");  
   $city = (isset($_SESSION['city_id'])?$_SESSION['city_id']:"");
@@ -29,6 +30,8 @@ else{
   
 }
 if ($_SERVER['REQUEST_METHOD']=="POST") {
+  unset($_SESSION['info_message']);
+  unset($_SESSION['requested_action']);  
   arraySanitize($_POST);
   //fix the session variables so that Null is passed if nothing is entered
   $bodyType = (isset($_POST['body_id']) AND !empty($_POST['body_id']))?$_POST['body_id']:"";
@@ -50,12 +53,16 @@ if ($_SERVER['REQUEST_METHOD']=="POST") {
   $smoker = (isset($_POST['smoker_id']) AND !empty($_POST['smoker_id']))?$_POST['smoker_id']:"";
   $status = (isset($_POST['status_id']) AND !empty($_POST['status_id']))?$_POST['status_id']:"";
   $selfDescription = (isset($_POST['self_description']) AND !empty($_POST['self_description']))?$_POST['self_description']:"";
-  if ($_SESSION['user_type'] == "i") {
+  if ($_SESSION['user_type'] == INCOMPLETE_USER) {
     storeNewProfileInfo($_POST);
+    $_SESSION['requested_action'] = "success";
+    $_SESSION['info_message'] = "Profile Created";
     header("Location: user-dashboard.php");
   }else{
     updateProfileInfo($_POST);
-    $auth = TRUE;
+    // $auth = TRUE;
+    $_SESSION['requested_action'] = "success";
+    $_SESSION['info_message'] = "Profile Updated";
     // header("Location: profile-display.php");
   }  
 }
@@ -65,10 +72,14 @@ if ($_SERVER['REQUEST_METHOD']=="POST") {
         <div class="row">
           <?php include_once ('inc/side-nav.php'); ?>
           <div class="col-xs-12 col-sm-8 col-md-9 content wp1">
-            <h1>
-            <?php echo $contentHeader; ?> Your Profile
-            </h1>
-            <p>Enter your information below to update your profile. Required fields are highlighted <span style="color:red"><b>red!!</b></span></p>              
+            <div class="row">
+              <div class="col-xs-12 col-sm-6">
+                <h1>
+                <?php echo $contentHeader; ?> Your Profile
+                </h1>
+                <p>Enter your information below to update your profile. Required fields are highlighted <span style="color:red"><b>red!!</b></span></p>
+              </div> 
+            </div>
             <form class="form" id="edit-profile" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" role="form">
             <!-- <form class="form" method="POST" action="test.php" role="form"> -->
             <div class="row">
@@ -133,17 +144,24 @@ if ($_SERVER['REQUEST_METHOD']=="POST") {
           </div>
         </div>        
      </section>
-      <script>
-      <?php
-      if($auth == TRUE){
-        echo "toastr.options.closeButton = true;\n
-          toastr.options.positionClass = 'toast-screen-center';\n
-          toastr.options.timeOut = 0;\n
-          toastr.options.extendedTimeOut = 0;\n
-          toastr.success(\"Thank You, your profile has been updated.\", \"Successfull Update!!\")";
-      }
-      ?>
-      </script>
+      <script>/*SCript for error or success message*/
+        <?php          
+            
+        $output = "\n\t  toastr.options.closeButton = true;\n";
+        $output .= "\t  toastr.options.positionClass = 'toast-screen-center';\n";
+        $output .= "\t  toastr.options.timeOut = 0;\n";
+        $output .= "\t  toastr.options.extendedTimeOut = 0;\n";
+        if(isset($_SESSION['requested_action']) && $_SESSION['requested_action'] == "error"){
+          $output .= "\t  toastr.error(\"" . $_SESSION['info_message'] . "\", \"Error!!\");\n";          
+        }
+        if(isset($_SESSION['requested_action']) && $_SESSION['requested_action'] == "success") {
+          $output .= "\t  toastr.success(\"" . $_SESSION['info_message'] . "\", \"Success!!\");\n";
+        }
+        echo($output);
+        // unset($_SESSION['info_message']);
+        // unset($_SESSION['requested_action']);        
+        ?>
 
+      </script>
 
 <?php include_once('inc/footer.php'); ?>

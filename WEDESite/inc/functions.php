@@ -40,7 +40,7 @@ function buildImageBox($path, $num, $userImage){
   // if (file_exists($image)) {
     $output = "\t\t      <div class=\"col-sm-4\">\n";
     $output .= "\t\t        <div class=\"flat-box\">\n";
-    $output .= "\t\t\t  <div class=\"colourway\"><img class=\"img-responsive img-rounded profile-image\" src=\"" . $path . "\"></div>\n"; 
+    $output .= "\t\t\t  <div class=\"colourway\"><img class=\"img-responsive img-rounded profile-image\" src=\"" . $path . "?".time()."\"/></div>\n"; //the time function ensures that the most updated version is downloaded as opposed to the cache version which may have the same name but not the correct image
     $output .= "\t\t        </div>\n";
     $output .= "\t\t        <p class='bg-primary text-center'>$num <input type='checkbox' name='images[]' value='$fileName'/></p>\n";
     $output .= "\t\t      </div>\n";  
@@ -131,7 +131,7 @@ function createTableRowDisabled($user_id, $first_name, $last_name, $email){
   $output .= "\t  <td>$first_name</td>";
   $output .= "\t  <td>$last_name</td>";
   $output .= "\t  <td>$email</td>";
-  $output .= "\t  <td style=\"text-align: center;\"><a href=\"\" class=\"btn btn-success btn-xs\" role=\"button\">Enable User</a><a href=\"\" class=\"btn btn-danger btn-xs\" role=\"button\">Delete User</a></td>";
+  $output .= "\t  <td style=\"text-align: center;\"><a href=\"user-enable.php?user_id=$user_id\" class=\"btn btn-success btn-xs\" role=\"button\">Enable User</a><a href=\"#\" class=\"btn btn-danger btn-xs\" role=\"button\">Delete User</a></td>";
   $output .= "\t</tr>";
   return $output;
 }
@@ -425,11 +425,11 @@ function sumCheckBox($array){
 function userLogin(){
   $output = "";
   if(isset($_COOKIE['user_id'])){
-    $output .= "<input class='userName form-control' type='text' name='user_id' value='" . $_COOKIE['user_id'] . "' required>\n"; 
-    $output .= "\t\t\t\t<input class='password form-control' type='password' name='password' placeholder='Password' autofocus required>\n";
+    $output .= "<input class='userName form-control' type='text' name='user_id' value='" . $_COOKIE['user_id'] . "' required/>\n"; 
+    $output .= "\t\t\t\t<input class='password form-control' type='password' name='password' placeholder='Password' autofocus required/>\n";
   }else{ 
-    $output .= "<input class='userName form-control' type='text' name='user_id' placeholder='Username' autofocus required>\n";
-    $output .= "\t\t\t\t<input class='password form-control' type='password' name='password' placeholder='Password' required>\n";  
+    $output .= "<input class='userName form-control' type='text' name='user_id' placeholder='Username' autofocus required/>\n";
+    $output .= "\t\t\t\t<input class='password form-control' type='password' name='password' placeholder='Password' required/>\n";  
   }
   return $output;
 }

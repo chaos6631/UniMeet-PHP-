@@ -19,7 +19,7 @@ if (isset($_GET['user_id'])) {
     $disabled1 = "";
     $disabled2 = "disabled = \"disabled\"";
   }
-  $flagged = checkOffensives($_GET['user_id'], "incomplete");
+  $flagged = checkOffensives($_GET['user_id'], UNRESOLVED);
   // dump($flagged);
   if ($flagged == 1) {
     $disabled3 = "disabled = \"disabled\"";

@@ -187,7 +187,6 @@ function buildCheckbox($tableName, $pre_selected){
     $output .= "\n\t\t      <input type=\"checkbox\"  id=\"city_toggle\" onclick=\"cityToggleAll();\" name=\"city[]\" value=\"0\"><span class='text-danger'><b>All Cities</b></span></input>"; 
     $output .= "\n\t\t    </li>";
   }
-  // $output .= "\t\t\t\t\t<li><input type='checkbox' id='ID'><label for='ID' name='NAME' value='VALUE'>Label</label></li>\n";
   if (!empty($result)) {
     $i = 0;
     //Fill dropdown
@@ -198,7 +197,7 @@ function buildCheckbox($tableName, $pre_selected){
       $var = isBitSet($i, $sum);       
       $selected = ($var == TRUE)?" checked=\"checked\"":"";      
       $output .= "\n\t\t    <li style='list-style:none;'>";
-      $output .= "\n\t\t      <input type='checkbox' id='" . $name . "' name='" . $name . "[]' value='" . $entry['value_id'] . "' " . $selected . " " . $required . ">" . $entry['property'] . "";
+      $output .= "\n\t\t      <input type='checkbox' id='" . $name . "' name='" . $name . "[]' value='" . $entry['value_id'] . "' " . $selected . " " . $required . "/>" . $entry['property'] . "";
       $output .= "\n\t\t    </li>";
       $i++;
     }    
@@ -334,10 +333,9 @@ function searchUsers($array){
 
 //storeNewUserInfo function that takes any user data input and stores it in the appropriate db tables
 function storeNewUserInfo($array){
-  global $conn;
-  
+  global $conn;  
   $insert = pg_prepare($conn, "new_user_insert", "INSERT INTO users VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)");
-  $insert = pg_execute($conn, "new_user_insert", array($array['user_id'], $array['password'], "i", $array['email_address'], $array['first_name'], $array['last_name'], $array['birth_date'], date('Y-m-d'), date('Y-m-d')));
+  $insert = pg_execute($conn, "new_user_insert", array($array['user_id'], $array['password'], INCOMPLETE_USER, $array['email_address'], $array['first_name'], $array['last_name'], $array['birth_date'], date('Y-m-d'), date('Y-m-d')));
 }
 
 //function that takes NEW user data input and stores it in the appropriate db tables

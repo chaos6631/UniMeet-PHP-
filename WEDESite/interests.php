@@ -65,7 +65,7 @@ foreach ($interests as $key => $value) {
         if (isset($_SESSION['requested_action'])) {
           $output = "\n\t  toastr.options.closeButton = true;\n";
           $output .= "\t  toastr.options.positionClass = 'toast-screen-center';\n";
-          $output .= "\t  toastr.options.timeOut = 1600;\n";
+          $output .= "\t  toastr.options.timeOut = 3600;\n";
           $output .= "\t  toastr.options.extendedTimeOut = 0;\n";
           if($_SESSION['requested_action'] == "error"){
             $output .= "\t  toastr.error(\"" . $_SESSION['info_message'] . "\", \"Error!!\");\n";          

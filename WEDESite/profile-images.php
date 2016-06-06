@@ -11,13 +11,13 @@ if (scanUserDirectory($path) == FALSE) {
   $userImages = 0;
   $countUserImages = 0;
 }else{
-  $userImages = scanUserDirectory($path);
+  $userImages = scanUserDirectory($path);// scanUserDirectory must be altered for non-windows server, see function for the changes required.
   $countUserImages = count($userImages);
 }
 
 // dump($userImages);
 // dump($countUserImages);
-// dump($userImages);
+// dump($_SESSION);
 // die;
 ?>
 <section class="design" id="design">        
@@ -90,22 +90,21 @@ if (scanUserDirectory($path) == FALSE) {
         }
       </script>
       <script>/*SCript for error or success message*/
-        <?php   
-        //print_r($_SESSION); 
+        <?php          
             
         $output = "\n\t  toastr.options.closeButton = true;\n";
         $output .= "\t  toastr.options.positionClass = 'toast-screen-center';\n";
         $output .= "\t  toastr.options.timeOut = 0;\n";
         $output .= "\t  toastr.options.extendedTimeOut = 0;\n";
-        if($_SESSION['requested_action'] == "error"){
+        if(isset($_SESSION['requested_action']) && $_SESSION['requested_action'] == "error"){
           $output .= "\t  toastr.error(\"" . $_SESSION['info_message'] . "\", \"Error!!\");\n";          
         }
-        if($_SESSION['requested_action'] == "success") {
+        if(isset($_SESSION['requested_action']) && $_SESSION['requested_action'] == "success") {
           $output .= "\t  toastr.success(\"" . $_SESSION['info_message'] . "\", \"Success!!\");\n";
         }
         echo($output);
-        unset($_SESSION['info_message']);
-        unset($_SESSION['requested_action']);        
+        // unset($_SESSION['info_message']);
+        // unset($_SESSION['requested_action']);        
         ?>
 
       </script>

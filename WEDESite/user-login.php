@@ -63,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		        			echo '<div class="output-box-normal text-center"><p>' . $errorMessage .'</p></div>';
 		        		}
 		        	?>		
-		          <input class="login-btn" type="submit" value="Log In">
+		          <input class="login-btn" type="submit" value="Log In"/>
 		        </div>
 		      </form>              
 		    </div>

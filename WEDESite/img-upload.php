@@ -62,12 +62,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		}	
 		//Saving file
 		if(move_uploaded_file($_FILES['upload_img']['tmp_name'], $path)){
-			echo $_SESSION['info_message'] = "Images Uploaded.";
+			$_SESSION['info_message'] = "Images Uploaded.";
 			$_SESSION['requested_action'] = "success";		
 			$_SESSION['images'] = $count + 1;	
 			updateImageCount($count, $_SESSION['user_id']);			
 		}else{
-			echo $_SESSION['info_message'] = "Sorry couldn't upload your image, please try again.";
+			$_SESSION['info_message'] = "Sorry couldn't upload your image, please try again.";
 			$_SESSION['requested_action'] = "error";
 		}	
 	}

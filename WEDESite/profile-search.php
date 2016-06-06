@@ -3,7 +3,7 @@
 require_once('inc/header.php');
 
 checkLoginStatus();
-if ($_SESSION['user_type'] == "i") {
+if ($_SESSION['user_type'] == INCOMPLETE_USER) {
  header("Location: profile-edit.php");
 }
 
@@ -64,11 +64,11 @@ if ($_SERVER['REQUEST_METHOD']=="POST") {
     $_SESSION['search_results'] = searchUsers($_POST);
     // dump(searchUsers($_POST));    //TESTING
     // dump($_SESSION['search_results'][0]);    //TESTING
-    // dump($_SESSION['search_results']);    //TESTING
-
+    dump($_SESSION['search_results']);    //TESTING
+    die;
     if(!empty(searchUsers($_POST)) && count(searchUsers($_POST)) == 1) {
       $_SESSION['view_user_id'] = $_SESSION['search_results'][0];
-      header("Location: profile-display.php");
+      header("Location: profile-display.php");//needs to be passed result user id
     }elseif(!empty(searchUsers($_POST)) && count(searchUsers($_POST)) > 1) {
       header("Location: profile-search-results.php");
     }else{

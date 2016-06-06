@@ -3,10 +3,10 @@
 require_once('inc/header.php');
 checkLoginStatus();
 
-if ($_SESSION['user_type'] == "i") {
+if ($_SESSION['user_type'] == INCOMPLETE_USER) {
   header("Location: profile-edit.php");
 }
-
+// dump($_SESSION);
 ?>
 <section class="design" id="design">        
         <div class="row">
@@ -109,13 +109,23 @@ if ($_SESSION['user_type'] == "i") {
           </div>
         </div>        
       </section>
-        <div class="row">
-          <div class="col-xs-6 col-sm-6 col-md-6"> <!-- Interests --> 
-            <h3>My Interests</h3>            
-          </div>
-          <div class="col-xs-6 col-sm-6 col-md-6"> <!-- People Interested -->
-            <h3>Interested in Me</h3>            
-          </div>
-        </div>
-     
+      <script>/*SCript for error or success message*/
+        <?php          
+            
+        $output = "\n\t  toastr.options.closeButton = true;\n";
+        $output .= "\t  toastr.options.positionClass = 'toast-screen-center';\n";
+        $output .= "\t  toastr.options.timeOut = 0;\n";
+        $output .= "\t  toastr.options.extendedTimeOut = 0;\n";
+        if(isset($_SESSION['requested_action']) && $_SESSION['requested_action'] == "error"){
+          $output .= "\t  toastr.error(\"" . $_SESSION['info_message'] . "\", \"Error!!\");\n";          
+        }
+        if(isset($_SESSION['requested_action']) && $_SESSION['requested_action'] == "success") {
+          $output .= "\t  toastr.success(\"" . $_SESSION['info_message'] . "\", \"Success!!\");\n";
+        }
+        echo($output);
+        // unset($_SESSION['info_message']);
+        // unset($_SESSION['requested_action']);        
+        ?>
+
+      </script>
 <?php include_once('inc/footer.php'); ?>
