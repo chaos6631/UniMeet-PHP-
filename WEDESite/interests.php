@@ -8,9 +8,9 @@ if ($_SESSION['user_type'] == "i") {
 }
 $interests = collectInterests($_SESSION['user_id']);
 $profInterested = collectProfilesInterested($_SESSION['user_id']);
-// dump($interests);
-// dump($profInterested);
-
+dump($interests);
+dump($profInterested);
+die;
 foreach ($interests as $key => $value) {
   $search = array_search($value, $profInterested);
   $search2 = array_search($value, $interests);

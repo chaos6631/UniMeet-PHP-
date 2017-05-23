@@ -64,8 +64,8 @@ if ($_SERVER['REQUEST_METHOD']=="POST") {
     $_SESSION['search_results'] = searchUsers($_POST);
     // dump(searchUsers($_POST));    //TESTING
     // dump($_SESSION['search_results'][0]);    //TESTING
-    dump($_SESSION['search_results']);    //TESTING
-    die;
+    //dump($_SESSION['search_results']);    //TESTING
+    //die;
     if(!empty(searchUsers($_POST)) && count(searchUsers($_POST)) == 1) {
       $_SESSION['view_user_id'] = $_SESSION['search_results'][0];
       header("Location: profile-display.php");//needs to be passed result user id

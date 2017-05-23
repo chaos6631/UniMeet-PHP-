@@ -6,14 +6,13 @@ checkLoginStatus();
 if ($_SESSION['user_type'] == INCOMPLETE_USER) {
  header("Location: profile-edit.php");
 }
-dump($_SESSION['search_results'];
-die;
+// dump(count($_SESSION['search_results']));
+// die;
 // Check if SESSION['search_results'] has more than 1 result
-if (count($_SESSION['search_results']) > 1) {
-  continue;
-}else{
+if (count($_SESSION['search_results']) < 1) {
   header("Location: profile-display.php");
 }
+
 $counter = checkPageNum($_SERVER['REQUEST_URI']);
 
 // dump($counter);

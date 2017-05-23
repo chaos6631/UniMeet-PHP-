@@ -49,11 +49,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		}				
 		
 		/*-------TESTING--------*/
-		// echo "sessionimages = " . $_SESSION['images'] . "max images =" . MAX_USER_IMAGES . "\n";
-		// dump($userImages);
-		// dump($a);
-		// echo $count;
-		// die;	
+		echo "sessionimages = " . $_SESSION['images'] . "max images =" . MAX_USER_IMAGES . "\n";
+		dump($userImages);
+		dump($a);
+		echo $count;
+		die;	
 		/*Setting file name*/
 		if ($a < 10) {
 			$path = $path . "/" . $_SESSION['user_id'] . "-" . $a . ".jpg";
